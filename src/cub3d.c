@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/21 16:55:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/22 20:42:56 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char **get_map(char **map)
 	map[1] = strdup("100000000111000000000001101");
 	map[2] = strdup("100000000110000000000000001");
 	map[3] = strdup("111111100000000011111000001");
-	map[4] = strdup("100000000000000000000000001");
+	map[4] = strdup("10000000000N000000000000001");
 	map[5] = strdup("100000000100001100100000101");
-	map[6] = strdup("10000000000N000000000000001");
+	map[6] = strdup("100000000000000000000000001");
 	map[7] = strdup("111111111111000000000001001");
 	map[8] = strdup("100000000000001111111000001");
 	map[9] = strdup("111111111111111111111111111");
@@ -52,32 +52,65 @@ size_t count_width(char **map)
 	}
 	return (size_w);
 }
-void draw_background(t_game *game, mlx_t *mlx)
+
+void draw_line(t_game *game)
+{
+	double x_ep;
+	double y_ep;
+	double x_tmp;
+	double y_tmp;
+	int i;
+	int dx;
+	int dy;
+	int steps;
+	int x_inc;
+	int y_inc;
+
+	i = -1;
+	x_ep = game->player.position_x + (30 * cos(game->player.angl_rotation));
+	y_ep = game->player.position_y + (30 * sin(game->player.angl_rotation));
+	dx = x_ep - game->player.position_x;
+	dy = y_ep - game->player.position_y;
+	if (abs(dx) > abs(dy))
+		steps = abs(dx);
+	else
+		steps = abs(dy);
+	x_inc = dx / steps;
+	y_inc = dy / steps;
+	x_tmp = game->player.position_x + 5;
+	y_tmp = game->player.position_y + 5;
+	while (++i <= steps)
+	{
+		mlx_put_pixel(game->wall_img, round(x_tmp), round(y_tmp), 0xFF0000ff);
+		x_tmp += x_inc;
+		y_tmp += y_inc;
+	}
+}
+
+void draw_background(t_game *game)
 {
 	int x;
 	int y;
-	mlx_image_t *background;
 
 	x = 0;
 	y = 0;
-	background = mlx_new_image(mlx, game->WIDTH * 30, game->HEIGHT * 30);
-	if ((!background) || (mlx_image_to_window(mlx, background, 0, 0) < 0))
+	game->background_img = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
+	if ((!game->background_img) || (mlx_image_to_window(game->mlx, game->background_img, 0, 0) < 0))
 		return ;
 	while (game->HEIGHT * 30 > y)
 	{
 		x = 0;
 		while (game->WIDTH * 30 > x)
 		{
-			mlx_put_pixel(background, x, y, 0xFFFFFFFF);
+			mlx_put_pixel(game->background_img, x, y, 0xFFFFFFFF);
 			x++;	
 		}
 		y++;
 	}
 }
 
-void draw_wall(t_game *game, mlx_t *mlx)
+void draw_wall(t_game *game)
 {
-	mlx_image_t *wall_img;
 	int x;
 	int y;
 	int i;
@@ -91,8 +124,8 @@ void draw_wall(t_game *game, mlx_t *mlx)
 	j = 0;
 	position_x = 0;
 	position_y = 0;
-	wall_img = mlx_new_image(mlx, game->WIDTH * 30, game->HEIGHT * 30);
-	if ((!wall_img) || (mlx_image_to_window(mlx, wall_img, 0, 0) < 0))
+	game->wall_img = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
+	if ((!game->wall_img) || (mlx_image_to_window(game->mlx, game->wall_img, 0, 0) < 0))
 		return ;
 	while (game->map[i])
 	{
@@ -108,7 +141,7 @@ void draw_wall(t_game *game, mlx_t *mlx)
 					x = 0;
 					while (30 > x)
 					{
-						mlx_put_pixel(wall_img, x + position_x, y + position_y, 0x000000FF);
+						mlx_put_pixel(game->wall_img, x + position_x, y + position_y, 0x000000FF);
 						x++;
 					}
 					y++;
@@ -122,26 +155,19 @@ void draw_wall(t_game *game, mlx_t *mlx)
 	}
 }
 
-// void draw_line(t_game *game)
-// {
-// 	double e_x = game->player.position_x + cos(game->player.angl_rotation);
-// 	double e_y = game->player.position_y + sin(game->player.angl_rotation);
-// }
-
-void draw_player(t_game *game, mlx_t *mlx)
+void draw_player(t_game *game)
 {
 	int i;
 	int j;
 	int x;
 	int y;
-	mlx_image_t *player_img;
 	
 	i = 0;
 	j = 0;
 	x = 0;
 	y = 0;
-	player_img = mlx_new_image(mlx, 10, 10);
-	if (!player_img)
+	game->player.player_image = mlx_new_image(game->mlx, 10, 10);
+	if (!game->player.player_image)
 		return ;
 	while (game->map[i])
 	{
@@ -150,16 +176,16 @@ void draw_player(t_game *game, mlx_t *mlx)
 		{
 			if (game->map[i][j] == 'N')
 			{
-				game->player.position_x = j;
-				game->player.position_y = i;
-				if (mlx_image_to_window(mlx, player_img, j * 30 + 10, i * 30 + 10) < 0)
+				game->player.position_x = (j * 30) + 10;
+				game->player.position_y = (i * 30) + 10;
+				if (mlx_image_to_window(game->mlx, game->player.player_image, j * 30 + 10, i * 30 + 10) < 0)
 					return ;
 				while (y < 10)
 				{
 					x = 0;
 					while (x < 10)
 					{
-						mlx_put_pixel(player_img, x, y, 0xFF0000ff);
+						mlx_put_pixel(game->player.player_image, x, y, 0xFF0000ff);
 						x++;
 					}
 					y++;
@@ -169,6 +195,22 @@ void draw_player(t_game *game, mlx_t *mlx)
 		}
 		i++;
 	}
+}
+
+void re_game(t_game *game)
+{
+	draw_background(game);
+	draw_wall(game);
+	draw_player(game);
+	draw_line(game);
+}
+
+void ft_raycasting(t_game *game)
+{
+	draw_background(game);
+	draw_wall(game);
+	draw_player(game);
+	draw_line(game);
 }
 
 int main()
@@ -188,14 +230,14 @@ int main()
 	height = count_height(game->map);
 	game->WIDTH = width;
 	game->HEIGHT = height;
+	game->player.direction = 0;
 	game->player.angl_rotation = M_PI / 2;
 	mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
+	game->mlx = mlx;
 	if (!mlx)
 		return (1);
-	draw_background(game, mlx);
-	draw_wall(game, mlx);
-	draw_player(game, mlx);
-	draw_line(game);
-	mlx_loop(mlx);
+	ft_raycasting(game);
+	mlx_key_hook(game->mlx, key_hook, game);
+	mlx_loop(game->mlx);
 	return (0);
 }

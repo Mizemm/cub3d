@@ -5,7 +5,7 @@ CC		= cc
 
 HEADERS	= -I ./include -I $(LIBMLX)/include/MLX42
 LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	= src/main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRCS	= src/cub3d.c src/player_action.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 OBJS	= ${SRCS:.c=.o}
 
 
