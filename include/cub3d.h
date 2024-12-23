@@ -28,8 +28,8 @@ typedef struct s_game {
 } t_game;
 
 char	*get_next_line(int fd);
-void key_hook(mlx_key_data_t key, void *param);
-void re_game(t_game *game);
+void	key_hook(mlx_key_data_t key, void *param);
+void	re_game(t_game *game);
 
 
 // draw 2d map pixel by pixel (finish)

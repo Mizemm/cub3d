@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/22 20:42:56 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:40:18 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,21 @@ void draw_line(t_game *game)
 	double x_tmp;
 	double y_tmp;
 	int i;
-	int dx;
-	int dy;
-	int steps;
-	int x_inc;
-	int y_inc;
+	double dx;
+	double dy;
+	double steps;
+	double x_inc;
+	double y_inc;
 
 	i = -1;
 	x_ep = game->player.position_x + (30 * cos(game->player.angl_rotation));
 	y_ep = game->player.position_y + (30 * sin(game->player.angl_rotation));
 	dx = x_ep - game->player.position_x;
 	dy = y_ep - game->player.position_y;
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
+	if (fabs(dx) > fabs(dy))
+		steps = fabs(dx);
 	else
-		steps = abs(dy);
+		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
 	x_tmp = game->player.position_x + 5;
@@ -207,6 +207,9 @@ void re_game(t_game *game)
 
 void ft_raycasting(t_game *game)
 {
+	mlx_delete_image(game->mlx, game->background_img);
+	mlx_delete_image(game->mlx, game->player.player_image);
+	mlx_delete_image(game->mlx, game->wall_img);
 	draw_background(game);
 	draw_wall(game);
 	draw_player(game);
