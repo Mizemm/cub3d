@@ -12,6 +12,7 @@ typedef struct s_player {
 	double position_y;
 	double angl_rotation;
 	double rotate_speed;
+	double move_speed;
 	int rotate_direction;
 	int move_direction;
 	mlx_image_t *player_image;
@@ -20,8 +21,8 @@ typedef struct s_player {
 } t_player;
 
 typedef struct s_game {
-	int WIDTH;
-	int HEIGHT;
+	size_t WIDTH;
+	size_t HEIGHT;
 	char **map;
 	mlx_t *mlx;
 	mlx_image_t *wall_img; 
@@ -30,15 +31,26 @@ typedef struct s_game {
 } t_game;
 
 char	*get_next_line(int fd);
-void	key_hook(mlx_key_data_t key, void *param);
-void	re_game(t_game *game);
+char 	**get_map(char **map);
+size_t 	get_height(char **map);
+size_t	get_width(char **map);
+
 void	init_struct(t_game *game);
 
+void	draw_background(t_game *game);
+void	draw_wall(t_game *game);
+void	draw_player(t_game *game);
+void 	draw_line(t_game *game);
 
-// draw 2d map pixel by pixel (finish)
-// put player 
-// make the player direction and make him rotate
-// make the player mvts
+void 	right_move(t_game *game);
+void	left_move(t_game *game);
+void	down_move(t_game *game);
+void	up_move(t_game *game);
+
+void	rebuild_game(t_game *game);
+void	key_hook(mlx_key_data_t key, void *param);
+
+
 // the player must not pass the walls
 
 // -------------------------------------------------------------------

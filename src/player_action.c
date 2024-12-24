@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/24 15:13:12 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/24 22:24:25 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,52 +22,6 @@ void rotate_left(t_game *game)
 {
 	game->player.rotate_direction = -1;
 	game->player.angl_rotation += game->player.rotate_direction * game->player.rotate_speed;
-}
-
-void right_move(t_game *game)
-{
-	double move_speed;
-	double move_steps;
-
-	move_speed = 5;
-	move_steps = move_speed;
-	game->player.position_x += cos(game->player.angl_rotation + M_PI / 2) * move_steps;
-	game->player.position_y += sin(game->player.angl_rotation + M_PI / 2) * move_steps;
-}
-
-void left_move(t_game *game)
-{
-	double move_speed;
-	double move_steps;
-
-	move_speed = 5;
-	move_steps = move_speed;
-	game->player.position_x -= cos(game->player.angl_rotation + M_PI / 2) * move_steps;
-	game->player.position_y -= sin(game->player.angl_rotation + M_PI / 2) * move_steps;
-}
-
-void down_move(t_game *game)
-{
-	double move_speed;
-	double move_steps;
-
-	move_speed = 5;
-	game->player.move_direction = -1;
-	move_steps = game->player.move_direction * move_speed;
-	game->player.position_x += cos(game->player.angl_rotation) * move_steps;
-	game->player.position_y += sin(game->player.angl_rotation) * move_steps;
-}
-
-void up_move(t_game *game)
-{
-	double move_speed;
-	double move_steps;
-
-	move_speed = 5;
-	game->player.move_direction = 1;
-	move_steps = game->player.move_direction * move_speed;
-	game->player.position_x += cos(game->player.angl_rotation) * move_steps;
-	game->player.position_y += sin(game->player.angl_rotation) * move_steps;
 }
 
 void key_hook(mlx_key_data_t key, void *param)
@@ -91,5 +45,5 @@ void key_hook(mlx_key_data_t key, void *param)
 		up_move(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
-	re_game(game);
+	rebuild_game(game);
 }
