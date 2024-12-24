@@ -11,7 +11,9 @@ typedef struct s_player {
 	double position_x;
 	double position_y;
 	double angl_rotation;
-	int direction;
+	double rotate_speed;
+	int rotate_direction;
+	int move_direction;
 	mlx_image_t *player_image;
 	mlx_image_t *line_img;
 
@@ -30,6 +32,7 @@ typedef struct s_game {
 char	*get_next_line(int fd);
 void	key_hook(mlx_key_data_t key, void *param);
 void	re_game(t_game *game);
+void	init_struct(t_game *game);
 
 
 // draw 2d map pixel by pixel (finish)

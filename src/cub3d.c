@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/23 17:40:18 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/24 15:15:19 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void draw_line(t_game *game)
 		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
-	x_tmp = game->player.position_x + 5;
-	y_tmp = game->player.position_y + 5;
+	x_tmp = game->player.position_x;
+	y_tmp = game->player.position_y;
 	while (++i <= steps)
 	{
 		mlx_put_pixel(game->wall_img, round(x_tmp), round(y_tmp), 0xFF0000ff);
@@ -169,6 +169,18 @@ void draw_player(t_game *game)
 	game->player.player_image = mlx_new_image(game->mlx, 10, 10);
 	if (!game->player.player_image)
 		return ;
+	// if (mlx_image_to_window(game->mlx, game->player.player_image, game->player.position_x, game->player.position_y) < 0)
+	// 	return ;
+	// while (y < 10)
+	// {
+	// 	x = 0;
+	// 	while (x < 10)
+	// 	{
+	// 		mlx_put_pixel(game->player.player_image, game->player.position_x + x,  game->player.position_y + y, 0xFF0000ff);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 	while (game->map[i])
 	{
 		j = 0;
@@ -176,8 +188,6 @@ void draw_player(t_game *game)
 		{
 			if (game->map[i][j] == 'N')
 			{
-				game->player.position_x = (j * 30) + 10;
-				game->player.position_y = (i * 30) + 10;
 				if (mlx_image_to_window(game->mlx, game->player.player_image, j * 30 + 10, i * 30 + 10) < 0)
 					return ;
 				while (y < 10)
@@ -199,6 +209,9 @@ void draw_player(t_game *game)
 
 void re_game(t_game *game)
 {
+	mlx_delete_image(game->mlx, game->background_img);
+	mlx_delete_image(game->mlx, game->player.player_image);
+	mlx_delete_image(game->mlx, game->wall_img);
 	draw_background(game);
 	draw_wall(game);
 	draw_player(game);
@@ -207,9 +220,6 @@ void re_game(t_game *game)
 
 void ft_raycasting(t_game *game)
 {
-	mlx_delete_image(game->mlx, game->background_img);
-	mlx_delete_image(game->mlx, game->player.player_image);
-	mlx_delete_image(game->mlx, game->wall_img);
 	draw_background(game);
 	draw_wall(game);
 	draw_player(game);
@@ -233,12 +243,15 @@ int main()
 	height = count_height(game->map);
 	game->WIDTH = width;
 	game->HEIGHT = height;
-	game->player.direction = 0;
+	game->player.rotate_direction = 0;
+	game->player.move_direction = 0;
+	game->player.rotate_speed = 5 * (M_PI / 180);
 	game->player.angl_rotation = M_PI / 2;
 	mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)
 		return (1);
+	init_struct(game);
 	ft_raycasting(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);
