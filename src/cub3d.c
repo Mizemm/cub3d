@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/24 15:15:19 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/24 20:05:37 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void draw_line(t_game *game)
 		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
-	x_tmp = game->player.position_x;
-	y_tmp = game->player.position_y;
+	x_tmp = game->player.position_x + 5;
+	y_tmp = game->player.position_y + 5;
 	while (++i <= steps)
 	{
 		mlx_put_pixel(game->wall_img, round(x_tmp), round(y_tmp), 0xFF0000ff);
@@ -157,53 +157,25 @@ void draw_wall(t_game *game)
 
 void draw_player(t_game *game)
 {
-	int i;
-	int j;
 	int x;
 	int y;
 	
-	i = 0;
-	j = 0;
 	x = 0;
 	y = 0;
 	game->player.player_image = mlx_new_image(game->mlx, 10, 10);
 	if (!game->player.player_image)
 		return ;
-	// if (mlx_image_to_window(game->mlx, game->player.player_image, game->player.position_x, game->player.position_y) < 0)
-	// 	return ;
-	// while (y < 10)
-	// {
-	// 	x = 0;
-	// 	while (x < 10)
-	// 	{
-	// 		mlx_put_pixel(game->player.player_image, game->player.position_x + x,  game->player.position_y + y, 0xFF0000ff);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	while (game->map[i])
+	if (mlx_image_to_window(game->mlx, game->player.player_image, game->player.position_x, game->player.position_y) < 0)
+		return ;
+	while (y < 10)
 	{
-		j = 0;
-		while (game->map[i][j])
+		x = 0;
+		while (x < 10)
 		{
-			if (game->map[i][j] == 'N')
-			{
-				if (mlx_image_to_window(game->mlx, game->player.player_image, j * 30 + 10, i * 30 + 10) < 0)
-					return ;
-				while (y < 10)
-				{
-					x = 0;
-					while (x < 10)
-					{
-						mlx_put_pixel(game->player.player_image, x, y, 0xFF0000ff);
-						x++;
-					}
-					y++;
-				}
-			}
-			j++;
+			mlx_put_pixel(game->player.player_image, x, y, 0xFF0000ff);
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 

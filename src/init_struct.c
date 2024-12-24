@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/24 15:06:38 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/24 19:02:36 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void find_player(t_game *game)
 			}
 			j++;
 		}
-		// printf("player_x: %f\n", game->player.position_x);
-		// printf("player_y: %f\n", game->player.position_y);
 		i++;
 	}
 }
