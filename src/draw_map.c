@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/24 21:42:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/25 17:05:03 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void draw_line(t_game *game)
 	double y_inc;
 
 	i = -1;
-	x_ep = game->player.position_x + (30 * cos(game->player.angl_rotation));
-	y_ep = game->player.position_y + (30 * sin(game->player.angl_rotation));
+	x_ep = game->player.position_x + (UNIT_SIZE * cos(game->player.angl_rotation));
+	y_ep = game->player.position_y + (UNIT_SIZE * sin(game->player.angl_rotation));
 	dx = x_ep - game->player.position_x;
 	dy = y_ep - game->player.position_y;
 	if (fabs(dx) > fabs(dy))
@@ -56,10 +56,10 @@ void draw_background(t_game *game)
 	game->background_img = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
 	if ((!game->background_img) || (mlx_image_to_window(game->mlx, game->background_img, 0, 0) < 0))
 		return ;
-	while (game->HEIGHT * 30 > y)
+	while (game->HEIGHT * UNIT_SIZE > y)
 	{
 		x = 0;
-		while (game->WIDTH * 30 > x)
+		while (game->WIDTH * UNIT_SIZE > x)
 		{
 			mlx_put_pixel(game->background_img, x, y, 0xFFFFFFFF);
 			x++;	
@@ -95,10 +95,10 @@ void draw_wall(t_game *game)
 			if (game->map[i][j] == '1')
 			{
 				y = 0;
-				while (30 > y)
+				while (UNIT_SIZE > y)
 				{
 					x = 0;
-					while (30 > x)
+					while (UNIT_SIZE > x)
 					{
 						mlx_put_pixel(game->wall_img, x + position_x, y + position_y, 0x000000FF);
 						x++;

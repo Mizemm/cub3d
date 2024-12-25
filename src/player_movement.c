@@ -6,46 +6,103 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:24:27 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/24 22:24:38 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/25 20:41:43 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+int check_map(t_game *game, double new_position_x, double new_position_y)
+{
+	int i;
+	int tmp_x;
+	int tmp_y;
+	
+	i = -2;
+	tmp_x = floor(new_position_x);
+	tmp_y = floor(new_position_y);
+	while (i <= 2)
+	{
+		if (game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == '1')
+			return (0);
+		i++;
+	}
+	i = -2;
+	while (i <= 2)
+	{
+		if (game->map[tmp_y / UNIT_SIZE][(tmp_x + i) / UNIT_SIZE] == '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void right_move(t_game *game)
 {
 	double move_steps;
+	double new_position_x;
+	double new_position_y;
 
 	move_steps = game->player.move_speed;
-	game->player.position_x += cos(game->player.angl_rotation + M_PI / 2) * move_steps;
-	game->player.position_y += sin(game->player.angl_rotation + M_PI / 2) * move_steps;
+	new_position_x = game->player.position_x;
+	new_position_y = game->player.position_y;
+	new_position_x += cos(game->player.angl_rotation + M_PI / 2) * move_steps;
+	new_position_y += sin(game->player.angl_rotation + M_PI / 2) * move_steps;
+	if (!check_map(game, new_position_x, new_position_y))
+		return ;
+	game->player.position_x = new_position_x;
+	game->player.position_y = new_position_y;
 }
 
 void left_move(t_game *game)
 {
 	double move_steps;
+	double new_position_x;
+	double new_position_y;
 
 	move_steps = game->player.move_speed;
-	game->player.position_x -= cos(game->player.angl_rotation + M_PI / 2) * move_steps;
-	game->player.position_y -= sin(game->player.angl_rotation + M_PI / 2) * move_steps;
+	new_position_x = game->player.position_x;
+	new_position_y = game->player.position_y;
+	new_position_x -= cos(game->player.angl_rotation + M_PI / 2) * move_steps;
+	new_position_y -= sin(game->player.angl_rotation + M_PI / 2) * move_steps;
+	if (!check_map(game, new_position_x, new_position_y))
+		return ;
+	game->player.position_x = new_position_x;
+	game->player.position_y = new_position_y;
 }
 
-void down_move(t_game *game)
+void backward_move(t_game *game)
 {
 	double move_steps;
+	double new_position_x;
+	double new_position_y;
 
 	game->player.move_direction = -1;
+	new_position_x = game->player.position_x;
+	new_position_y = game->player.position_y;
 	move_steps = game->player.move_direction * game->player.move_speed;
-	game->player.position_x += cos(game->player.angl_rotation) * move_steps;
-	game->player.position_y += sin(game->player.angl_rotation) * move_steps;
+	new_position_x += cos(game->player.angl_rotation) * move_steps;
+	new_position_y += sin(game->player.angl_rotation) * move_steps;
+	if (!check_map(game, new_position_x, new_position_y))
+		return ;
+	game->player.position_x = new_position_x;
+	game->player.position_y = new_position_y;
 }
 
-void up_move(t_game *game)
+void forward_move(t_game *game)
 {
 	double move_steps;
+	double new_position_x;
+	double new_position_y;
 
 	game->player.move_direction = 1;
+	new_position_x = game->player.position_x;
+	new_position_y = game->player.position_y;
 	move_steps = game->player.move_direction * game->player.move_speed;
-	game->player.position_x += cos(game->player.angl_rotation) * move_steps;
-	game->player.position_y += sin(game->player.angl_rotation) * move_steps;
+	new_position_x += cos(game->player.angl_rotation) * move_steps;
+	new_position_y += sin(game->player.angl_rotation) * move_steps;
+	if (!check_map(game, new_position_x, new_position_y))
+		return ;
+	game->player.position_x = new_position_x;
+	game->player.position_y = new_position_y;
 }

@@ -7,6 +7,8 @@
 // #include <../../MLX42/include/MLX42/MLX42.h>
 #include <MLX42.h>
 
+#define UNIT_SIZE 30
+
 typedef struct s_player {
 	double position_x;
 	double position_y;
@@ -44,8 +46,8 @@ void 	draw_line(t_game *game);
 
 void 	right_move(t_game *game);
 void	left_move(t_game *game);
-void	down_move(t_game *game);
-void	up_move(t_game *game);
+void	backward_move(t_game *game);
+void	forward_move(t_game *game);
 
 void	rebuild_game(t_game *game);
 void	key_hook(mlx_key_data_t key, void *param);
