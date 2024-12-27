@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/24 21:45:18 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/27 19:55:32 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void ft_raycasting(t_game *game)
 	draw_wall(game);
 	draw_player(game);
 	draw_line(game);
+	draw_ray(game);
 }
 
 int main()

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/25 17:05:03 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/27 17:59:46 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void draw_line(t_game *game)
 	double y_inc;
 
 	i = -1;
-	x_ep = game->player.position_x + (UNIT_SIZE * cos(game->player.angl_rotation));
-	y_ep = game->player.position_y + (UNIT_SIZE * sin(game->player.angl_rotation));
+	x_ep = game->player.position_x + (UNIT_SIZE * cos(game->player.angle_rotation));
+	y_ep = game->player.position_y + (UNIT_SIZE * sin(game->player.angle_rotation));
 	dx = x_ep - game->player.position_x;
 	dy = y_ep - game->player.position_y;
 	if (fabs(dx) > fabs(dy))

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:24:27 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/25 20:41:43 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/27 17:59:46 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void right_move(t_game *game)
 	move_steps = game->player.move_speed;
 	new_position_x = game->player.position_x;
 	new_position_y = game->player.position_y;
-	new_position_x += cos(game->player.angl_rotation + M_PI / 2) * move_steps;
-	new_position_y += sin(game->player.angl_rotation + M_PI / 2) * move_steps;
+	new_position_x += cos(game->player.angle_rotation + M_PI / 2) * move_steps;
+	new_position_y += sin(game->player.angle_rotation + M_PI / 2) * move_steps;
 	if (!check_map(game, new_position_x, new_position_y))
 		return ;
 	game->player.position_x = new_position_x;
@@ -63,8 +63,8 @@ void left_move(t_game *game)
 	move_steps = game->player.move_speed;
 	new_position_x = game->player.position_x;
 	new_position_y = game->player.position_y;
-	new_position_x -= cos(game->player.angl_rotation + M_PI / 2) * move_steps;
-	new_position_y -= sin(game->player.angl_rotation + M_PI / 2) * move_steps;
+	new_position_x -= cos(game->player.angle_rotation + M_PI / 2) * move_steps;
+	new_position_y -= sin(game->player.angle_rotation + M_PI / 2) * move_steps;
 	if (!check_map(game, new_position_x, new_position_y))
 		return ;
 	game->player.position_x = new_position_x;
@@ -81,8 +81,8 @@ void backward_move(t_game *game)
 	new_position_x = game->player.position_x;
 	new_position_y = game->player.position_y;
 	move_steps = game->player.move_direction * game->player.move_speed;
-	new_position_x += cos(game->player.angl_rotation) * move_steps;
-	new_position_y += sin(game->player.angl_rotation) * move_steps;
+	new_position_x += cos(game->player.angle_rotation) * move_steps;
+	new_position_y += sin(game->player.angle_rotation) * move_steps;
 	if (!check_map(game, new_position_x, new_position_y))
 		return ;
 	game->player.position_x = new_position_x;
@@ -99,8 +99,8 @@ void forward_move(t_game *game)
 	new_position_x = game->player.position_x;
 	new_position_y = game->player.position_y;
 	move_steps = game->player.move_direction * game->player.move_speed;
-	new_position_x += cos(game->player.angl_rotation) * move_steps;
-	new_position_y += sin(game->player.angl_rotation) * move_steps;
+	new_position_x += cos(game->player.angle_rotation) * move_steps;
+	new_position_y += sin(game->player.angle_rotation) * move_steps;
 	if (!check_map(game, new_position_x, new_position_y))
 		return ;
 	game->player.position_x = new_position_x;
