@@ -10,10 +10,12 @@
 #define UNIT_SIZE 30
 #define FOV 60
 
-typedef struct s_ray {
-	int ray_number;
-	double ray_angle;
-} t_ray;
+typedef struct s_horizontal {
+	long x_intercept;
+	long y_intercept;
+	long x_step;
+	long y_step;
+} t_horizontal;
 
 typedef struct s_player {
 	double position_x;
@@ -36,7 +38,7 @@ typedef struct s_game {
 	mlx_image_t *wall_img; 
 	mlx_image_t *background_img;
 	t_player player;
-	t_ray	ray;
+	t_horizontal horizontal;
 } t_game;
 
 char	*get_next_line(int fd);
@@ -50,7 +52,6 @@ void	draw_background(t_game *game);
 void	draw_wall(t_game *game);
 void	draw_player(t_game *game);
 void 	draw_line(t_game *game);
-void 	draw_ray(t_game *game);
 
 void 	right_move(t_game *game);
 void	left_move(t_game *game);
@@ -59,6 +60,8 @@ void	forward_move(t_game *game);
 
 void	rebuild_game(t_game *game);
 void	key_hook(mlx_key_data_t key, void *param);
+
+void horizontal_intersection(t_game *game);
 
 
 // -------------------------------------------------------------------

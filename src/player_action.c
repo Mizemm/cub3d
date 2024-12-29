@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/27 20:01:15 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/29 20:58:10 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void key_hook(mlx_key_data_t key, void *param)
 		forward_move(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
+	horizontal_intersection(game);
 	rebuild_game(game);
 }

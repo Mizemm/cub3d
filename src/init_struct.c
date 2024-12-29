@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/27 19:58:46 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/29 21:21:31 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void init_struct(t_game *game)
 	game->player.rotate_speed = 5 * (M_PI / 180);
 	game->player.move_speed = 5;
 	game->player.angle_rotation = M_PI / 2;
-	game->ray.ray_angle = game->player.angle_rotation - (FOV / 2);
-	game->ray.ray_number = (game->WIDTH * 30);
+	game->horizontal.x_intercept = 0;
+	game->horizontal.y_intercept = 0;
+	game->horizontal.x_step = 0;
+	game->horizontal.y_step = 0;
 	mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)
