@@ -61,7 +61,9 @@ void	forward_move(t_game *game);
 void	rebuild_game(t_game *game);
 void	key_hook(mlx_key_data_t key, void *param);
 
-void horizontal_intersection(t_game *game);
+double	normalize_angle(double angle);
+
+void	horizontal_intersection(t_game *game);
 
 
 // -------------------------------------------------------------------

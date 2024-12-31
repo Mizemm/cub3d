@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/29 20:58:10 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/30 17:04:53 by Amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void rotate_right(t_game *game)
 {
 	game->player.rotate_direction = 1;
 	game->player.angle_rotation += game->player.rotate_direction * game->player.rotate_speed;
+	game->player.angle_rotation = normalize_angle(game->player.angle_rotation);
 }
 
 void rotate_left(t_game *game)
 {
 	game->player.rotate_direction = -1;
 	game->player.angle_rotation += game->player.rotate_direction * game->player.rotate_speed;
+	game->player.angle_rotation = normalize_angle(game->player.angle_rotation);
+
 }
 
 void key_hook(mlx_key_data_t key, void *param)
@@ -45,6 +48,8 @@ void key_hook(mlx_key_data_t key, void *param)
 		forward_move(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
-	horizontal_intersection(game);
+	// double angle = normalize_angle(game->player.angle_rotation);
+	printf("angle : %f\n", game->player.angle_rotation);
+	// horizontal_intersection(game);
 	rebuild_game(game);
 }

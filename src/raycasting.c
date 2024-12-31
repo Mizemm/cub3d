@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/29 21:26:11 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/30 16:25:37 by Amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,14 @@ void horizontal_intersection(t_game *game)
 	game->horizontal.y_step = UNIT_SIZE;
 	game->horizontal.x_step = game->horizontal.y_step / tan(game->player.angle_rotation);
 }
+
+// ray facing down
+
+
+// ray facing up 
+
+
+// ray facing right
+
+
+// ray facing left
