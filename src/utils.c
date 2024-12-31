@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/29 18:14:39 by asalmi           ###   ########.fr       */
+/*   Updated: 2024/12/31 11:14:48 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,12 @@ size_t get_width(char **map)
 		size_h++;
 	}
 	return (size_w);
+}
+
+double normalize_angle(double angle)
+{
+	angle = fmod(angle, (2 * M_PI));
+	if (angle < 0)
+		angle += (2 * M_PI);
+	return (angle);
 }
