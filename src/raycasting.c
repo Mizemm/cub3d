@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/31 14:15:50 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/01 19:04:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void horizontal_intersection(t_game *game)
 	game->horizontal.y_step = UNIT_SIZE;
 	if (is_facing_up(game->player.angle_rotation))
 		game->horizontal.y_step *= -1;
-	game->horizontal.x_step = game->horizontal.y_step / tan(game->player.angle_rotation);
+	game->horizontal.x_step = UNIT_SIZE / tan(game->player.angle_rotation);
+	printf("xtep: %ld\n", game->horizontal.x_step);
 }
