@@ -59,11 +59,15 @@ void	left_move(t_game *game);
 void	backward_move(t_game *game);
 void	forward_move(t_game *game);
 
+bool	is_facing_down(double angle);
+bool	is_facing_up(double angle);
+bool	is_facing_right(double angle);
+bool	is_facing_left(double angle);
+
 void	key_hook(mlx_key_data_t key, void *param);
 
 double	normalize_angle(double angle);
-void	horizontal_intersection(t_game *game);
-
+void 	cast_rays(t_game *game);
 
 // -------------------------------------------------------------------
 
