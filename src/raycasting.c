@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/02 16:58:22 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/03 21:16:11 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,34 @@ void horizontal_intersection(t_game *game, double angle)
 		game->horizontal.x_step *= -1;
 	else if (is_facing_right(angle) && game->horizontal.x_step < 0)
 		game->horizontal.x_step *= -1;
-	printf("--------- %f---------\n", angle);
-	printf("y_intercept: %ld\n", game->horizontal.y_intercept);
-	printf("x_intercept: %ld\n", game->horizontal.x_intercept);
-	printf("x_step: %ld\n", game->horizontal.x_step);
-	printf("y_step: %ld\n", game->horizontal.x_step);
+	double nextHorzStepX = game->horizontal.x_intercept;
+	double nextHorzStepY = game->horizontal.y_intercept;
+	// printf("next horizontal x: %f\n", nextHorzStepX);
+	// printf("next horizontal y: %f\n", nextHorzStepY);
+	// printf("width: %zu\n", game->WIDTH);
+	// printf("height: %zu\n", game->HEIGHT);
+	while (nextHorzStepX >= 0 && nextHorzStepX <= game->WIDTH * UNIT_SIZE 
+		&& nextHorzStepY >= 0 && nextHorzStepY <= game->HEIGHT * UNIT_SIZE)
+	{
+		// printf("----------- test1 -----------\n");
+		// is_wall(game, nextHorzStepX, nextHorzStepY);
+		// printf("----------- test2 -----------\n");
+		printf("next x: %f\n", nextHorzStepX);
+		printf("next y: %f\n", nextHorzStepY);
+		printf("width: %zu\n", game->WIDTH * 30);
+		printf("height: %zu\n", game->HEIGHT * 30);
+		if (is_wall(game, nextHorzStepX, nextHorzStepY))
+		{ 
+			printf("----------- test -----------\n");
+			// game->horizontal.wallHitX = nextHorzStepX;
+			// game->horizontal.wallHitY = nextHorzStepY;
+			// printf("wall x -> %ld\n", game->horizontal.wallHitX);
+			// printf("wall y -> %ld\n", game->horizontal.wallHitY);
+			// break;
+		}
+		nextHorzStepX += game->horizontal.x_step;
+		nextHorzStepY += game->horizontal.y_step;
+	}
 }
 
 void cast_rays(t_game *game)

@@ -15,6 +15,8 @@ typedef struct s_horizontal {
 	long y_intercept;
 	long x_step;
 	long y_step;
+	long wallHitX;
+	long wallHitY;
 } t_horizontal;
 
 typedef struct s_player {
@@ -63,6 +65,7 @@ bool	is_facing_down(double angle);
 bool	is_facing_up(double angle);
 bool	is_facing_right(double angle);
 bool	is_facing_left(double angle);
+bool is_wall(t_game *game, double x, double y);
 
 void	key_hook(mlx_key_data_t key, void *param);
 

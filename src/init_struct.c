@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/29 21:21:31 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/03 16:59:18 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void init_struct(t_game *game)
 	game->horizontal.y_intercept = 0;
 	game->horizontal.x_step = 0;
 	game->horizontal.y_step = 0;
+	game->horizontal.wallHitX = 0;
+	game->horizontal.wallHitY = 0;
 	mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)

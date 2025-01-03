@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2024/12/31 11:14:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/03 21:21:38 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,15 @@ double normalize_angle(double angle)
 	if (angle < 0)
 		angle += (2 * M_PI);
 	return (angle);
+}
+
+bool is_wall(t_game *game, double x, double y)
+{
+	if (x < 0 || y < 0)
+		return (false);
+	printf("x -> %f\n", x);
+	printf("y -> %f\n", y);
+	int x_tmp = floor(x / UNIT_SIZE);
+	int y_tmp = floor(y / UNIT_SIZE);
+	return (game->map[x_tmp][y_tmp] == '1');
 }
