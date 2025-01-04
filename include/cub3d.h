@@ -15,9 +15,18 @@ typedef struct s_horizontal {
 	long y_intercept;
 	long x_step;
 	long y_step;
-	long wallHitX;
-	long wallHitY;
+	long horzWallHitX;
+	long horzWallHitY;
 } t_horizontal;
+
+typedef struct s_vertical {
+	long x_intercept;
+	long y_intercept;
+	long x_step;
+	long y_step;
+	long vertWallHitX;
+	long vertWallHitY;
+} t_vertical;
 
 typedef struct s_player {
 	double position_x;
@@ -41,6 +50,7 @@ typedef struct s_game {
 	mlx_image_t *background_img;
 	t_player player;
 	t_horizontal horizontal;
+	t_vertical vertical;
 } t_game;
 
 char	*get_next_line(int fd);
@@ -65,7 +75,7 @@ bool	is_facing_down(double angle);
 bool	is_facing_up(double angle);
 bool	is_facing_right(double angle);
 bool	is_facing_left(double angle);
-bool is_wall(t_game *game, double x, double y);
+bool 	is_wall(t_game *game, double x, double y);
 
 void	key_hook(mlx_key_data_t key, void *param);
 

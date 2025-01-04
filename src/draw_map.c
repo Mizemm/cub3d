@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/03 18:03:59 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/04 18:57:11 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ void draw_line(t_game *game)
 	// y_ep = game->player.position_y + (UNIT_SIZE * sin(game->player.angle_rotation));
 	// dx = x_ep - game->player.position_x;
 	// dy = y_ep - game->player.position_y;
-	printf("wall x: %ld\n", game->horizontal.wallHitX);
-	printf("wall y: %ld\n", game->horizontal.wallHitY);
-	dx = game->horizontal.wallHitX - game->player.position_x;
-	dy = game->horizontal.wallHitY - game->player.position_y;
+	dx = game->horizontal.horzWallHitX - game->player.position_x;
+	dy = game->horizontal.horzWallHitY - game->player.position_y;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
 	else
