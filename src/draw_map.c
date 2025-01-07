@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/04 18:57:11 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/07 18:10:38 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void draw_line(t_game *game)
 {
-	// double x_ep;
-	// double y_ep;
 	double x_tmp;
 	double y_tmp;
 	int i;
@@ -26,12 +24,8 @@ void draw_line(t_game *game)
 	double y_inc;
 
 	i = -1;
-	// x_ep = game->player.position_x + (UNIT_SIZE * cos(game->player.angle_rotation));
-	// y_ep = game->player.position_y + (UNIT_SIZE * sin(game->player.angle_rotation));
-	// dx = x_ep - game->player.position_x;
-	// dy = y_ep - game->player.position_y;
-	dx = game->horizontal.horzWallHitX - game->player.position_x;
-	dy = game->horizontal.horzWallHitY - game->player.position_y;
+	dx = game->wallHitX - game->player.position_x;
+	dy = game->wallHitY - game->player.position_y;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
 	else

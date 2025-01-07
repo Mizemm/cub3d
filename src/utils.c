@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/04 19:14:50 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/07 17:58:11 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,14 @@ bool is_wall(t_game *game, double x, double y)
 	int x_tmp = floor(x / UNIT_SIZE);
 	int y_tmp = floor(y / UNIT_SIZE);
 	return (game->map[y_tmp][x_tmp] == '1');
+}
+
+double calculate_distance(double x1, double y1, double x2, double y2)
+{
+	double dx;
+	double dy;
+
+	dx = x2 - x1;	
+	dy = y2 - y1;
+	return (sqrt((dx * dx) + (dy * dy)));
 }
