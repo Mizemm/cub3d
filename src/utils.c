@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/04 19:14:50 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/10 20:58:03 by Amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 char **get_map(char **map)
 {
-	map[0] = strdup("111111111111111111111111111");
-	map[1] = strdup("100000000111000000000001101");
-	map[2] = strdup("100000000110000000000000001");
-	map[3] = strdup("111111110000000011111000001");
-	map[4] = strdup("10000001100N000000000000001");
-	map[5] = strdup("100000000100001100100000101");
-	map[6] = strdup("100000000000000000000000001");
-	map[7] = strdup("111111111111000000000001001");
-	map[8] = strdup("100000000000001111111000001");
-	map[9] = strdup("111111111111111111111111111");
-	map[10] = NULL;
+	map[0] = strdup("111111111111111111111111");
+    map[1] = strdup("100100000N00000000000001");
+    map[2] = strdup("100100000000000000000001");
+    map[3] = strdup("100100000000000000000001");
+    map[4] = strdup("111111100100000011100001");
+    map[5] = strdup("100000000011000011101111");
+    map[6] = strdup("111101111111101110000001");
+    map[7] = strdup("111101111111110111011001");
+    map[8] = strdup("110000001101010111000001");
+    map[9] = strdup("100000000000000110000011");
+    map[10] = strdup("100000000000000011010111");
+    map[11] = strdup("110000011101010111101111");
+    map[12] = strdup("111101111110101101111001");
+    map[13] = strdup("111111111111111111111111");
+    map[14] = NULL;
 	return (map);
 }
 size_t get_height(char **map)
@@ -68,4 +72,14 @@ bool is_wall(t_game *game, double x, double y)
 	int x_tmp = floor(x / UNIT_SIZE);
 	int y_tmp = floor(y / UNIT_SIZE);
 	return (game->map[y_tmp][x_tmp] == '1');
+}
+
+double calculate_distance(double x1, double y1, double x2, double y2)
+{
+	double dx;
+	double dy;
+
+	dx = x2 - x1;
+	dy = y2 - y1;
+	return (sqrt((dx * dx) + (dy * dy)));
 }

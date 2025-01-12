@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/04 14:02:53 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/10 20:39:19 by Amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void rebuild_game(t_game *game)
 	draw_background(game);
 	draw_wall(game);
 	draw_player(game);
-	draw_line(game);
 	cast_rays(game);
+	draw_line(game);
 }
 
 void ft_raycasting(t_game *game)
@@ -29,8 +29,8 @@ void ft_raycasting(t_game *game)
 	draw_background(game);
 	draw_wall(game);
 	draw_player(game);
-	draw_line(game);
 	cast_rays(game);
+	draw_line(game);
 }
 
 int main()
@@ -41,6 +41,7 @@ int main()
 	if (!game)
 		return (1);
 	init_struct(game);
+	// printf("angle: %f\n", game->player.angle_rotation);
 	ft_raycasting(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);
