@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/07 18:10:38 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/12 00:45:01 by Amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void draw_line(t_game *game)
 		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
-	x_tmp = game->player.position_x + 5;
-	y_tmp = game->player.position_y + 5;
+	x_tmp = game->player.position_x;
+	y_tmp = game->player.position_y;
 	while (++i <= steps)
 	{
 		mlx_put_pixel(game->wall_img, round(x_tmp), round(y_tmp), 0xFF0000ff);

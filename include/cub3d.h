@@ -3,8 +3,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
-#include <math.h>
 #include <limits.h>
+#include <math.h>
 // #include <../../MLX42/include/MLX42/MLX42.h>
 #include <MLX42.h>
 
@@ -26,8 +26,8 @@ typedef struct s_vertical {
 	long y_intercept;
 	long x_step;
 	long y_step;
-	double vertWallHitX;
-	double vertWallHitY;
+	long vertWallHitX;
+	long vertWallHitY;
 	bool foundVertWall;
 } t_vertical;
 
@@ -51,11 +51,11 @@ typedef struct s_game {
 	mlx_t *mlx;
 	mlx_image_t *wall_img; 
 	mlx_image_t *background_img;
+	double wallHitX;
+	double wallHitY;
 	t_player player;
 	t_horizontal horizontal;
 	t_vertical vertical;
-	double wallHitX;
-	double wallHitY;
 } t_game;
 
 char	*get_next_line(int fd);
@@ -87,6 +87,7 @@ void	key_hook(mlx_key_data_t key, void *param);
 double	normalize_angle(double angle);
 void 	cast_rays(t_game *game);
 double 	calculate_distance(double x1, double y1, double x2, double y2);
+
 
 // -------------------------------------------------------------------
 

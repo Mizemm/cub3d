@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/07 18:02:21 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/10 19:10:29 by Amine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void init_struct(t_game *game)
 	mlx_t *mlx;
 
 	// Zero-initialize the entire structure -> use memset
-	game->map = malloc(sizeof(char *) * (10 + 1));
+	game->map = malloc(sizeof(char *) * (14 + 1));
 	if (!game->map)
 		return ;
 	game->map = get_map(game->map);
