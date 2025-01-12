@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/12 01:42:30 by Amine            ###   ########.fr       */
+/*   Updated: 2025/01/12 21:42:04 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void init_horizontal_intersection(t_game *game, double angle)
 	game->horizontal.y_intercept = floor(game->player.position_y / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_down(angle))
 		game->horizontal.y_intercept += UNIT_SIZE;
-	else
-		game->horizontal.y_intercept += 0;
 	game->horizontal.x_intercept = ((game->horizontal.y_intercept - game->player.position_y) / tan(angle)) + game->player.position_x;
 	game->horizontal.y_step = UNIT_SIZE;
 	if (is_facing_up(angle))
@@ -38,8 +36,8 @@ void horizontal_intersection(t_game *game, double angle)
 	init_horizontal_intersection(game, angle);
 	double nextHorzStepX = game->horizontal.x_intercept;
 	double nextHorzStepY = game->horizontal.y_intercept;
-	double checkStepX;
-	double checkStepY;
+	double checkStepX = 0;
+	double checkStepY = 0;
 	while (nextHorzStepX >= 0 && nextHorzStepX <= game->WIDTH * UNIT_SIZE 
 		&& nextHorzStepY >= 0 && nextHorzStepY <= game->HEIGHT * UNIT_SIZE)
 	{
@@ -67,8 +65,6 @@ void init_vertical_intersection(t_game *game, double angle)
 	game->vertical.x_intercept = floor(game->player.position_x / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_right(angle))
 		game->vertical.x_intercept += UNIT_SIZE;
-	else
-		game->vertical.x_intercept += 0;
 	game->vertical.y_intercept = game->player.position_y + ((game->vertical.x_intercept - game->player.position_x) * tan(angle));
 	game->vertical.x_step = UNIT_SIZE;
 	if (is_facing_left(angle))
@@ -85,8 +81,8 @@ void vertical_intersection(t_game *game, double angle)
 	init_vertical_intersection(game, angle);
 	double nextVertStepX = game->vertical.x_intercept;
 	double nextVertStepY = game->vertical.y_intercept;
-	double checkStepX;
-	double checkStepY;
+	double checkStepX = 0;
+	double checkStepY = 0;
 	while (nextVertStepX >= 0 && nextVertStepX <= game->WIDTH * UNIT_SIZE
 			&& nextVertStepY >= 0 && nextVertStepY <= game->HEIGHT * UNIT_SIZE)
 	{
@@ -106,15 +102,15 @@ void vertical_intersection(t_game *game, double angle)
 	}
 }
 
-void cast_rays(t_game *game)
+void find_distance(t_game *game, t_ray *ray, double ray_angle)
 {
 	double angle;
 	double horizontal_distance;
 	double vertical_distance;
-
+	
 	horizontal_distance = INT_MAX;
 	vertical_distance = INT_MAX;
-	angle = normalize_angle(game->player.angle_rotation);
+	angle = normalize_angle(ray_angle);
 	horizontal_intersection(game, angle);
 	vertical_intersection(game, angle);
 	if (game->horizontal.foundHorzWall)
@@ -123,14 +119,35 @@ void cast_rays(t_game *game)
 		vertical_distance = calculate_distance(game->player.position_x, game->player.position_y, game->vertical.vertWallHitX, game->vertical.vertWallHitY);
 	if (horizontal_distance < vertical_distance)
 	{
-		// printf("------- v ------\n");
-		game->wallHitX = game->horizontal.horzWallHitX;
-		game->wallHitY = game->horizontal.horzWallHitY;
+		ray->wallHitX = game->horizontal.horzWallHitX;
+		ray->wallHitY = game->horizontal.horzWallHitY;
 	}
 	else
 	{
-		// printf("------- h ------\n");
-		game->wallHitX = game->vertical.vertWallHitX;
-		game->wallHitY = game->vertical.vertWallHitY;
+		ray->wallHitX = game->vertical.vertWallHitX;
+		ray->wallHitY = game->vertical.vertWallHitY;
+	}
+	
+}
+
+void cast_rays(t_game *game)
+{
+	int i;
+	double rays_incs;
+
+	i = 0;
+	game->rays->ray_angle = game->player.angle_rotation - (FOV / 2);
+	rays_incs = (FOV / game->rays_number);
+	while (i < game->rays_number)
+	{
+		find_distance(game, &game->rays[i], game->rays->ray_angle);
+		game->rays->ray_angle += (FOV / game->rays_number);
+		i++;
+	}
+	i = 0;
+	while (i < game->rays_number)
+	{
+		draw_line(game, game->rays[i]);
+		i++;
 	}
 }

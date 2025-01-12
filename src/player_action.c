@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/10 19:36:17 by Amine            ###   ########.fr       */
+/*   Updated: 2025/01/12 21:23:09 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,5 @@ void key_hook(mlx_key_data_t key, void *param)
 		forward_move(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
-	// printf("angle: %f\n", (game->player.angle_rotation * (180 / M_PI)));
 	rebuild_game(game);
-	// printf("%f\n", game->player.angle_rotation);
 }

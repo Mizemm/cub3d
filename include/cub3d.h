@@ -9,25 +9,25 @@
 #include <MLX42.h>
 
 #define UNIT_SIZE 30
-#define FOV 60
+#define FOV 60 * (M_PI / 180)
 
 typedef struct s_horizontal {
-	long x_intercept;
-	long y_intercept;
-	long x_step;
-	long y_step;
-	long horzWallHitX;
-	long horzWallHitY;
+	double x_intercept;
+	double y_intercept;
+	double x_step;
+	double y_step;
+	double horzWallHitX;
+	double horzWallHitY;
 	bool foundHorzWall;
 } t_horizontal;
 
 typedef struct s_vertical {
-	long x_intercept;
-	long y_intercept;
-	long x_step;
-	long y_step;
-	long vertWallHitX;
-	long vertWallHitY;
+	double x_intercept;
+	double y_intercept;
+	double x_step;
+	double y_step;
+	double vertWallHitX;
+	double vertWallHitY;
 	bool foundVertWall;
 } t_vertical;
 
@@ -40,22 +40,27 @@ typedef struct s_player {
 	int rotate_direction;
 	int move_direction;
 	mlx_image_t *player_image;
-	mlx_image_t *line_img;
-
 } t_player;
+
+typedef struct s_ray {
+	double wallHitX;
+	double wallHitY;
+	double ray_angle;
+} t_ray;
 
 typedef struct s_game {
 	size_t WIDTH;
 	size_t HEIGHT;
-	char **map;
-	mlx_t *mlx;
-	mlx_image_t *wall_img; 
-	mlx_image_t *background_img;
+	long rays_number;
 	double wallHitX;
 	double wallHitY;
+	char **map;
+	mlx_t *mlx;
+	mlx_image_t *image;
+	t_ray *rays;
 	t_player player;
-	t_horizontal horizontal;
 	t_vertical vertical;
+	t_horizontal horizontal;
 } t_game;
 
 char	*get_next_line(int fd);
@@ -68,7 +73,7 @@ void	init_struct(t_game *game);
 void	draw_background(t_game *game);
 void	draw_wall(t_game *game);
 void	draw_player(t_game *game);
-void 	draw_line(t_game *game);
+void 	draw_line(t_game *game, t_ray ray);
 void	rebuild_game(t_game *game);
 
 void 	right_move(t_game *game);
@@ -85,6 +90,7 @@ bool 	is_wall(t_game *game, double x, double y);
 void	key_hook(mlx_key_data_t key, void *param);
 
 double	normalize_angle(double angle);
+void 	find_distance(t_game *game, t_ray *ray, double ray_angle);
 void 	cast_rays(t_game *game);
 double 	calculate_distance(double x1, double y1, double x2, double y2);
 

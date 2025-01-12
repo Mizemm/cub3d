@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/12 00:45:01 by Amine            ###   ########.fr       */
+/*   Updated: 2025/01/12 21:42:34 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void draw_line(t_game *game)
+void draw_line(t_game *game, t_ray ray)
 {
 	double x_tmp;
 	double y_tmp;
@@ -24,8 +24,8 @@ void draw_line(t_game *game)
 	double y_inc;
 
 	i = -1;
-	dx = game->wallHitX - game->player.position_x;
-	dy = game->wallHitY - game->player.position_y;
+	dx = ray.wallHitX - game->player.position_x;
+	dy = ray.wallHitY - game->player.position_y;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
 	else
@@ -36,7 +36,7 @@ void draw_line(t_game *game)
 	y_tmp = game->player.position_y;
 	while (++i <= steps)
 	{
-		mlx_put_pixel(game->wall_img, round(x_tmp), round(y_tmp), 0xFF0000ff);
+		mlx_put_pixel(game->image, round(x_tmp), round(y_tmp), 0xFF0000ff);
 		x_tmp += x_inc;
 		y_tmp += y_inc;
 	}
@@ -49,15 +49,15 @@ void draw_background(t_game *game)
 
 	x = 0;
 	y = 0;
-	game->background_img = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
-	if ((!game->background_img) || (mlx_image_to_window(game->mlx, game->background_img, 0, 0) < 0))
+	game->image = mlx_new_image(game->mlx, game->WIDTH * UNIT_SIZE, game->HEIGHT * UNIT_SIZE);
+	if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
 		return ;
 	while (game->HEIGHT * UNIT_SIZE > y)
 	{
 		x = 0;
 		while (game->WIDTH * UNIT_SIZE > x)
 		{
-			mlx_put_pixel(game->background_img, x, y, 0xFFFFFFFF);
+			mlx_put_pixel(game->image, x, y, 0xFFFFFFFF);
 			x++;	
 		}
 		y++;
@@ -79,9 +79,6 @@ void draw_wall(t_game *game)
 	j = 0;
 	position_x = 0;
 	position_y = 0;
-	game->wall_img = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
-	if ((!game->wall_img) || (mlx_image_to_window(game->mlx, game->wall_img, 0, 0) < 0))
-		return ;
 	while (game->map[i])
 	{
 		j = 0;
@@ -96,17 +93,17 @@ void draw_wall(t_game *game)
 					x = 0;
 					while (UNIT_SIZE > x)
 					{
-						mlx_put_pixel(game->wall_img, x + position_x, y + position_y, 0x000000FF);
+						mlx_put_pixel(game->image, x + position_x, y + position_y, 0x000000FF);
 						x++;
 					}
 					y++;
 				}
 			}
 			j++;
-		position_x += 30;	
+			position_x += UNIT_SIZE;	
 		}
 		i++;
-		position_y += 30;
+		position_y += UNIT_SIZE;
 	}
 }
 
@@ -115,19 +112,19 @@ void draw_player(t_game *game)
 	int x;
 	int y;
 	
-	x = 0;
-	y = 0;
-	game->player.player_image = mlx_new_image(game->mlx, 10, 10);
-	if (!game->player.player_image)
-		return ;
-	if (mlx_image_to_window(game->mlx, game->player.player_image, game->player.position_x, game->player.position_y) < 0)
-		return ;
-	while (y < 10)
+	x = -5;
+	y = -5;
+	// game->player.player_image = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
+	// if (!game->player.player_image)
+	// 	return ;
+	// if (mlx_image_to_window(game->mlx, game->player.player_image, 0, 0) < 0)
+	// 	return ;
+	while (y < 5)
 	{
-		x = 0;
-		while (x < 10)
+		x = -5;
+		while (x < 5)
 		{
-			mlx_put_pixel(game->player.player_image, x, y, 0xFF0000ff);
+			mlx_put_pixel(game->image, game->player.position_x + x, game->player.position_y + y, 0xFF0000ff);
 			x++;
 		}
 		y++;

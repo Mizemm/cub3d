@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Amine <Amine@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/10 19:10:29 by Amine            ###   ########.fr       */
+/*   Updated: 2025/01/12 21:39:57 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,18 @@ void init_struct(t_game *game)
 	game->HEIGHT = get_height(game->map);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
-	game->player.rotate_speed = 5 * (M_PI / 180);
+	game->player.rotate_speed = 3.5 * (M_PI / 180);
 	game->player.move_speed = 5;
 	game->player.angle_rotation = M_PI / 2;
-	game->horizontal.x_intercept = 0;
-	game->horizontal.y_intercept = 0;
-	game->horizontal.x_step = 0;
-	game->horizontal.y_step = 0;
-	game->horizontal.horzWallHitX = 0;
-	game->horizontal.horzWallHitY = 0;
-	game->horizontal.foundHorzWall = false;
-	game->vertical.x_intercept = 0;
-	game->vertical.y_intercept = 0;
-	game->vertical.x_step = 0;
-	game->vertical.y_step = 0;
-	game->vertical.vertWallHitX = 0;
-	game->vertical.vertWallHitY = 0;
-	game->vertical.foundVertWall = false;
+	game->rays_number = game->WIDTH;
+	game->rays = malloc(sizeof(t_ray) * game->rays_number);
+	if (!game->rays)
+	{
+		free(game);
+		return ;
+	}
 	game->wallHitX = 0;
-	game->wallHitY = 0;
+	game->wallHitY = 0;	
 	mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)
