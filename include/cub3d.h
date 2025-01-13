@@ -51,7 +51,7 @@ typedef struct s_ray {
 typedef struct s_game {
 	size_t WIDTH;
 	size_t HEIGHT;
-	long rays_number;
+	double rays_number;
 	double wallHitX;
 	double wallHitY;
 	char **map;

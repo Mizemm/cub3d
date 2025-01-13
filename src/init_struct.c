@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/12 21:39:57 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:31:16 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void init_struct(t_game *game)
 	game->player.rotate_speed = 3.5 * (M_PI / 180);
 	game->player.move_speed = 5;
 	game->player.angle_rotation = M_PI / 2;
-	game->rays_number = game->WIDTH;
+	game->rays_number = game->WIDTH * UNIT_SIZE;
 	game->rays = malloc(sizeof(t_ray) * game->rays_number);
 	if (!game->rays)
 	{
@@ -60,7 +60,7 @@ void init_struct(t_game *game)
 	}
 	game->wallHitX = 0;
 	game->wallHitY = 0;	
-	mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
+	mlx = mlx_init(game->WIDTH * UNIT_SIZE, game->HEIGHT * UNIT_SIZE, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)
 		return ;

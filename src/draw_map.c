@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/12 21:42:34 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:29:14 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void draw_line(t_game *game, t_ray ray)
 {
-	double x_tmp;
-	double y_tmp;
 	int i;
 	double dx;
 	double dy;
+	double x_tmp;
+	double y_tmp;
 	double steps;
 	double x_inc;
 	double y_inc;

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/12 21:42:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:39:45 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void find_distance(t_game *game, t_ray *ray, double ray_angle)
 	double angle;
 	double horizontal_distance;
 	double vertical_distance;
-	
+
 	horizontal_distance = INT_MAX;
 	vertical_distance = INT_MAX;
 	angle = normalize_angle(ray_angle);
@@ -127,17 +127,14 @@ void find_distance(t_game *game, t_ray *ray, double ray_angle)
 		ray->wallHitX = game->vertical.vertWallHitX;
 		ray->wallHitY = game->vertical.vertWallHitY;
 	}
-	
 }
 
 void cast_rays(t_game *game)
 {
 	int i;
-	double rays_incs;
 
 	i = 0;
 	game->rays->ray_angle = game->player.angle_rotation - (FOV / 2);
-	rays_incs = (FOV / game->rays_number);
 	while (i < game->rays_number)
 	{
 		find_distance(game, &game->rays[i], game->rays->ray_angle);
