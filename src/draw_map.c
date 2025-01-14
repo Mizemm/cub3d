@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/13 17:29:14 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/14 18:40:31 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void draw_line(t_game *game, t_ray ray)
 	y_tmp = game->player.position_y;
 	while (++i <= steps)
 	{
+		if (x_tmp < 0 || y_tmp < 0 || x_tmp >= game->WIDTH * UNIT_SIZE || y_tmp >= game->HEIGHT * UNIT_SIZE)
+            break;
 		mlx_put_pixel(game->image, round(x_tmp), round(y_tmp), 0xFF0000ff);
 		x_tmp += x_inc;
 		y_tmp += y_inc;
@@ -114,11 +116,6 @@ void draw_player(t_game *game)
 	
 	x = -5;
 	y = -5;
-	// game->player.player_image = mlx_new_image(game->mlx, game->WIDTH * 30, game->HEIGHT * 30);
-	// if (!game->player.player_image)
-	// 	return ;
-	// if (mlx_image_to_window(game->mlx, game->player.player_image, 0, 0) < 0)
-	// 	return ;
 	while (y < 5)
 	{
 		x = -5;

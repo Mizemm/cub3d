@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/13 17:31:16 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/14 18:05:58 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void find_player(t_game *game)
 		{
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'W' || game->map[i][j] == 'E')
 			{
-				game->player.position_x = (j * 30) + 15;
-				game->player.position_y = (i * 30) + 15;
+				game->player.position_x = (j * UNIT_SIZE) + 15;
+				game->player.position_y = (i * UNIT_SIZE) + 15;
 			}
 			j++;
 		}
@@ -48,7 +48,7 @@ void init_struct(t_game *game)
 	game->HEIGHT = get_height(game->map);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
-	game->player.rotate_speed = 3.5 * (M_PI / 180);
+	game->player.rotate_speed = 3 * (M_PI / 180);
 	game->player.move_speed = 5;
 	game->player.angle_rotation = M_PI / 2;
 	game->rays_number = game->WIDTH * UNIT_SIZE;

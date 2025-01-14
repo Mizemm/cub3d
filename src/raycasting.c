@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/13 17:39:45 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/14 20:08:39 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void horizontal_intersection(t_game *game, double angle)
 	init_horizontal_intersection(game, angle);
 	double nextHorzStepX = game->horizontal.x_intercept;
 	double nextHorzStepY = game->horizontal.y_intercept;
-	double checkStepX = 0;
+	double checkStepX = 0;	
 	double checkStepY = 0;
 	while (nextHorzStepX >= 0 && nextHorzStepX <= game->WIDTH * UNIT_SIZE 
 		&& nextHorzStepY >= 0 && nextHorzStepY <= game->HEIGHT * UNIT_SIZE)
@@ -87,15 +87,17 @@ void vertical_intersection(t_game *game, double angle)
 			&& nextVertStepY >= 0 && nextVertStepY <= game->HEIGHT * UNIT_SIZE)
 	{
 		checkStepX = nextVertStepX;
-		checkStepY = nextVertStepY;
 		if (is_facing_left(angle))
 			checkStepX -= 1;
+		checkStepY = nextVertStepY;
+		// printf("check X: %f\ncheck Y: %f\n", checkStepX, checkStepY);
 		if (is_wall(game, checkStepX, checkStepY))
 		{
 			game->vertical.vertWallHitX = nextVertStepX;
 			game->vertical.vertWallHitY = nextVertStepY;
 			game->vertical.foundVertWall = true;
-			break;
+			// printf("vertwall X: %f\nvert wall Y: %f\n", game->vertical.vertWallHitX, game->vertical.vertWallHitY);
+			break ;
 		}
 		nextVertStepX += game->vertical.x_step;
 		nextVertStepY += game->vertical.y_step;
@@ -105,8 +107,8 @@ void vertical_intersection(t_game *game, double angle)
 void find_distance(t_game *game, t_ray *ray, double ray_angle)
 {
 	double angle;
-	double horizontal_distance;
-	double vertical_distance;
+	long horizontal_distance;
+	long vertical_distance;
 
 	horizontal_distance = INT_MAX;
 	vertical_distance = INT_MAX;
