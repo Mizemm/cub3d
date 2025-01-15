@@ -6,41 +6,119 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/14 18:40:31 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/15 20:49:40 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+t_dda init_dda(t_game *game, t_ray ray)
+{
+	t_dda dd;
+
+	dd.x0 = game->player.position_x;
+	dd.y0 = game->player.position_y;
+	dd.x1 = ray.wallHitX;
+	dd.y1 = ray.wallHitY;
+	dd.dx = abs(dd.x1 - dd.x0);
+	dd.dy = abs(dd.y1 - dd.y0);
+	if (dd.x0 < dd.x1)
+	 	dd.stepx = 1;
+	else
+		dd.stepx = -1;
+	if (dd.y0 < dd.y1)
+		dd.stepy = 1;
+	else
+		dd.stepy = -1;
+	dd.err = dd.dx - dd.dy;
+	return (dd);
+}
+
+void dda_test(t_game *game, t_ray ray)
+{	
+	t_dda dd;
+	dd = init_dda(game, ray);
+	// printf("stepx: %d\nstepy: %d\n", dd.stepx, dd.stepy);
+	// int x0 = game->player.position_x;
+	// int y0 = game->player.position_y;
+	// int x1 = ray.wallHitX;
+	// int y1 = ray.wallHitY;
+	// int dx = abs(x1 - x0);
+	// int dy = abs(y1 - y0);
+	// // int err = 0;
+	// // int e2 = 0;
+	// int sx;
+	// int sy;
+	// if (x0 < x1)
+	// 	sx = 1;
+	// else
+	// 	sx = -1;
+	// if (y0 < y1)
+	// 	sy = 1;
+	// else
+	// 	sy = -1;
+	// err = dx - dy;
+	while (1)
+	{
+		if (dd.x0 < 0 || dd.y0 < 0 || dd.x0 >= (int)game->WIDTH * UNIT_SIZE || dd.y0 >= (int)game->HEIGHT * UNIT_SIZE)
+			return ;
+		mlx_put_pixel(game->image, dd.x0, dd.y0, 0xFF0000ff);
+		if (dd.x0 == dd.x1 && dd.y0 == dd.y1)
+			break;
+		dd.e2 = 2 * dd.err;
+		if (dd.e2 > -dd.dy)
+		{
+			dd.err -= dd.dy;
+			dd.x0 += dd.stepx;
+		}
+		if (dd.e2 < dd.dx)
+		{
+			dd.err += dd.dx;
+			dd.y0 += dd.stepy;
+		}
+	}
+}
 
 void draw_line(t_game *game, t_ray ray)
 {
 	int i;
 	double dx;
 	double dy;
-	double x_tmp;
-	double y_tmp;
+	double x0;
+	double y0;
 	double steps;
 	double x_inc;
 	double y_inc;
+	double x1;
+	double y1;
 
 	i = -1;
-	dx = ray.wallHitX - game->player.position_x;
-	dy = ray.wallHitY - game->player.position_y;
+	x1 = ray.wallHitX;
+	y1 = ray.wallHitY;
+	x0 = game->player.position_x;
+	y0 = game->player.position_y;
+	dx = x1 - x0;
+	dy = y1 - y0;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
 	else
 		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
-	x_tmp = game->player.position_x;
-	y_tmp = game->player.position_y;
-	while (++i <= steps)
+	// if (x0 > x1)
+	// 	x_inc *= -1;
+	// if (y0 > y1)
+	// 	y_inc *= -1;
+	while (i <= steps)
 	{
-		if (x_tmp < 0 || y_tmp < 0 || x_tmp >= game->WIDTH * UNIT_SIZE || y_tmp >= game->HEIGHT * UNIT_SIZE)
+		if (x0 < 0 || y0 < 0 || x0 >= game->WIDTH * UNIT_SIZE || y0 >= game->HEIGHT * UNIT_SIZE)
             break;
-		mlx_put_pixel(game->image, round(x_tmp), round(y_tmp), 0xFF0000ff);
-		x_tmp += x_inc;
-		y_tmp += y_inc;
+		mlx_put_pixel(game->image, round(x0), round(y0), 0xFF0000ff);
+		// if (x0 == x1 && y0 == y1)
+		// 	break;
+		x0 += x_inc;
+		y0 += y_inc;
+		i++;
 	}
 }
 

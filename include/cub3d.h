@@ -11,6 +11,19 @@
 #define UNIT_SIZE 30
 #define FOV 60 * (M_PI / 180)
 
+typedef struct s_dda {
+	int x0;
+	int y0;
+	int x1;
+	int y1;
+	int dx;
+	int dy;
+	int stepx;
+	int stepy;
+	int err;
+	int e2;
+}	t_dda;
+
 typedef struct s_horizontal {
 	double x_intercept;
 	double y_intercept;
@@ -73,7 +86,8 @@ void	init_struct(t_game *game);
 void	draw_background(t_game *game);
 void	draw_wall(t_game *game);
 void	draw_player(t_game *game);
-void 	draw_line(t_game *game, t_ray ray);
+// void 	draw_line(t_game *game, t_ray ray);
+void 	dda_test(t_game *game, t_ray ray);
 void	rebuild_game(t_game *game);
 
 void 	right_move(t_game *game);
