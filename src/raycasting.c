@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/15 20:36:12 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/16 17:07:41 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,13 @@ void find_distance(t_game *game, t_ray *ray, double ray_angle)
 	{
 		ray->wallHitX = game->horizontal.horzWallHitX;
 		ray->wallHitY = game->horizontal.horzWallHitY;
+		ray->distance = horizontal_distance;
 	}
 	else
 	{
 		ray->wallHitX = game->vertical.vertWallHitX;
 		ray->wallHitY = game->vertical.vertWallHitY;
+		ray->distance = vertical_distance;
 	}
 }
 

@@ -59,6 +59,8 @@ typedef struct s_ray {
 	double wallHitX;
 	double wallHitY;
 	double ray_angle;
+	double line_hight;
+	double distance;
 } t_ray;
 
 typedef struct s_game {
@@ -86,7 +88,7 @@ void	init_struct(t_game *game);
 void	draw_background(t_game *game);
 void	draw_wall(t_game *game);
 void	draw_player(t_game *game);
-// void 	draw_line(t_game *game, t_ray ray);
+void 	draw_line(t_game *game, t_ray ray);
 void 	dda_test(t_game *game, t_ray ray);
 void	rebuild_game(t_game *game);
 

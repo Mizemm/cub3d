@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/15 20:49:40 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/16 17:09:13 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,6 @@ void dda_test(t_game *game, t_ray ray)
 {	
 	t_dda dd;
 	dd = init_dda(game, ray);
-	// printf("stepx: %d\nstepy: %d\n", dd.stepx, dd.stepy);
-	// int x0 = game->player.position_x;
-	// int y0 = game->player.position_y;
-	// int x1 = ray.wallHitX;
-	// int y1 = ray.wallHitY;
-	// int dx = abs(x1 - x0);
-	// int dy = abs(y1 - y0);
-	// // int err = 0;
-	// // int e2 = 0;
-	// int sx;
-	// int sy;
-	// if (x0 < x1)
-	// 	sx = 1;
-	// else
-	// 	sx = -1;
-	// if (y0 < y1)
-	// 	sy = 1;
-	// else
-	// 	sy = -1;
-	// err = dx - dy;
 	while (1)
 	{
 		if (dd.x0 < 0 || dd.y0 < 0 || dd.x0 >= (int)game->WIDTH * UNIT_SIZE || dd.y0 >= (int)game->HEIGHT * UNIT_SIZE)
@@ -105,19 +85,48 @@ void draw_line(t_game *game, t_ray ray)
 		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
-	// if (x0 > x1)
-	// 	x_inc *= -1;
-	// if (y0 > y1)
-	// 	y_inc *= -1;
-	while (i <= steps)
+	while (++i <= steps)
 	{
+		mlx_put_pixel(game->image, round(x0), round(y0), 0xFF0000ff);
 		if (x0 < 0 || y0 < 0 || x0 >= game->WIDTH * UNIT_SIZE || y0 >= game->HEIGHT * UNIT_SIZE)
             break;
-		mlx_put_pixel(game->image, round(x0), round(y0), 0xFF0000ff);
-		// if (x0 == x1 && y0 == y1)
-		// 	break;
 		x0 += x_inc;
 		y0 += y_inc;
+	}
+}
+
+void draw_grid(t_game *game)
+{
+	size_t x;
+	size_t y;
+	
+	for (y = 0; y < game->HEIGHT * UNIT_SIZE; y += UNIT_SIZE)
+	{
+		for (x = 0; x < game->WIDTH * UNIT_SIZE; x++)
+		{
+			mlx_put_pixel(game->image, x, y, 0xb5b8b7);
+		}
+	}
+	for (x = 0; x < game->WIDTH * UNIT_SIZE; x += UNIT_SIZE)
+	{
+		for (y = 0; y < game->HEIGHT * UNIT_SIZE; y++)
+		{
+			mlx_put_pixel(game->image, x, y, 0xb5b8b7);
+		}
+	}
+}
+void render_wall(t_game *game, t_ray ray)
+{
+	int i;
+
+	i = 0;
+	double start = 0;
+	double end = 0;
+	while (i < game->rays_number)
+	{
+		ray.line_hight = (UNIT_SIZE / ray.distance) * 415;
+		start = (game->HEIGHT / 2) - (ray.line_hight / 2);
+		end = ray.line_hight;
 		i++;
 	}
 }
@@ -142,6 +151,7 @@ void draw_background(t_game *game)
 		}
 		y++;
 	}
+	draw_grid(game);
 }
 
 void draw_wall(t_game *game)
