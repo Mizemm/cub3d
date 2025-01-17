@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/16 17:09:13 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/17 18:09:19 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,18 +115,33 @@ void draw_grid(t_game *game)
 		}
 	}
 }
-void render_wall(t_game *game, t_ray ray)
+void render_wall(t_game *game, t_ray *ray)
 {
 	int i;
-
+	double projection_distance;
+	double half_width = game->rays_number / 2;
+	double p_wall_height;
+	double start;
+	double end;
+	double height = game->HEIGHT * UNIT_SIZE;
+	
 	i = 0;
-	double start = 0;
-	double end = 0;
 	while (i < game->rays_number)
 	{
-		ray.line_hight = (UNIT_SIZE / ray.distance) * 415;
-		start = (game->HEIGHT / 2) - (ray.line_hight / 2);
-		end = ray.line_hight;
+		projection_distance = (half_width / tan(FOV / 2));
+		p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
+		start = (height / 2) - (p_wall_height / 2);
+		if (start < 0)
+			start = 0;
+		end = start + p_wall_height;
+		if (end < 0)
+			end = height;
+		while (end >= start)
+		{
+			if (i >= 0 && i < (int)game->WIDTH * UNIT_SIZE && start >= 0 && start < height)
+				mlx_put_pixel(game->image, i, start, ray[i].color);
+			start++;
+		}
 		i++;
 	}
 }
@@ -146,12 +161,12 @@ void draw_background(t_game *game)
 		x = 0;
 		while (game->WIDTH * UNIT_SIZE > x)
 		{
-			mlx_put_pixel(game->image, x, y, 0xFFFFFFFF);
+			mlx_put_pixel(game->image, x, y, 0x333320);
 			x++;	
 		}
 		y++;
 	}
-	draw_grid(game);
+	// draw_grid(game);
 }
 
 void draw_wall(t_game *game)

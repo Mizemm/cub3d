@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/16 14:35:39 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:55:08 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void init_struct(t_game *game)
 	game->player.angle_rotation = M_PI / 2;
 	game->rays_number = game->WIDTH * UNIT_SIZE;
 	game->rays = malloc(sizeof(t_ray) * game->rays_number);
+	game->rays->color = 0x58179c8a;
 	// if (!game->rays)
 	// {
 	// 	free(game);
 	// 	return ;
 	// }
-	game->wallHitX = 0;
-	game->wallHitY = 0;	
 	mlx = mlx_init(game->WIDTH * UNIT_SIZE, game->HEIGHT * UNIT_SIZE, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)

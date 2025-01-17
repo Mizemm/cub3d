@@ -61,14 +61,13 @@ typedef struct s_ray {
 	double ray_angle;
 	double line_hight;
 	double distance;
+	unsigned int color;
 } t_ray;
 
 typedef struct s_game {
 	size_t WIDTH;
 	size_t HEIGHT;
 	double rays_number;
-	double wallHitX;
-	double wallHitY;
 	char **map;
 	mlx_t *mlx;
 	mlx_image_t *image;
@@ -110,7 +109,7 @@ void 	find_distance(t_game *game, t_ray *ray, double ray_angle);
 void 	cast_rays(t_game *game);
 double 	calculate_distance(double x1, double y1, double x2, double y2);
 
-
+void render_wall(t_game *game, t_ray *ray);
 // -------------------------------------------------------------------
 
 //     ------------------------------

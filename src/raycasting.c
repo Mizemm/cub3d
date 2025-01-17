@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/16 17:07:41 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/17 18:09:26 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,17 @@ void find_distance(t_game *game, t_ray *ray, double ray_angle)
 		ray->wallHitX = game->horizontal.horzWallHitX;
 		ray->wallHitY = game->horizontal.horzWallHitY;
 		ray->distance = horizontal_distance;
+		ray->color = 0x58179cff;
 	}
 	else
 	{
 		ray->wallHitX = game->vertical.vertWallHitX;
 		ray->wallHitY = game->vertical.vertWallHitY;
 		ray->distance = vertical_distance;
+		ray->color = 0x58179c8a;
 	}
+	// game->rays->ray_angle = angle;
+	ray->distance *= cos(game->player.angle_rotation - angle);
 }
 
 void cast_rays(t_game *game)
@@ -146,10 +150,11 @@ void cast_rays(t_game *game)
 		i++;
 	}
 	i = 0;
-	while (i < game->rays_number)
-	{
+	render_wall(game, game->rays);
+	// while (i < game->rays_number)
+	// {
 		// draw_line(game, game->rays[i]);
-		dda_test(game, game->rays[i]);
-		i++;
-	}
+		// dda_test(game, game->rays[i]);
+		// i++;
+	// }
 }
