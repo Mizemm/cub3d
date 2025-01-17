@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/17 18:09:19 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 00:29:02 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,29 +118,23 @@ void draw_grid(t_game *game)
 void render_wall(t_game *game, t_ray *ray)
 {
 	int i;
-	double projection_distance;
-	double half_width = game->rays_number / 2;
-	double p_wall_height;
-	double start;
-	double end;
-	double height = game->HEIGHT * UNIT_SIZE;
 	
 	i = 0;
+	double projection_distance = ((game->WIDTH * UNIT_SIZE) / 2) / tan(FOV / 2);
 	while (i < game->rays_number)
 	{
-		projection_distance = (half_width / tan(FOV / 2));
-		p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
-		start = (height / 2) - (p_wall_height / 2);
-		if (start < 0)
-			start = 0;
-		end = start + p_wall_height;
-		if (end < 0)
-			end = height;
-		while (end >= start)
+		double p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
+		int walltopPixel = ((game->HEIGHT * UNIT_SIZE) / 2) - (p_wall_height / 2);
+		if (walltopPixel < 0)
+			walltopPixel = 0;
+		int wallbuttomPixel = ((game->HEIGHT * UNIT_SIZE) / 2) + (p_wall_height / 2);
+		if (wallbuttomPixel > (int)game->HEIGHT * UNIT_SIZE)
+			wallbuttomPixel = game->HEIGHT * UNIT_SIZE;
+		int y = walltopPixel;
+		while (y < wallbuttomPixel)
 		{
-			if (i >= 0 && i < (int)game->WIDTH * UNIT_SIZE && start >= 0 && start < height)
-				mlx_put_pixel(game->image, i, start, ray[i].color);
-			start++;
+			mlx_put_pixel(game->image, i, y, game->rays[i].color);
+			y++;
 		}
 		i++;
 	}
@@ -161,7 +155,7 @@ void draw_background(t_game *game)
 		x = 0;
 		while (game->WIDTH * UNIT_SIZE > x)
 		{
-			mlx_put_pixel(game->image, x, y, 0x333320);
+			mlx_put_pixel(game->image, x, y, 0x33030);
 			x++;	
 		}
 		y++;

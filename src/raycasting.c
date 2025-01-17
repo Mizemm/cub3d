@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/17 18:09:26 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 00:47:27 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void horizontal_intersection(t_game *game, double angle)
 	init_horizontal_intersection(game, angle);
 	double nextHorzStepX = game->horizontal.x_intercept;
 	double nextHorzStepY = game->horizontal.y_intercept;
-	double checkStepX = 0;	
+	double checkStepX = 0;
 	double checkStepY = 0;
 	while (nextHorzStepX >= 0 && nextHorzStepX <= game->WIDTH * UNIT_SIZE 
 		&& nextHorzStepY >= 0 && nextHorzStepY <= game->HEIGHT * UNIT_SIZE)
@@ -54,6 +54,7 @@ void horizontal_intersection(t_game *game, double angle)
 		}
 		nextHorzStepX += game->horizontal.x_step;
 		nextHorzStepY += game->horizontal.y_step;
+	
 	}
 }
 
@@ -65,7 +66,7 @@ void init_vertical_intersection(t_game *game, double angle)
 	game->vertical.x_intercept = floor(game->player.position_x / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_right(angle))
 		game->vertical.x_intercept += UNIT_SIZE;
-	game->vertical.y_intercept = game->player.position_y + ((game->vertical.x_intercept - game->player.position_x) * tan(angle));
+	game->vertical.y_intercept = game->player.position_y + (game->vertical.x_intercept - game->player.position_x) * tan(angle);
 	game->vertical.x_step = UNIT_SIZE;
 	if (is_facing_left(angle))
 		game->vertical.x_step *= -1;
@@ -99,20 +100,31 @@ void vertical_intersection(t_game *game, double angle)
 			// printf("vertwall X: %f\nvert wall Y: %f\n", game->vertical.vertWallHitX, game->vertical.vertWallHitY);
 			break ;
 		}
-		nextVertStepX += game->vertical.x_step;
-		nextVertStepY += game->vertical.y_step;
+		else
+		{
+			nextVertStepX += game->vertical.x_step;
+			nextVertStepY += game->vertical.y_step;
+		}
 	}
 }
 
-void find_distance(t_game *game, t_ray *ray, double ray_angle)
+int depth_color(t_ray *ray)
 {
-	double angle;
-	long horizontal_distance;
-	long vertical_distance;
+	int i;
+
+	i = 0;
+    if (ray->distance > 255)
+        return 255;
+    return ray->distance;
+}
+
+void find_distance(t_game *game, t_ray *ray, double angle)
+{
+	double horizontal_distance;
+	double vertical_distance;
 
 	horizontal_distance = INT_MAX;
 	vertical_distance = INT_MAX;
-	angle = normalize_angle(ray_angle);
 	horizontal_intersection(game, angle);
 	vertical_intersection(game, angle);
 	if (game->horizontal.foundHorzWall)
@@ -133,19 +145,21 @@ void find_distance(t_game *game, t_ray *ray, double ray_angle)
 		ray->distance = vertical_distance;
 		ray->color = 0x58179c8a;
 	}
-	// game->rays->ray_angle = angle;
 	ray->distance *= cos(game->player.angle_rotation - angle);
+	ray->color += depth_color(ray);
 }
 
 void cast_rays(t_game *game)
 {
 	int i;
-
+	double angle;
+	
 	i = 0;
 	game->rays->ray_angle = game->player.angle_rotation - (FOV / 2);
 	while (i < game->rays_number)
 	{
-		find_distance(game, &game->rays[i], game->rays->ray_angle);
+		angle = normalize_angle(game->rays->ray_angle);
+		find_distance(game, &game->rays[i], angle);
 		game->rays->ray_angle += (FOV / game->rays_number);
 		i++;
 	}
@@ -153,8 +167,8 @@ void cast_rays(t_game *game)
 	render_wall(game, game->rays);
 	// while (i < game->rays_number)
 	// {
-		// draw_line(game, game->rays[i]);
-		// dda_test(game, game->rays[i]);
-		// i++;
+	// 	// draw_line(game, game->rays[i]);
+	// 	dda_test(game, game->rays[i]);
+	// 	i++;
 	// }
 }
