@@ -1,0 +1,10 @@
+{
+    "cmake.ignoreCMakeListsMissing": true,
+    "files.associations": {
+        "locale": "c",
+        "cub3d.h": "c",
+        "sstream": "c",
+        "get_next_line.h": "c",
+        "ios": "c"
+    }
+}
