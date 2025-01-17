@@ -5,7 +5,7 @@ CC		= cc
 
 HEADERS	= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)/include
 LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	= src/main.c src/ft_free.c src/border_check.c src/elements.c src/map.c \
+SRCS	= src/main.c src/ft_free.c src/border_check.c src/elements.c src/map.c src/parsing_error.c \
         get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		libft/ft_split.c libft/ft_substr.c libft/ft_mini_strchr.c
 OBJS	= ${SRCS:.c=.o}

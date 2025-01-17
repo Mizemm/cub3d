@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/15 20:21:33 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/17 21:04:50 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	struct_elements(t_game *game)
 			game->FLOOR_DATA = ft_strdup(str[1]);
 		else if (ft_strcmp(str[0], "C") == 0)
 			game->CEILING_DATA = ft_strdup(str[1]);
+		else if (str && (str[0][0] >= 33 && str[0][0] <= 126))
+			game->trash = ft_strdup(str[0]);
 		i++;
 		ft_free(str);
 	}

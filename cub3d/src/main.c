@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/15 20:49:01 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/17 21:09:13 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void init(t_game *game)
 	game->EA_DATA = NULL;
 	game->FLOOR_DATA = NULL;
 	game->CEILING_DATA = NULL;
+	game->trash = NULL;
 	game->map = malloc(sizeof(char *) * (10 + 1));
 	if (!game->map)
 		return ;
@@ -176,7 +177,11 @@ void parsing(t_game *game, char *line)
 	game->WIDTH = count_width(game->map);
 	game->HEIGHT = count_height(game->map);
 	struct_elements(game);
-	printf("%d\n", borders(game));
+	if (parsing_error(game) == 1)
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
 }
 int main(int ac, char **av)
 {

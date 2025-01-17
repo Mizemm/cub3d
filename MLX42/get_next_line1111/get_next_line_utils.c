@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:00:10 by asalmi            #+#    #+#             */
-/*   Updated: 2024/05/23 19:23:53 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/17 20:53:27 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,21 +114,3 @@ int	found_newline(t_lst *list)
 	return (0);
 }
 
-// int main()
-// {
-//     char *str = malloc(100);
-//     t_lst *node1 = malloc(sizeof(t_lst));
-//     t_lst *node2 = malloc(sizeof(t_lst));
-//     t_lst *node3 = malloc(sizeof(t_lst));
-
-//     node1->str_data = "\n";
-//     node2->str_data = "world ";
-//     node3->str_data = "1337 ";
-
-//     node1->next = node2;
-//     node2->next = node3;
-//     node3->next = NULL;
-
-//     copy_string(node1, str);
-//     printf("%s", str);
-// }

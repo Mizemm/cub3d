@@ -24,6 +24,7 @@ typedef struct s_game {
 	char *EA_DATA;
 	char *FLOOR_DATA;
 	char *CEILING_DATA;
+	char *trash;
 	t_player player;
 } t_game;
 
@@ -48,6 +49,7 @@ void    elements(t_game *game, char *line);
 void	map(t_game *game, char *line);
 void	struct_elements(t_game *game);
 int		borders(t_game *game);
+int		parsing_error(t_game *game);
 
 // draw 2d map pixel by pixel (finish)
 // put player
