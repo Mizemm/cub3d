@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 00:07:46 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 16:12:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void init_struct(t_game *game)
 	// 	free(game);
 	// 	return ;
 	// }
-	game->rays->color = 0x58179c8a;
+	//0x8f108b
 	mlx = mlx_init(game->WIDTH * UNIT_SIZE, game->HEIGHT * UNIT_SIZE, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)
