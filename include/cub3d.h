@@ -10,6 +10,7 @@
 
 #define UNIT_SIZE 30
 #define FOV 60 * (M_PI / 180)
+#define MOVE_SPEED 5
 
 typedef struct s_dda {
 	int x0;
@@ -111,8 +112,8 @@ void 	cast_rays(t_game *game);
 double 	calculate_distance(double x1, double y1, double x2, double y2);
 
 void 	render_wall(t_game *game, t_ray *ray);
-unsigned int		trgb_color(int t, int r, int g, int b);
-int depth_color(t_ray ray);
+unsigned int		rgbt_color(int t, int r, int g, int b);
+int depth_color(double distance, int terp);
 // -------------------------------------------------------------------
 
 //     ------------------------------

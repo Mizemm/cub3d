@@ -6,13 +6,13 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 16:32:36 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:56:25 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-unsigned trgb_color(int r, int g, int b, int t)
+unsigned rgbt_color(int r, int g, int b, int t)
 {
 	if (r > 255)
 		r = 255;
@@ -33,14 +33,13 @@ unsigned trgb_color(int r, int g, int b, int t)
 	 return ((r << 24) | (g << 16) | (b << 8) | t);
 }
 
-int depth_color(t_ray ray)
+int depth_color(double distance, int terp)
 {
-	int i;
-
-	i = 0;
-	while (i < ray.distance)
-		i++;
-	if (i > 255)
-		i = 255;
-	return (i);
+	(void)terp;
+    double brightness = 200 - (distance * 0.7);
+    if (brightness > 150)
+        brightness = 150;
+	if (brightness < 50)
+		brightness = 50;
+    return (int)brightness;
 }

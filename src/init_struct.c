@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 16:12:22 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:20:13 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void init_struct(t_game *game)
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	game->player.rotate_speed = 5 * (M_PI / 180);
-	game->player.move_speed = 5;
+	game->player.move_speed = MOVE_SPEED;
 	game->player.angle_rotation = M_PI / 2;
 	game->rays_number = game->WIDTH * UNIT_SIZE;
 	game->rays = malloc(sizeof(t_ray) * game->rays_number);

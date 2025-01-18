@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 16:33:25 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:53:51 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ void draw_grid(t_game *game)
 void render_wall(t_game *game, t_ray *ray)
 {
 	int i;
+	int terp;
 	
+	terp = 0;
 	i = 0;
 	double projection_distance = ((game->WIDTH * UNIT_SIZE) / 2) / tan(FOV / 2);
 	while (i < game->rays_number)
@@ -131,13 +133,13 @@ void render_wall(t_game *game, t_ray *ray)
 		if (wallbuttomPixel > (int)game->HEIGHT * UNIT_SIZE)
 			wallbuttomPixel = game->HEIGHT * UNIT_SIZE;
 		int y = walltopPixel;
-		// int terp = depth_color(ray[i]);
+		terp = depth_color(ray[i].distance, terp);
 		while (y < wallbuttomPixel)
 		{
 			if (ray[i].foundHorz)
-				mlx_put_pixel(game->image, i, y, trgb_color(204, 26, 198, 100));
+				mlx_put_pixel(game->image, i, y, rgbt_color(204, 26, 198, terp));
 			else if (ray[i].foundVert)
-				mlx_put_pixel(game->image, i, y, trgb_color(143, 16, 139, 100));
+				mlx_put_pixel(game->image, i, y, rgbt_color(143, 16, 139, terp));
 			y++;
 		}
 		i++;

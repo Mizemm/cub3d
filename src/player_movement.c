@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:24:27 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/14 18:12:39 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:21:57 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int check_map(t_game *game, double new_position_x, double new_position_y)
 	int tmp_x;
 	int tmp_y;
 	
-	i = -2;
+	i = -MOVE_SPEED;
 	tmp_x = floor(new_position_x);
 	tmp_y = floor(new_position_y);
-	while (i <= 2)
+	while (i <= MOVE_SPEED)
 	{
 		if (game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == '1')
 			return (0);
 		i++;
 	}
-	i = -2;
-	while (i <= 2)
+	i = -MOVE_SPEED;
+	while (i <= MOVE_SPEED)
 	{
 		if (game->map[tmp_y / UNIT_SIZE][(tmp_x + i) / UNIT_SIZE] == '1')
 			return (0);
