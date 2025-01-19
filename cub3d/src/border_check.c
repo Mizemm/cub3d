@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:35:24 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/19 20:03:39 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/19 20:49:16 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,35 @@ int map_checker(t_game *game)
 	}
 	return (0);
 }
+int map_checker_2(t_game *game)
+{
+	int x;
+	int y;
+	int flag;
+
+	y = 0;
+	flag = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'N')
+				flag++;
+			if (game->map[y][x] == 'S')
+				flag++;
+			if (game->map[y][x] == 'W')
+				flag++;
+			if (game->map[y][x] == 'E')
+				flag++;
+			x++;
+	    }
+		y++;
+	}
+	if (flag != 1)
+		return (1);
+	return (0);
+}
 int	borders(t_game *game)
 {
 	int		x;
@@ -77,6 +106,8 @@ int	borders(t_game *game)
 
 	y = 0;
 	if ( map_checker(game) == 1)
+		return (1);
+	if ( map_checker_2(game) == 1)
 		return (1);
 	while (game->map[y])
 	{
