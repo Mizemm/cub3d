@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/17 21:04:50 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/19 19:42:52 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,32 +63,55 @@ void	elements(t_game *game, char *line)
 	game->elements[i] = NULL;
 	close(fd);
 }
-void	struct_elements(t_game *game)
+int	struct_elements(t_game *game)
 {
 	int i;
+	int flag;
 	char **str;
 
 	i = 0;
+	flag = 0;
 	if (!*(game->elements))
-		return ;
+		return 1;
 	while (game->elements[i])
 	{
 		str = ft_split(game->elements[i], " 	");
 		if (ft_strcmp(str[0], "NO") == 0)
-			game->NO_DATA = ft_strdup(str[1]);
+		{
+			game->no_path = ft_strdup(str[1]);
+			flag++;
+		}
 		else if (ft_strcmp(str[0], "SO") == 0)
-			game->SO_DATA = ft_strdup(str[1]);
+		{
+			game->so_path = ft_strdup(str[1]);
+			flag++;
+		}
 		else if (ft_strcmp(str[0], "WE") == 0)
-			game->WE_DATA = ft_strdup(str[1]);
+		{
+			game->we_path = ft_strdup(str[1]);
+			flag++;
+		}
 		else if (ft_strcmp(str[0], "EA") == 0)
-			game->EA_DATA = ft_strdup(str[1]);
+		{
+			game->ea_path = ft_strdup(str[1]);
+			flag++;
+		}
 		else if (ft_strcmp(str[0], "F") == 0)
-			game->FLOOR_DATA = ft_strdup(str[1]);
+		{
+			game->floor_color = ft_strdup(str[1]);
+			flag++;
+		}
 		else if (ft_strcmp(str[0], "C") == 0)
-			game->CEILING_DATA = ft_strdup(str[1]);
+		{
+			game->ceiling_color = ft_strdup(str[1]);
+			flag++;
+		}
 		else if (str && (str[0][0] >= 33 && str[0][0] <= 126))
 			game->trash = ft_strdup(str[0]);
 		i++;
 		ft_free(str);
 	}
+	if (flag != 6)
+		return (1);
+	return (0);
 }

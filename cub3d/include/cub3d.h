@@ -14,16 +14,16 @@ typedef struct s_player {
 } t_player;
 
 typedef struct s_game {
-	int WIDTH;
-	int HEIGHT;
+	int width;
+	int height;
 	char **elements;
 	char **map;
-	char *NO_DATA;
-	char *SO_DATA;
-	char *WE_DATA;
-	char *EA_DATA;
-	char *FLOOR_DATA;
-	char *CEILING_DATA;
+	char *no_path;
+	char *so_path;
+	char *we_path;
+	char *ea_path;
+	char *floor_color;
+	char *ceiling_color;
 	char *trash;
 	t_player player;
 } t_game;
@@ -47,7 +47,7 @@ void	ft_free(char **arr);
 int		map_finder(char *str);
 void    elements(t_game *game, char *line);
 void	map(t_game *game, char *line);
-void	struct_elements(t_game *game);
+int	struct_elements(t_game *game);
 int		borders(t_game *game);
 int		parsing_error(t_game *game);
 

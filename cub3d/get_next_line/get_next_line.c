@@ -3,119 +3,114 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 19:10:47 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/14 22:32:23 by mizem            ###   ########.fr       */
+/*   Created: 2023/11/29 17:19:22 by asalmi            #+#    #+#             */
+/*   Updated: 2023/11/30 17:14:55 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_counter(char *s)
+void edit_list(t_list **list)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (i);
+    t_list *new_node;
+    t_list *last_node;
+    char *buf;
+    int i;
+    int j;
+    
+    buf = malloc(BUFFER_SIZE + 1);
+    new_node = malloc(sizeof(t_list));
+    if (new_node == NULL || buf == NULL)
+        return ;
+    last_node = found_last_node(*list);
+    i = 0;
+    j = 0;
+    while (last_node->str_data[i] && last_node->str_data[i] != '\n')
+        i++;
+    if (last_node->str_data[i] && last_node->str_data[i] == '\n')
+        i++;
+    while (last_node->str_data[i])
+        buf[j++] = last_node->str_data[i++];
+    buf[j] = '\0';
+    new_node->str_data = buf;
+    new_node->next = NULL;
+    free_list(list, new_node, buf);
 }
-
-char	*ft_read(int fd, char *res)
+char    *get_line(t_list *list)
 {
-	int		bytes_read;
-	char	*buffer;
+    char *str_line;
+    int lenght_line;
 
-	bytes_read = 1;
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL);
-	while (bytes_read > 0)
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[bytes_read] = '\0';
-		res = ft_strjoin(res, buffer);
-		if (find_new_line(res) != -1)
-			break ;
-	}
-	free(buffer);
-	return (res);
+    if (list == NULL)
+        return (NULL);
+    lenght_line = get_len_line(list);
+    str_line = malloc(lenght_line + 1);
+    if (str_line == NULL)
+        return (NULL);
+    copy_string(list, str_line);
+    return (str_line);
 }
-
-char	*find_line(char *str)
+void    append(t_list **list, char *buf)
 {
-	int		i;
-	int		j;
-	char	*line;
+    t_list *new_node;
+    t_list *last_node;
 
-	if (!*str)
-		return (NULL);
-	i = ft_counter(str);
-	j = 0;
-	if (str[i] == '\n')
-		i++;
-	line = ft_calloc(i + 1, sizeof(char));
-	while (j < i)
-	{
-		line[j] = str[j];
-		j++;
-	}
-	return (line);
+    last_node = found_last_node(*list);
+    new_node = malloc(sizeof(t_list));
+    if (new_node == NULL)
+        return ;
+    if (last_node == NULL)
+        *list = new_node;
+    else
+        last_node->next = new_node;
+    new_node->str_data = buf;
+    new_node->next = NULL;
 }
-
-char	*update_str(char *old_str)
+void    creat_list(t_list **list, int fd)
 {
-	int		i;
-	int		j;
-	char	*new_str;
-
-	if (!old_str)
-		return (NULL);
-	j = 0;
-	i = ft_counter(old_str);
-	new_str = ft_calloc(ft_strlen(old_str) - i + 1, sizeof(char));
-	if (old_str[i] == '\n')
-		i++;
-	while (old_str[i + j])
-	{
-		new_str[j] = old_str[i + j];
-		j++;
-	}
-	free(old_str);
-	if (!ft_strlen(new_str))
-	{
-		free(new_str);
-		new_str = (NULL);
-	}
-	return (new_str);
+    char    *buf;
+    int     num_read;
+    
+    while (!found_newline(*list))
+    {
+        buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+        if (buf == NULL)
+            return ;
+        num_read = read(fd, buf, BUFFER_SIZE);
+        if (!num_read)
+        {
+            free(buf);
+            return ;
+        }
+        buf[num_read] = '\0';   
+        append(list, buf);
+    }
 }
-
-char	*get_next_line(int fd)
+char    *get_next_line(int fd)
 {
-	static char	*str;
-	char		*line;
+    static t_list   *list = NULL;
+    char            *next_line;
 
-	if (BUFFER_SIZE < 0 || fd < 0 || BUFFER_SIZE > INT_MAX 
-		|| read(fd, 0, 0) == -1)
-	{
-		free(str);
-		str = NULL;
-		return (NULL);
-	}
-	str = ft_read(fd, str);
-	if (!str)
-		return (NULL);
-	line = find_line(str);
-	str = update_str(str);
-	return (line);
+    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
+        return (NULL);
+    creat_list(&list, fd);
+    if(list == NULL)
+        return (NULL);
+    next_line = get_line(list);
+    edit_list(&list);
+    return (next_line);
 }
+// int main()
+// {
+//     char *line;
+//     int num_line;
+    
+//     num_line = 1;
+//     int fd = open("test.txt", O_RDONLY);
+//     printf("%s", get_next_line(fd));
+//     printf("%s", get_next_line(fd));
+//     printf("%s", get_next_line(fd));
+//     printf("%s", get_next_line(fd));
+// }

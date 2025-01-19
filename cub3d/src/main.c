@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/19 16:33:41 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/19 19:51:04 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,20 @@ size_t count_width(char **map)
 {
 	int size_w;
 	int size_h;
+	int b_size;
 
 	size_h = 0;
+	b_size = 0;
 	while (map[size_h])
 	{
 		size_w = 0;
 		while (map[size_h][size_w])
 			size_w++;
+		if (b_size < size_w)
+			b_size = size_w;
 		size_h++;
 	}
-	return (size_w);
+	return (b_size);
 }
 void draw_background(t_game *game, mlx_t *mlx)
 {
@@ -45,13 +49,13 @@ void draw_background(t_game *game, mlx_t *mlx)
 
 	x = 0;
 	y = 0;
-	background = mlx_new_image(mlx, game->WIDTH * 30, game->HEIGHT * 30);
+	background = mlx_new_image(mlx, game->width * 30, game->height * 30);
 	if ((!background) || (mlx_image_to_window(mlx, background, 0, 0) < 0))
 		return ;
-	while (game->HEIGHT * 30 > y)
+	while (game->height * 30 > y)
 	{
 		x = 0;
-		while (game->WIDTH * 30 > x)
+		while (game->width * 30 > x)
 		{
 			mlx_put_pixel(background, x, y, 0xFFFFFFFF);
 			x++;	
@@ -76,7 +80,7 @@ void draw_wall(t_game *game, mlx_t *mlx)
 	j = 0;
 	position_x = 0;
 	position_y = 0;
-	wall_img = mlx_new_image(mlx, game->WIDTH * 30, game->HEIGHT * 30);
+	wall_img = mlx_new_image(mlx, game->width * 30, game->height * 30);
 	if ((!wall_img) || (mlx_image_to_window(mlx, wall_img, 0, 0) < 0))
 		return ;
 	while (game->map[i])
@@ -151,16 +155,16 @@ void draw_player(t_game *game, mlx_t *mlx)
 }
 void init(t_game *game)
 {
-	game->WIDTH = 0;
-	game->HEIGHT = 0;
+	game->width = 0;
+	game->height = 0;
 	game->elements = NULL;
 	game->map = NULL;
-	game->NO_DATA = NULL;
-	game->SO_DATA = NULL;
-	game->WE_DATA = NULL;
-	game->EA_DATA = NULL;
-	game->FLOOR_DATA = NULL;
-	game->CEILING_DATA = NULL;
+	game->no_path = NULL;
+	game->so_path = NULL;
+	game->we_path = NULL;
+	game->ea_path = NULL;
+	game->floor_color = NULL;
+	game->ceiling_color = NULL;
 	game->trash = NULL;
 	game->map = malloc(sizeof(char *) * (10 + 1));
 	if (!game->map)
@@ -175,14 +179,13 @@ parsing(t_game *game, char *line)
 {
 	elements(game, line);
 	map(game, line);
-	game->WIDTH = count_width(game->map);
-	game->HEIGHT = count_height(game->map);
-	struct_elements(game);
-	// if (parsing_error(game) == 1)
-	// {
-	// 	write(1, "Error\n", 6);
-	// 	exit(1);
-	// }
+	game->width = count_width(game->map);
+	game->height = count_height(game->map);
+	if (struct_elements(game) == 1 || parsing_error(game) == 1)
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
 }
 int main(int ac, char **av)
 {
@@ -196,7 +199,7 @@ int main(int ac, char **av)
 	init(game);
 	parsing(game, av[1]);
 	// game->player.angl_rotation = M_PI / 2;
-	// mlx = mlx_init(game->WIDTH * 30, game->HEIGHT * 30, "cub3d", false);
+	// mlx = mlx_init(game->width * 30, game->height * 30, "cub3d", false);
 	// if (!mlx)
 	// 	return (1);
 	// draw_background(game, mlx);

@@ -3,11 +3,11 @@ NAME	= cub3d
 LIBMLX	= ~/MLX42
 CC		= cc
 
-HEADERS	= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)/include
+HEADERS	= -I ./include -I $(LIBMLX)/include/MLX42
 LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	= src/main.c src/ft_free.c src/border_check.c src/elements.c src/map.c src/parsing_error.c \
-        get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-		libft/ft_split.c libft/ft_substr.c libft/ft_mini_strchr.c
+        	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+			libft/ft_split.c libft/ft_substr.c libft/ft_mini_strchr.c libft/ft_strlen.c libft/ft_strdup.c
 OBJS	= ${SRCS:.c=.o}
 
 all: libmlx libft $(NAME)

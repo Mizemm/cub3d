@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:38:35 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/19 16:33:24 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/19 19:57:34 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ int elements_error(t_game *game)
 
     i = 0;
     flag = 0;
-    printf("%s\n", game->trash);
-    if (ft_strcmp(game->NO_DATA, "NO") == 0)
+    if (ft_strcmp(game->no_path, "NO") == 0)
         flag++;
-    // printf("flag = %d\n", flag);
     // while(1)
     // {
-    //     if (ft_strcmp(game->NO_DATA, "NO") == 0 || ft_strcmp(game->SO_DATA, "SO") == 0 || ft_strcmp(game->WE_DATA, "WE") == 0 
-    //     || ft_strcmp(game->EA_DATA, "EA") == 0 || ft_strcmp(game->FLOOR_DATA, "F") == 0 || ft_strcmp(game->CEILING_DATA, "C") == 0)
+    //     if (ft_strcmp(game->no_path, "NO") == 0 || ft_strcmp(game->so_path, "SO") == 0 || ft_strcmp(game->we_path, "WE") == 0 
+    //     || ft_strcmp(game->ea_path, "EA") == 0 || ft_strcmp(game->floor_color, "F") == 0 || ft_strcmp(game->ceiling_color, "C") == 0)
     //         flag++;
     //     i++;
     //     if (flag != 6)
@@ -39,7 +37,7 @@ int parsing_error(t_game *game)
 {
     if (!game->map[0] || !game->elements[0] || borders(game) == 1)
         return (1);
-    if (game->trash[0])
+    if (ft_strlen(game->trash))
         return (1);
     return (0);
 }

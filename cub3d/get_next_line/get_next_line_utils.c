@@ -3,102 +3,132 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 20:58:54 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/14 22:32:06 by mizem            ###   ########.fr       */
+/*   Created: 2023/11/29 18:00:10 by asalmi            #+#    #+#             */
+/*   Updated: 2023/11/30 17:26:10 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+t_list  *found_last_node(t_list *list)
+{   
+    if (list == NULL)
+        return (NULL);
+    while (list->next)
+        list = list->next;
+    return (list);
 }
 
-void	*ft_calloc(int count, int size)
+int get_len_line(t_list *list)
 {
-	int	i;
-	char	*ptr;
+    int i;
+    int len;
 
-	i = 0;
-	ptr = (char *)malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	while (i < count * size)
-	{
-		ptr[i] = 0;
-		i++;
-	}
-	return (ptr);
+    len = 0;
+    while (list)
+    {
+        i = 0;
+        while (list->str_data[i])
+        {
+            if(list->str_data[i] == '\n')
+            {
+                len++;
+                break;
+            }
+            i++;
+            len++;
+        }
+        list = list->next;
+    }
+    return (len);
 }
 
-char	*ft_strdup(char *s1)
+void copy_string(t_list *list, char *string)
 {
-	int	i;
-	int	y;
-	char	*dst;
-
-	i = ft_strlen(s1);
-	y = 0;
-	dst = malloc((i + 1));
-	if (dst == NULL)
-		return (NULL);
-	while (s1[y])
-	{
-		dst[y] = s1[y];
-		y++;
-	}
-	dst[y] = '\0';
-	return (dst);
+    int i;
+    int j;
+    
+    if (list == NULL)
+        return ;
+    j = 0;
+    while (list)
+    {
+        i = 0;
+        while (list->str_data[i])
+        {
+            if (list->str_data[i] == '\n')
+            {
+                string[j++] = '\n';
+                string[j] = '\0';
+                break ;
+            }
+            string[j++] = list->str_data[i++];
+        }
+        list = list->next;
+    }
+    string[j] = '\0';
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+void    free_list(t_list **list, t_list *new_node, char *buf)
 {
-	char	*dst;
-	int	i;
-	int	j;
-
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2 && s1)
-		return (ft_strdup(s1));
-	dst = ft_calloc(((ft_strlen(s1) + ft_strlen(s2)) + 1), 1);
-	j = 0;
-	while (s1[j])
-	{
-		dst[j] = s1[j];
-		j++;
-	}
-	i = 0;
-	while (s2[i])
-	{
-		dst[j + i] = s2[i];
-		i++;
-	}
-	dst[j + i] = '\0';
-	free(s1);
-	return (dst);
+    t_list *tmp;
+    
+    if (*list == NULL)
+        return ;
+    while(*list)
+    {
+        tmp = (*list)->next;
+        free((*list)->str_data);
+        free(*list);
+        *list = tmp;
+    }
+    *list = NULL;
+    if (new_node->str_data[0])
+        *list = new_node;
+    else
+    {
+        free(buf);
+        free(new_node);
+    }
 }
 
-int	find_new_line(char *s)
+int found_newline(t_list *list)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (-1);
+    int i;
+    
+    if (list == NULL)
+        return (0); 
+    while (list)
+    {
+        i = 0;
+        while (list->str_data[i] && i < BUFFER_SIZE)
+        {
+            if (list->str_data[i] == '\n')
+                return (1);
+            i++;
+        }
+        list = list->next;
+    }
+    return (0);
 }
+
+// int main()
+// {
+//     char *str = malloc(100);
+//     t_list *node1 = malloc(sizeof(t_list));
+//     t_list *node2 = malloc(sizeof(t_list));
+//     t_list *node3 = malloc(sizeof(t_list));
+
+//     node1->str_data = "\n";
+//     node2->str_data = "world ";
+//     node3->str_data = "1337 ";
+
+//     node1->next = node2;
+//     node2->next = node3;
+//     node3->next = NULL;
+
+//     copy_string(node1, str);
+//     printf("%s", str);
+// }

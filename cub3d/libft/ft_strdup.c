@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/25 17:13:08 by mizem             #+#    #+#             */
-/*   Updated: 2024/01/06 22:11:37 by mizem            ###   ########.fr       */
+/*   Created: 2023/12/23 15:59:14 by mizem             #+#    #+#             */
+/*   Updated: 2025/01/19 19:31:18 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/cub3d.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strdup(char *s1)
 {
+	int	i;
+	int	y;
 	char	*dst;
-	size_t	i;
-	size_t	s1len;
 
-	if (!s1 || !s2)
-		return (NULL);
-	s1len = ft_strlen(s1);
-	i = 0;
-	dst = malloc((s1len + ft_strlen(s2) + 1) * sizeof(char));
+	i = ft_strlen(s1);
+	y = 0;
+	dst = malloc((i + 1) * sizeof(char));
 	if (dst == NULL)
 		return (NULL);
-	while (i < s1len)
+	while (s1[y])
 	{
-		dst[i] = s1[i];
-		i++;
+		dst[y] = s1[y];
+		y++;
 	}
-	i = 0;
-	while (i < ft_strlen(s2))
-	{
-		dst[s1len + i] = s2[i];
-		i++;
-	}
-	dst[s1len + i] = '\0';
+	dst[y] = '\0';
 	return (dst);
 }
