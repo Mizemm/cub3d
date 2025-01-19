@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:38:35 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/17 21:14:42 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/19 16:33:24 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int elements_error(t_game *game)
 
     i = 0;
     flag = 0;
-    printf("NO_DATA = %s\n", game->NO_DATA);
+    printf("%s\n", game->trash);
     if (ft_strcmp(game->NO_DATA, "NO") == 0)
         flag++;
     // printf("flag = %d\n", flag);
@@ -39,7 +39,7 @@ int parsing_error(t_game *game)
 {
     if (!game->map[0] || !game->elements[0] || borders(game) == 1)
         return (1);
-    if (elements_error(game) == 1 || game->trash[0])
+    if (game->trash[0])
         return (1);
     return (0);
 }

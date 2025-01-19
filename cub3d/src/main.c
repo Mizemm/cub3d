@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/17 21:09:13 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/19 16:33:41 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,18 +170,19 @@ void init(t_game *game)
 	game->player.angl_rotation = 0;
 }
 
-void parsing(t_game *game, char *line)
+void 
+parsing(t_game *game, char *line)
 {
 	elements(game, line);
 	map(game, line);
 	game->WIDTH = count_width(game->map);
 	game->HEIGHT = count_height(game->map);
 	struct_elements(game);
-	if (parsing_error(game) == 1)
-	{
-		write(1, "Error\n", 6);
-		exit(1);
-	}
+	// if (parsing_error(game) == 1)
+	// {
+	// 	write(1, "Error\n", 6);
+	// 	exit(1);
+	// }
 }
 int main(int ac, char **av)
 {
