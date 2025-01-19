@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:35:24 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/19 20:49:16 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/20 00:12:07 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ int border_check(t_game *game, int y, int x)
 	{
 		while (game->map[y][x])
 		{
-			if (game->map[y][x] == '0' || game->map[y][x] == 'E')
+			if (game->map[y][x] == '0' || game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'W' || game->map[y][x] == 'E')
 				return (1);
 			x++;
 		}
 	}
-	if (x == 0 && (game->map[y][x] == '0' || game->map[y][x] == 'E'))
+	if (x == 0 && (game->map[y][x] == '0' || game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'W' || game->map[y][x] == 'E'))
 		return (1);
 	if (y == game->height - 1)
 	{
 		while (game->map[y][x])
 		{
-			if ((game->map[y][x] == '0' || game->map[y][x] == 'E'))
+			if ((game->map[y][x] == '0' || game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'W' || game->map[y][x] == 'E'))
 				return (1);
 			x++;
 		}
 	}
-	if (((game->map[y][x] == '0' || game->map[y][x] == 'E')) && checker(game, x, y) == 1)
+	if (((game->map[y][x] == '0' || game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'W' || game->map[y][x] == 'E')) && checker(game, x, y) == 1)
 		return (1);
 	return (0);
 }

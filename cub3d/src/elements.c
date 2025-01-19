@@ -6,13 +6,13 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/19 19:42:52 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/20 00:04:56 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	elements_counter(char *map_name)
+int	elements_counter(char *line)
 {
 	char	*ptr;
     char    buffer[1024];
@@ -23,7 +23,8 @@ int	elements_counter(char *map_name)
     int     b_read;
 
 	i = 0;
-	fd = open("map.cub", O_RDWR);
+	j = 0;
+	fd = open(line, O_RDWR);
     b_read = 1;
 	index = 0;
     while (b_read > 0)

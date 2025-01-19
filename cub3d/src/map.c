@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:38:03 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/14 22:15:18 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/20 00:05:34 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int map_finder(char *str)
 	return (0);
 }
 
-int	map_counter(void)
+int	map_counter(char *line)
 {
 	char	*ptr[1024];
 	int		i;
@@ -43,7 +43,7 @@ int	map_counter(void)
 	i = 0;
 	j = 0;
 	count = 0;
-	fd = open("map.cub", O_RDWR);
+	fd = open(line, O_RDWR);
     while (1)
 	{
 		ptr[i] = get_next_line(fd);
@@ -70,7 +70,7 @@ void	map(t_game *game, char *line)
 	char *str[1024];
 
 	i = 0;
-	j = map_counter();
+	j = map_counter(line);
 	fd = open(line, O_RDONLY);
 	game->map = malloc(sizeof(char *) * (j + 1));
 	while (1 && j > 0)
@@ -94,4 +94,5 @@ void	map(t_game *game, char *line)
 		i++;
 	}
 	game->map[i] = NULL;
+	close(fd);
 }
