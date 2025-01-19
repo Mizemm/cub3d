@@ -6,37 +6,13 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/19 21:14:28 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/19 23:50:33 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-char **get_map(char **map)
-{
-	// map[0]  = strdup("1111");
-    // map[1]  = strdup("11S1");
-    // map[2]  = strdup("1001");
-    // map[3]  = strdup("1111");
-    // map[4]  = NULL;
-	map[0]  = strdup("111111111111111111111111");
-    map[1]  = strdup("100100000000000000000001");
-    map[2]  = strdup("1001000000N0000000000001");
-    map[3]  = strdup("100100000000000000000001");
-    map[4]  = strdup("111111100100000011100001");
-    map[5]  = strdup("100000000011000011101001");
-    map[6]  = strdup("111101111111101110000001");
-    map[7]  = strdup("111101111111110111011001");
-    map[8]  = strdup("110000001101010111000001");
-    map[9]  = strdup("100000000000000110000001");
-    map[10] = strdup("100000000000000011010001");
-    map[11] = strdup("110000011101010111101001");
-    map[12] = strdup("111101111110101101111001");
-    map[13] = strdup("111111111111111111111111");
-    map[14] = NULL;
-	return (map);
-}
-size_t get_height(char **map)
+size_t count_height(char **map)
 {
 	int size;
 
@@ -46,20 +22,24 @@ size_t get_height(char **map)
 	return (size);
 }
 
-size_t get_width(char **map)
+size_t count_width(char **map)
 {
 	int size_w;
 	int size_h;
+	int b_size;
 
 	size_h = 0;
+	b_size = 0;
 	while (map[size_h])
 	{
 		size_w = 0;
 		while (map[size_h][size_w])
 			size_w++;
+		if (b_size < size_w)
+			b_size = size_w;
 		size_h++;
 	}
-	return (size_w);
+	return (b_size);
 }
 
 double normalize_angle(double angle)

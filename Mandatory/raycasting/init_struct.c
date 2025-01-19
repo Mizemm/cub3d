@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/19 21:57:52 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/19 23:45:49 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,20 @@ void init_struct(t_game *game)
 {
 	mlx_t *mlx;
 
-	// Zero-initialize the entire structure -> use memset
-	game->map = malloc(sizeof(char *) * (15));
+	game->width = 0;
+	game->height = 0;
+	game->elements = NULL;
+	game->map = NULL;
+	game->no_path = NULL;
+	game->so_path = NULL;
+	game->we_path = NULL;
+	game->ea_path = NULL;
+	game->floor_color = NULL;
+	game->ceiling_color = NULL;
+	game->trash = NULL;
+	game->map = malloc(sizeof(char *) * (20));
 	if (!game->map)
 		return ;
-	game->map = get_map(game->map);
-	game->width = get_width(game->map);
-	game->height = get_height(game->map);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	game->player.rotate_speed = 5 * (M_PI / 180);
@@ -53,15 +60,16 @@ void init_struct(t_game *game)
 	game->player.angle_rotation = M_PI / 2;
 	game->rays_number = WIDTH;
 	game->rays = malloc(sizeof(t_ray) * game->rays_number);
-	// if (!game->rays)
-	// {
-	// 	free(game);
-	// 	return ;
-	// }
-	//0x8f108b
+	if (!game->rays)
+	{
+		free(game);
+		return ;
+	}
+	game->player.position_x = 0;
+	game->player.position_y = 0;
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	game->mlx = mlx;
 	if (!mlx)
 		return ;
-	find_player(game);
+	// find_player(game);
 }
