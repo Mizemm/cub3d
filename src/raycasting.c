@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 17:59:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/19 20:53:17 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void horizontal_intersection(t_game *game, double angle)
 	double nextHorzStepY = game->horizontal.y_intercept;
 	double checkStepX = 0;
 	double checkStepY = 0;
-	while (nextHorzStepX >= 0 && nextHorzStepX <= game->WIDTH * UNIT_SIZE 
-		&& nextHorzStepY >= 0 && nextHorzStepY <= game->HEIGHT * UNIT_SIZE)
+	while (nextHorzStepX >= 0 && nextHorzStepX <= game->width * UNIT_SIZE 
+		&& nextHorzStepY >= 0 && nextHorzStepY <= game->height * UNIT_SIZE)
 	{
 		checkStepX = nextHorzStepX;
 		checkStepY = nextHorzStepY;
@@ -84,27 +84,22 @@ void vertical_intersection(t_game *game, double angle)
 	double nextVertStepY = game->vertical.y_intercept;
 	double checkStepX = 0;
 	double checkStepY = 0;
-	while (nextVertStepX >= 0 && nextVertStepX <= game->WIDTH * UNIT_SIZE
-			&& nextVertStepY >= 0 && nextVertStepY <= game->HEIGHT * UNIT_SIZE)
+	while (nextVertStepX >= 0 && nextVertStepX <= game->width * UNIT_SIZE
+			&& nextVertStepY >= 0 && nextVertStepY <= game->height * UNIT_SIZE)
 	{
 		checkStepX = nextVertStepX;
 		if (is_facing_left(angle))
 			checkStepX -= 1;
 		checkStepY = nextVertStepY;
-		// printf("check X: %f\ncheck Y: %f\n", checkStepX, checkStepY);
 		if (is_wall(game, checkStepX, checkStepY))
 		{
 			game->vertical.vertWallHitX = nextVertStepX;
 			game->vertical.vertWallHitY = nextVertStepY;
 			game->vertical.foundVertWall = true;
-			// printf("vertwall X: %f\nvert wall Y: %f\n", game->vertical.vertWallHitX, game->vertical.vertWallHitY);
 			break ;
 		}
-		else
-		{
-			nextVertStepX += game->vertical.x_step;
-			nextVertStepY += game->vertical.y_step;
-		}
+		nextVertStepX += game->vertical.x_step;
+		nextVertStepY += game->vertical.y_step;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 17:54:40 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/19 21:14:28 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 char **get_map(char **map)
 {
+	// map[0]  = strdup("1111");
+    // map[1]  = strdup("11S1");
+    // map[2]  = strdup("1001");
+    // map[3]  = strdup("1111");
+    // map[4]  = NULL;
 	map[0]  = strdup("111111111111111111111111");
     map[1]  = strdup("100100000000000000000001");
     map[2]  = strdup("1001000000N0000000000001");
@@ -67,7 +72,7 @@ double normalize_angle(double angle)
 
 bool is_wall(t_game *game, double x, double y)
 {
-	if (x < 0 || y < 0 || x >= game->WIDTH * UNIT_SIZE || y >= game->HEIGHT * UNIT_SIZE)
+	if (x < 0 || y < 0 || x >= game->width * UNIT_SIZE || y >= game->height * UNIT_SIZE)
 		return (false);
 	int x_tmp = floor(x / UNIT_SIZE);
 	int y_tmp = floor(y / UNIT_SIZE);

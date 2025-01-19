@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 17:53:51 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/19 20:33:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void dda_test(t_game *game, t_ray ray)
 	dd = init_dda(game, ray);
 	while (1)
 	{
-		if (dd.x0 < 0 || dd.y0 < 0 || dd.x0 >= (int)game->WIDTH * UNIT_SIZE || dd.y0 >= (int)game->HEIGHT * UNIT_SIZE)
+		if (dd.x0 < 0 || dd.y0 < 0 || dd.x0 >= (int)game->width * UNIT_SIZE || dd.y0 >= (int)game->height * UNIT_SIZE)
 			return ;
 		mlx_put_pixel(game->image, dd.x0, dd.y0, 0xFF0000ff);
 		if (dd.x0 == dd.x1 && dd.y0 == dd.y1)
@@ -88,7 +88,7 @@ void draw_line(t_game *game, t_ray ray)
 	while (++i <= steps)
 	{
 		mlx_put_pixel(game->image, round(x0), round(y0), 0xFF0000ff);
-		if (x0 < 0 || y0 < 0 || x0 >= game->WIDTH * UNIT_SIZE || y0 >= game->HEIGHT * UNIT_SIZE)
+		if (x0 < 0 || y0 < 0 || x0 >= game->width * UNIT_SIZE || y0 >= game->height * UNIT_SIZE)
             break;
 		x0 += x_inc;
 		y0 += y_inc;
@@ -100,16 +100,16 @@ void draw_grid(t_game *game)
 	size_t x;
 	size_t y;
 	
-	for (y = 0; y < game->HEIGHT * UNIT_SIZE; y += UNIT_SIZE)
+	for (y = 0; y < game->height * UNIT_SIZE; y += UNIT_SIZE)
 	{
-		for (x = 0; x < game->WIDTH * UNIT_SIZE; x++)
+		for (x = 0; x < game->width * UNIT_SIZE; x++)
 		{
 			mlx_put_pixel(game->image, x, y, 0xb5b8b7);
 		}
 	}
-	for (x = 0; x < game->WIDTH * UNIT_SIZE; x += UNIT_SIZE)
+	for (x = 0; x < game->width * UNIT_SIZE; x += UNIT_SIZE)
 	{
-		for (y = 0; y < game->HEIGHT * UNIT_SIZE; y++)
+		for (y = 0; y < game->height * UNIT_SIZE; y++)
 		{
 			mlx_put_pixel(game->image, x, y, 0xb5b8b7);
 		}
@@ -122,16 +122,16 @@ void render_wall(t_game *game, t_ray *ray)
 	
 	terp = 0;
 	i = 0;
-	double projection_distance = ((game->WIDTH * UNIT_SIZE) / 2) / tan(FOV / 2);
+	double projection_distance = (WIDTH / 2) / tan(FOV / 2);
 	while (i < game->rays_number)
 	{
 		double p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
-		int walltopPixel = ((game->HEIGHT * UNIT_SIZE) / 2) - (p_wall_height / 2);
+		int walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
 		if (walltopPixel < 0)
 			walltopPixel = 0;
-		int wallbuttomPixel = ((game->HEIGHT * UNIT_SIZE) / 2) + (p_wall_height / 2);
-		if (wallbuttomPixel > (int)game->HEIGHT * UNIT_SIZE)
-			wallbuttomPixel = game->HEIGHT * UNIT_SIZE;
+		int wallbuttomPixel = (HEIGHT / 2) + (p_wall_height / 2);
+		if (wallbuttomPixel > HEIGHT)
+			wallbuttomPixel = HEIGHT;
 		int y = walltopPixel;
 		terp = depth_color(ray[i].distance, terp);
 		while (y < wallbuttomPixel)
@@ -153,13 +153,13 @@ void draw_background(t_game *game)
 
 	x = 0;
 	y = 0;
-	game->image = mlx_new_image(game->mlx, game->WIDTH * UNIT_SIZE, game->HEIGHT * UNIT_SIZE);
+	game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
 		return ;
-	while (game->HEIGHT * UNIT_SIZE > y)
+	while (HEIGHT > y)
 	{
 		x = 0;
-		while (game->WIDTH * UNIT_SIZE > x)
+		while (WIDTH > x)
 		{
 			mlx_put_pixel(game->image, x, y, 0x33030);
 			x++;	

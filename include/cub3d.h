@@ -11,6 +11,8 @@
 #define UNIT_SIZE 30
 #define FOV 60 * (M_PI / 180)
 #define MOVE_SPEED 5
+#define WIDTH 900
+#define HEIGHT 600
 
 typedef struct s_dda {
 	int x0;
@@ -67,8 +69,8 @@ typedef struct s_ray {
 } t_ray;
 
 typedef struct s_game {
-	size_t WIDTH;
-	size_t HEIGHT;
+	size_t width;
+	size_t height;
 	double rays_number;
 	char **map;
 	mlx_t *mlx;
@@ -85,7 +87,6 @@ size_t 	get_height(char **map);
 size_t	get_width(char **map);
 
 void	init_struct(t_game *game);
-
 void	draw_background(t_game *game);
 void	draw_wall(t_game *game);
 void	draw_player(t_game *game);
@@ -114,16 +115,3 @@ double 	calculate_distance(double x1, double y1, double x2, double y2);
 void 	render_wall(t_game *game, t_ray *ray);
 unsigned int		rgbt_color(int t, int r, int g, int b);
 int depth_color(double distance, int terp);
-// -------------------------------------------------------------------
-
-//     ------------------------------
-// .. the angle most not > 360 or <  ..
-//     ------------------------------
-
-// calculate the horizontal and vertical distances between the wall and the player
-// choose the nearest one to the player
-// cast rays
-
-// -------------------------------------------------------------------
-
-// render walls
