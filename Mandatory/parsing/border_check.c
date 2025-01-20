@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   border_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:35:24 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/20 13:07:29 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/20 20:39:27 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int checker_2(t_game *game)
 	int y;
 
 	y = 0;
-	while(game->map[y])
-	{
-		printf(">>%s", game->map[y]);
-		y++;
-	}
+	// while(game->map[y])
+	// {
+	// 	printf(">>%s", game->map[y]);
+	// 	y++;
+	// }
 	while (game->map[y])
 	{
 		x = 0;
