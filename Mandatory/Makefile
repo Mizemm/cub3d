@@ -9,7 +9,7 @@ SRCS	= cub3d.c raycasting/player_action.c raycasting/init_struct.c raycasting/ut
 		raycasting/player_movement.c raycasting/raycasting.c raycasting/player_direction.c raycasting/utils2.c \
 		parsing/parsing.c parsing/ft_free.c parsing/border_check.c parsing/elements.c parsing/map.c parsing/parsing_error.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-		libft/ft_split.c libft/ft_substr.c libft/ft_mini_strchr.c libft/ft_strlen.c libft/ft_strdup.c libft/ft_strstr.c
+		libft/ft_split.c libft/ft_substr.c libft/ft_mini_strchr.c libft/ft_strlen.c libft/ft_strdup.c
 OBJS	= ${SRCS:.c=.o}
 
 all: libmlx $(NAME)
