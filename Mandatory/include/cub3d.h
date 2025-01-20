@@ -94,6 +94,7 @@ typedef struct s_game {
 int		ft_strlen(char *s);
 int		ft_mini_strchr(char s, char *c);
 int     ft_strcmp(char *s1, char *s2);
+int	ft_strstr(char *src, char *dst, int i);
 char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
 char	**ft_split(char *s, char *c);
@@ -109,6 +110,7 @@ void	map(t_game *game, char *line);
 int		struct_elements(t_game *game);
 int		borders(t_game *game);
 int		parsing_error(t_game *game);
+int	file_check(char *name);
 
 size_t count_width(char **map);
 size_t count_height(char **map);

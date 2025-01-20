@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/20 14:18:15 by mizem            ###   ########.fr       */
+/*   Created: 2025/01/20 14:08:52 by mizem             #+#    #+#             */
+/*   Updated: 2025/01/20 14:09:07 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void parsing(t_game *game, char *line)
+int	ft_strstr(char *src, char *dst, int i)
 {
-	if (file_check(line) == 1)
+	int	j;
+
+	if (dst[i] == '\0')
+		return (1);
+	while (src[i])
 	{
-		write(1, "Error\n", 6);
-		exit(1);
+		j = 0;
+		while (dst[j] == src[i + j] && dst[j])
+			j++;
+		if (!dst[j] && ft_strlen(dst) == j)
+			return (0);
+		i++;
 	}
-	elements(game, line);
-	map(game, line);
-	game->width = count_width(game->map);
-	game->height = count_height(game->map);
-	if (struct_elements(game) == 1 || parsing_error(game) == 1)
-	{
-		write(1, "Error\n", 6);
-		exit(1);
-	}
+	return (1);
 }
