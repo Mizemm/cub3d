@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:16:11 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/19 19:27:58 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/21 19:55:58 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "../include/cub3d.h"
 
 # ifndef GET_NEXT_LINE_H
 #define GET_NEXT_LINE_H

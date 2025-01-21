@@ -92,9 +92,10 @@ typedef struct s_game {
 // parsing function 
 
 int		ft_strlen(char *s);
+int		ft_isdigit(char c);
 int		ft_mini_strchr(char s, char *c);
 int     ft_strcmp(char *s1, char *s2);
-int	ft_strstr(char *src, char *dst, int i);
+int		ft_atoi(char *str);
 char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
 char	**ft_split(char *s, char *c);
@@ -110,7 +111,11 @@ void	map(t_game *game, char *line);
 int		struct_elements(t_game *game);
 int		borders(t_game *game);
 int		parsing_error(t_game *game);
-int	file_check(char *name);
+int		file_check(char *name);
+int 	floor_color_check(t_game *game);
+int 	floor_color_check_2(t_game *game);
+int		ceiling_color_check(t_game *game);
+int		ceiling_color_check_2(t_game *game);
 
 size_t count_width(char **map);
 size_t count_height(char **map);

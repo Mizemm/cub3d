@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:38:03 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/20 20:50:02 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/21 21:03:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,49 @@ int map_finder(char *str)
 	return (0);
 }
 
-int	map_counter(char *line)
+int	map_counter(char *line, char **str)
 {
-	char	*ptr[1024];
+	char    buffer[1024];
 	int		i;
-	int		j;
-	int count;
+	int		b_read;
+	int		index;
+	int 	count;
 	int		fd;
 
 	i = 0;
-	j = 0;
+	b_read = 1;
+	index = 0;
 	count = 0;
 	fd = open(line, O_RDWR);
-    while (1)
-	{
-		ptr[i] = get_next_line(fd);
-		if (!ptr[i])
-			break ;
+	while (b_read > 0)
+    {
+        b_read = read(fd, &buffer[index], 1);
+        if (b_read > 0 && buffer[index] == '\n')
+        {
+            buffer[index + 1] = '\0';
+			str[i] = ft_strdup(buffer);
+			i++;
+            index = 0;
+        }
+        else
+            index++;
+    }
+    if (index > 0)
+    {
+        buffer[index] = '\0';
+        str[i] = ft_strdup(buffer);
+        i++;
+    }
+    str[i] = NULL;
+	i = 0;
+	while (str[i] && map_finder(str[i]) == 0)
 		i++;
-	}
-	while (ptr[j] && map_finder(ptr[j]) == 0)
-		j++;
-	while (ptr[j])
+	while (str[i])
 	{
 		count++;
-		j++;
+		i++;
 	}
-	close(fd);
+	close(fd);	
 	return (count);
 }
 
@@ -70,28 +86,19 @@ void	map(t_game *game, char *line)
 	char *str[1024];
 
 	i = 0;
-	j = map_counter(line);
+	j = map_counter(line, str);
 	fd = open(line, O_RDONLY);
-	game->map = malloc(sizeof(char *) * (j + 1));
-	while (1 && j > 0)
-	{
-		str[i] = get_next_line(fd);
-		if (map_finder(str[i]))
-		{
-			game->map[0] = ft_strdup(str[i]);
-			i = 1;
-			while (1)
-			{
-				game->map[i] = get_next_line(fd);
-				if (!game->map[i])
-				{
-					game->map[i] = NULL;
-					return ;
-				}
-				i++;
-			}
-		}
+	game->map = malloc(sizeof(char *) * (j + 1));	
+	while (str[i] && map_finder(str[i]) == 0)
 		i++;
+	j = 0;
+	while (1)
+	{
+		if (!str[i])
+			break;
+		game->map[j] = ft_strdup(str[i]);
+		i++;
+		j++;
 	}
-	game->map[i] = NULL;
+	game->map[j] = NULL;
 }
