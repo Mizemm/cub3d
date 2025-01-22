@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/21 19:52:56 by mizem            ###   ########.fr       */
+/*   Updated: 2025/01/22 23:27:59 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void ft_raycasting(t_game *game)
 	find_player(game);
 	// draw_wall(game);
 	// draw_player(game);
+	draw_minimap(game);
 	cast_rays(game);
 	// draw_line(game);
 }
@@ -44,8 +45,8 @@ int main(int ac, char **av)
 		return (1);
 	init_struct(game);
 	parsing(game, av[1]);
-	// ft_raycasting(game);
-	// mlx_key_hook(game->mlx, key_hook, game);
-	// mlx_loop(game->mlx);
+	ft_raycasting(game);
+	mlx_key_hook(game->mlx, key_hook, game);
+	mlx_loop(game->mlx);
 	return (0);
 }

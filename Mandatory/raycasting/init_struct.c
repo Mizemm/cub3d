@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/19 23:45:49 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/22 23:18:50 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void init_struct(t_game *game)
 
 	game->width = 0;
 	game->height = 0;
+	game->minimap_width = 0;
+	game->minimap_height = 0;
 	game->elements = NULL;
 	game->map = NULL;
 	game->no_path = NULL;
@@ -50,9 +52,6 @@ void init_struct(t_game *game)
 	game->floor_color = NULL;
 	game->ceiling_color = NULL;
 	game->trash = NULL;
-	game->map = malloc(sizeof(char *) * (20));
-	if (!game->map)
-		return ;
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	game->player.rotate_speed = 5 * (M_PI / 180);
@@ -71,5 +70,4 @@ void init_struct(t_game *game)
 	game->mlx = mlx;
 	if (!mlx)
 		return ;
-	// find_player(game);
 }

@@ -13,6 +13,7 @@
 #define MOVE_SPEED 5
 #define WIDTH 900
 #define HEIGHT 600
+#define MINIMAP_SCALE 0.2
 
 typedef struct s_dda {
 	int x0;
@@ -71,6 +72,8 @@ typedef struct s_ray {
 typedef struct s_game {
 	int width;
 	int height;
+	int minimap_width;
+	int minimap_height;
 	double rays_number;
 	char **map;
 	char **elements;
@@ -82,6 +85,7 @@ typedef struct s_game {
 	char *ceiling_color;
 	char *trash;
 	mlx_t *mlx;
+	mlx_image_t *minimap_img;
 	mlx_image_t *image;
 	t_ray *rays;
 	t_player player;
@@ -152,3 +156,4 @@ void 	render_wall(t_game *game, t_ray *ray);
 unsigned int		rgbt_color(int t, int r, int g, int b);
 int depth_color(double distance, int terp);
 void find_player(t_game *game);
+void draw_minimap(t_game *game);
