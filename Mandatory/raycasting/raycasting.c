@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/22 17:33:54 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/23 21:21:10 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ void cast_rays(t_game *game)
 		i++;
 	}
 	i = 0;
-	render_wall(game, game->rays);
-	// while (i < game->rays_number)
-	// {
-	// 	// draw_line(game, game->rays[i]);
-	// 	dda_test(game, game->rays[i]);
-	// 	i++;
-	// }
+	// render_wall(game, game->rays);
+	while (i < game->rays_number)
+	{
+		draw_line(game, game->rays[i]);
+		// dda_test(game, game->rays[i]);
+		i++;
+	}
 }

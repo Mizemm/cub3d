@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/20 22:04:16 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/21 21:31:57 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void rebuild_game(t_game *game)
 {
-	// mlx_delete_image(game->mlx, game->player.player_image);
 	mlx_delete_image(game->mlx, game->image);
 	draw_background(game);
 	// draw_wall(game);
