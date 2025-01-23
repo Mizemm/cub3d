@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:58:06 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/23 21:16:16 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:09:40 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,29 @@ void minimap_grid(t_game *game)
 		}
 	}
 }
+
+// int check_for_draw(t_game *game)
+// {
+// 	double px;
+// 	double py;
+// 	double xd;
+// 	double yd;
+// 	int x;
+// 	int y;
+
+// 	px = game->minimap_width / 2;
+// 	py = game->minimap_height / 2;
+// 	while (y < game->minimap_height)
+// 	{
+// 		x = 0;
+// 		while (x < game->minimap_width)
+// 		{
+			
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 void draw_minimap(t_game *game)
 {
