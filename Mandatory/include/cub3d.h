@@ -14,6 +14,7 @@
 #define WIDTH 900
 #define HEIGHT 600
 #define MINIMAP_SCALE 0.2
+#define ZOOM 0.5
 
 typedef struct s_dda {
 	int x0;
