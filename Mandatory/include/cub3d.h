@@ -5,6 +5,7 @@
 #include <string.h>
 #include <limits.h>
 #include <math.h>
+#include <stdbool.h>
 // #include <../../MLX42/include/MLX42/MLX42.h>
 #include <MLX42.h>
 
@@ -28,6 +29,14 @@ typedef struct s_dda {
 	int err;
 	int e2;
 }	t_dda;
+
+typedef struct s_doors {
+	bool foundDoor;
+	bool is_close;
+	bool is_open;
+	double doorHitX;
+	double doorHitY;
+} t_doors;
 
 typedef struct s_horizontal {
 	double x_intercept;
@@ -68,6 +77,7 @@ typedef struct s_ray {
 	double distance;
 	bool foundHorz;
 	bool foundVert;
+	bool foundDoor;
 } t_ray;
 
 typedef struct s_game {
@@ -91,6 +101,7 @@ typedef struct s_game {
 	t_ray *rays;
 	t_player player;
 	t_vertical vertical;
+	t_doors door;
 	t_horizontal horizontal;
 } t_game;
 
@@ -130,6 +141,7 @@ void parsing(t_game *game, char *line);
 void	init_struct(t_game *game);
 void	draw_background(t_game *game);
 void	draw_wall(t_game *game);
+void 	draw_doors(t_game *game);
 void	draw_player(t_game *game);
 void 	draw_line(t_game *game, t_ray ray);
 void 	dda_test(t_game *game, t_ray ray);
@@ -145,6 +157,7 @@ bool	is_facing_up(double angle);
 bool	is_facing_right(double angle);
 bool	is_facing_left(double angle);
 bool 	is_wall(t_game *game, double x, double y);
+bool 	is_doors(t_game *game, double x, double y);
 
 void	key_hook(mlx_key_data_t key, void *param);
 

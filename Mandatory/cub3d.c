@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/25 19:49:49 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/25 21:10:10 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void rebuild_game(t_game *game)
 	mlx_delete_image(game->mlx, game->image);
 	draw_background(game);
 	// draw_wall(game);
+	// draw_doors(game);
 	// draw_player(game);
+	draw_minimap(game);
 	cast_rays(game);
-	// draw_minimap(game);
 }
 
 void ft_raycasting(t_game *game)
@@ -28,9 +29,10 @@ void ft_raycasting(t_game *game)
 	draw_background(game);
 	find_player(game);
 	// draw_wall(game);
+	// draw_doors(game);
 	// draw_player(game);
+	draw_minimap(game);
 	cast_rays(game);
-	// draw_minimap(game);
 }
 
 int main(int ac, char **av)

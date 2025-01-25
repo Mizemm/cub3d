@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/23 21:17:46 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/25 23:34:04 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,10 @@ void render_wall(t_game *game, t_ray *ray)
 		terp = depth_color(ray[i].distance, terp);
 		while (y < wallbuttomPixel)
 		{
+			if (ray[i].foundDoor)
+			{
+				mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, 255));
+			}
 			if (ray[i].foundHorz)
 				mlx_put_pixel(game->image, i, y, rgbt_color(204, 26, 198, terp));
 			else if (ray[i].foundVert)
@@ -165,6 +169,63 @@ void draw_background(t_game *game)
 			x++;	
 		}
 		y++;
+	}
+}
+
+void draw_doors(t_game *game)
+{
+	int x;
+	int y;
+	int i;
+	int j;
+	int position_x;
+	int position_y;
+
+	x = 0;
+	y = 0;
+	i = 0;
+	j = 0;
+	position_x = 0;
+	position_y = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		position_x = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'C')
+			{
+				y = 0;
+				while (UNIT_SIZE > y)
+				{
+					x = 0;
+					while (UNIT_SIZE > x)
+					{
+						mlx_put_pixel(game->image, x + position_x, y + position_y, rgbt_color(107, 229, 184, 255));
+						x++;
+					}
+					y++;
+				}
+			}
+			if (game->map[i][j] == 'O')
+			{
+				y = 0;
+				while (UNIT_SIZE > y)
+				{
+					x = 0;
+					while (UNIT_SIZE > x)
+					{
+						mlx_put_pixel(game->image, x + position_x, y + position_y, rgbt_color(204, 204, 255, 255));
+						x++;
+					}
+					y++;
+				}
+			}
+			j++;
+			position_x += UNIT_SIZE;	
+		}
+		i++;
+		position_y += UNIT_SIZE;
 	}
 }
 

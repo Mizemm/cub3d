@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/22 23:18:50 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/25 22:05:36 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void init_struct(t_game *game)
 	game->player.move_speed = MOVE_SPEED;
 	game->player.angle_rotation = M_PI / 2;
 	game->rays_number = WIDTH;
+	game->door.foundDoor = false;
 	game->rays = malloc(sizeof(t_ray) * game->rays_number);
 	if (!game->rays)
 	{

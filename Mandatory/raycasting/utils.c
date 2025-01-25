@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/22 16:46:29 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/25 21:27:11 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,18 @@ bool is_wall(t_game *game, double x, double y)
 {
 	int x_tmp = floor(x / UNIT_SIZE);
 	int y_tmp = floor(y / UNIT_SIZE);
-	// printf("x_tmp: %d --- Width%d\n", x_tmp, game->width);
-	// printf("y_tmp: %d--- height%d\n", y_tmp, game->height);
 	if (x_tmp < 0 || y_tmp < 0 || x_tmp >= ft_strlen(game->map[y_tmp]) || y_tmp >= game->height)
 		return (false);
 	return (game->map[y_tmp][x_tmp] == '1');
+}
+
+bool is_doors(t_game *game, double x, double y)
+{
+	int x_tmp = floor(x / UNIT_SIZE);
+	int y_tmp = floor(y / UNIT_SIZE);
+	if (x_tmp < 0 || y_tmp < 0 || x_tmp >= ft_strlen(game->map[y_tmp]) || y_tmp >= game->height)
+		return (false);
+	return (game->map[y_tmp][x_tmp] == 'C');
 }
 
 double calculate_distance(double x1, double y1, double x2, double y2)

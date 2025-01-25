@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/25 19:08:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/25 23:28:55 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void init_horizontal_intersection(t_game *game, double angle)
 	game->horizontal.foundHorzWall = false;
 	game->horizontal.horzWallHitX = 0;
 	game->horizontal.horzWallHitY = 0;
+	game->door.doorHitX = 0;
+	game->door.doorHitY = 0;
+	game->door.foundDoor = false;
 	game->horizontal.y_intercept = floor(game->player.position_y / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_down(angle))
 		game->horizontal.y_intercept += UNIT_SIZE;
@@ -45,6 +48,13 @@ void horizontal_intersection(t_game *game, double angle)
 		checkStepY = nextHorzStepY;
 		if (is_facing_up(angle))
 			checkStepY -= 1;
+		if (is_doors(game, checkStepX, checkStepY))
+		{
+			game->door.doorHitX = nextHorzStepX;
+			game->door.doorHitY = nextHorzStepY;
+			game->door.foundDoor = true;
+			// break;
+		}
 		if (is_wall(game, checkStepX, checkStepY))
 		{
 			game->horizontal.horzWallHitX = nextHorzStepX;
@@ -63,6 +73,9 @@ void init_vertical_intersection(t_game *game, double angle)
 	game->vertical.foundVertWall = false;
 	game->vertical.vertWallHitX = 0;
 	game->vertical.vertWallHitY = 0;
+	game->door.doorHitX = 0;
+	game->door.doorHitY = 0;
+	game->door.foundDoor = false;
 	game->vertical.x_intercept = floor(game->player.position_x / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_right(angle))
 		game->vertical.x_intercept += UNIT_SIZE;
@@ -91,6 +104,13 @@ void vertical_intersection(t_game *game, double angle)
 		if (is_facing_left(angle))
 			checkStepX -= 1;
 		checkStepY = nextVertStepY;
+		if (is_doors(game, checkStepX, checkStepY))
+		{
+			game->door.doorHitX = nextVertStepX;
+			game->door.doorHitY = nextVertStepY;
+			game->door.foundDoor = true;
+			// break;
+		}
 		if (is_wall(game, checkStepX, checkStepY))
 		{
 			game->vertical.vertWallHitX = nextVertStepX;
@@ -107,15 +127,28 @@ void find_distance(t_game *game, t_ray *ray, double angle)
 {
 	double horizontal_distance;
 	double vertical_distance;
+	double door_distance;
 
 	horizontal_distance = INT_MAX;
 	vertical_distance = INT_MAX;
+	door_distance = INT_MAX;
 	horizontal_intersection(game, angle);
 	vertical_intersection(game, angle);
 	if (game->horizontal.foundHorzWall)
 		horizontal_distance = calculate_distance(game->player.position_x, game->player.position_y, game->horizontal.horzWallHitX, game->horizontal.horzWallHitY);
 	if (game->vertical.foundVertWall)
 		vertical_distance = calculate_distance(game->player.position_x, game->player.position_y, game->vertical.vertWallHitX, game->vertical.vertWallHitY);
+	if (game->door.foundDoor)
+		door_distance = calculate_distance(game->player.position_x, game->player.position_y, game->door.doorHitX, game->door.doorHitY);
+	if (door_distance < horizontal_distance && door_distance < vertical_distance)
+	{
+		ray->wallHitX = game->door.doorHitX;
+		ray->wallHitY = game->door.doorHitY;
+		ray->distance = door_distance;
+		ray->foundDoor = true;
+		ray->foundHorz = false;
+		ray->foundVert = false;
+	}
 	if (horizontal_distance < vertical_distance)
 	{
 		ray->wallHitX = game->horizontal.horzWallHitX;
@@ -123,6 +156,7 @@ void find_distance(t_game *game, t_ray *ray, double angle)
 		ray->distance = horizontal_distance;
 		ray->foundHorz = true;
 		ray->foundVert = false;
+		ray->foundDoor = false;
 	}
 	else
 	{
@@ -131,6 +165,7 @@ void find_distance(t_game *game, t_ray *ray, double angle)
 		ray->distance = vertical_distance;
 		ray->foundVert = true;
 		ray->foundHorz = false;
+		ray->foundDoor = false;
 	}
 	ray->distance *= cos(game->player.angle_rotation - angle);
 }
@@ -153,8 +188,8 @@ void cast_rays(t_game *game)
 	render_wall(game, game->rays);
 	// while (i < game->rays_number)
 	// {
-	// 	draw_line(game, game->rays[i]);
-	// 	// dda_test(game, game->rays[i]);
+	// 	// draw_line(game, game->rays[i]);
+	// 	dda_test(game, game->rays[i]);
 	// 	i++;
 	// }
 }
