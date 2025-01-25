@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:58:06 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/25 01:30:06 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/25 19:26:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void minimap_line(t_game *game, double px, double py)
 	double y1;
 
 	i = -1;
-	x1 = px + (15 * cos(game->player.angle_rotation));
-	y1 = py + (15 * sin(game->player.angle_rotation));
+	x1 = px + (12 * cos(game->player.angle_rotation));
+	y1 = py + (12 * sin(game->player.angle_rotation));
 	dx = x1 - px;
 	dy = y1 - py;
 	if (fabs(dx) > fabs(dy))
 		steps = fabs(dx);
-	else
+	else	
 		steps = fabs(dy);
 	x_inc = dx / steps;
 	y_inc = dy / steps;
@@ -86,13 +86,13 @@ int check_for_draw(t_game *game, int x, int y)
 	yd = (game->player.position_y) + yd;
 	if (xd < 0 || yd < 0)
 		return (-1);
-	// printf("window h ---> %d\n", game->height * UNIT_SIZE);
-	// printf("yd ---------> %d\n", yd);
 	if (yd >= game->height * UNIT_SIZE)
 		return (-1);
 	xd /= UNIT_SIZE;
 	yd /= UNIT_SIZE;
-	if (xd > ft_strlen(game->map[yd]))
+	if (xd >= ft_strlen(game->map[yd]))
+		return (-1);
+	if (game->map[yd][xd] == 10)
 		return (-1);
 	if (game->map[yd][xd] == '1')
 		return (1);
@@ -120,7 +120,7 @@ void darw_object(t_game *game)
 			if (status == 1)
 				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(27, 27, 27, 255));
 			if (status == -1)
-				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(255, 255, 255, 255));
+				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(67, 67, 67, 255));
 			x++;
 		}
 		y++;
@@ -139,11 +139,6 @@ void draw_minimap(t_game *game)
 	game->minimap_img = mlx_new_image(game->mlx, game->minimap_width, game->minimap_height);
 	if ((!game->minimap_img) || (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10)) < 0)
 		return ;
-	// for (int x = 0; x < game->height; x++)
-	// {
-	// 	printf("%s", game->map[x]);
-	// }
 	darw_object(game);
-	// minimap_grid(game);
 	minimap_player(game);
 }
