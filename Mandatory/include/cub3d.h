@@ -31,11 +31,10 @@ typedef struct s_dda {
 }	t_dda;
 
 typedef struct s_doors {
-	bool foundDoor;
-	bool is_close;
+	bool foundHerzDoor;
+	bool foundVertDoor;
+	bool found_door;
 	bool is_open;
-	double doorHitX;
-	double doorHitY;
 } t_doors;
 
 typedef struct s_horizontal {

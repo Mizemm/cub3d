@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/25 22:05:36 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/26 20:35:02 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,16 @@ void init_struct(t_game *game)
 	game->player.move_speed = MOVE_SPEED;
 	game->player.angle_rotation = M_PI / 2;
 	game->rays_number = WIDTH;
-	game->door.foundDoor = false;
+	game->door.found_door = false;
 	game->rays = malloc(sizeof(t_ray) * game->rays_number);
 	if (!game->rays)
 	{
 		free(game);
 		return ;
 	}
+	game->rays->foundDoor = false;
+	game->rays->foundHorz = false;
+	game->rays->foundVert = false;
 	game->player.position_x = 0;
 	game->player.position_y = 0;
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);

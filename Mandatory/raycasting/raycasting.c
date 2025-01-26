@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/25 23:28:55 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/26 22:45:43 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void init_horizontal_intersection(t_game *game, double angle)
 	game->horizontal.foundHorzWall = false;
 	game->horizontal.horzWallHitX = 0;
 	game->horizontal.horzWallHitY = 0;
-	game->door.doorHitX = 0;
-	game->door.doorHitY = 0;
-	game->door.foundDoor = false;
+	// game->door.foundHerzDoor = false;
 	game->horizontal.y_intercept = floor(game->player.position_y / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_down(angle))
 		game->horizontal.y_intercept += UNIT_SIZE;
@@ -32,6 +30,12 @@ void init_horizontal_intersection(t_game *game, double angle)
 		game->horizontal.x_step *= -1;
 	else if (is_facing_right(angle) && game->horizontal.x_step < 0)
 		game->horizontal.x_step *= -1;
+}
+
+void set_flg(t_game *game, double x, double y)
+{
+	if (is_doors(game, x, y))
+		game->door.found_door = true;
 }
 
 void horizontal_intersection(t_game *game, double angle)
@@ -48,15 +52,12 @@ void horizontal_intersection(t_game *game, double angle)
 		checkStepY = nextHorzStepY;
 		if (is_facing_up(angle))
 			checkStepY -= 1;
-		if (is_doors(game, checkStepX, checkStepY))
+		// if (is_doors(game, checkStepX, checkStepY))
+		// 	game->door.foundHerzDoor = true;
+		if (is_wall(game, checkStepX, checkStepY) || is_doors(game, checkStepX, checkStepY))
 		{
-			game->door.doorHitX = nextHorzStepX;
-			game->door.doorHitY = nextHorzStepY;
-			game->door.foundDoor = true;
-			// break;
-		}
-		if (is_wall(game, checkStepX, checkStepY))
-		{
+			set_flg(game, checkStepX, checkStepY);
+			printf("door H: %d\n", game->door.found_door);
 			game->horizontal.horzWallHitX = nextHorzStepX;
 			game->horizontal.horzWallHitY = nextHorzStepY;
 			game->horizontal.foundHorzWall = true;
@@ -73,9 +74,7 @@ void init_vertical_intersection(t_game *game, double angle)
 	game->vertical.foundVertWall = false;
 	game->vertical.vertWallHitX = 0;
 	game->vertical.vertWallHitY = 0;
-	game->door.doorHitX = 0;
-	game->door.doorHitY = 0;
-	game->door.foundDoor = false;
+	// game->door.foundVertDoor = false;
 	game->vertical.x_intercept = floor(game->player.position_x / UNIT_SIZE) * UNIT_SIZE;
 	if (is_facing_right(angle))
 		game->vertical.x_intercept += UNIT_SIZE;
@@ -104,15 +103,12 @@ void vertical_intersection(t_game *game, double angle)
 		if (is_facing_left(angle))
 			checkStepX -= 1;
 		checkStepY = nextVertStepY;
-		if (is_doors(game, checkStepX, checkStepY))
+		// if (is_doors(game, checkStepX, checkStepY))
+		// 	game->door.foundVertDoor = true;
+		if (is_wall(game, checkStepX, checkStepY) || is_doors(game, checkStepX, checkStepY))
 		{
-			game->door.doorHitX = nextVertStepX;
-			game->door.doorHitY = nextVertStepY;
-			game->door.foundDoor = true;
-			// break;
-		}
-		if (is_wall(game, checkStepX, checkStepY))
-		{
+			set_flg(game, checkStepX, checkStepY);
+			printf("door V: %d\n", game->door.found_door);
 			game->vertical.vertWallHitX = nextVertStepX;
 			game->vertical.vertWallHitY = nextVertStepY;
 			game->vertical.foundVertWall = true;
@@ -127,28 +123,15 @@ void find_distance(t_game *game, t_ray *ray, double angle)
 {
 	double horizontal_distance;
 	double vertical_distance;
-	double door_distance;
 
 	horizontal_distance = INT_MAX;
 	vertical_distance = INT_MAX;
-	door_distance = INT_MAX;
 	horizontal_intersection(game, angle);
 	vertical_intersection(game, angle);
 	if (game->horizontal.foundHorzWall)
 		horizontal_distance = calculate_distance(game->player.position_x, game->player.position_y, game->horizontal.horzWallHitX, game->horizontal.horzWallHitY);
 	if (game->vertical.foundVertWall)
 		vertical_distance = calculate_distance(game->player.position_x, game->player.position_y, game->vertical.vertWallHitX, game->vertical.vertWallHitY);
-	if (game->door.foundDoor)
-		door_distance = calculate_distance(game->player.position_x, game->player.position_y, game->door.doorHitX, game->door.doorHitY);
-	if (door_distance < horizontal_distance && door_distance < vertical_distance)
-	{
-		ray->wallHitX = game->door.doorHitX;
-		ray->wallHitY = game->door.doorHitY;
-		ray->distance = door_distance;
-		ray->foundDoor = true;
-		ray->foundHorz = false;
-		ray->foundVert = false;
-	}
 	if (horizontal_distance < vertical_distance)
 	{
 		ray->wallHitX = game->horizontal.horzWallHitX;
@@ -156,7 +139,7 @@ void find_distance(t_game *game, t_ray *ray, double angle)
 		ray->distance = horizontal_distance;
 		ray->foundHorz = true;
 		ray->foundVert = false;
-		ray->foundDoor = false;
+		// ray->foundDoor = false;
 	}
 	else
 	{
@@ -165,7 +148,7 @@ void find_distance(t_game *game, t_ray *ray, double angle)
 		ray->distance = vertical_distance;
 		ray->foundVert = true;
 		ray->foundHorz = false;
-		ray->foundDoor = false;
+		// ray->foundDoor = false;
 	}
 	ray->distance *= cos(game->player.angle_rotation - angle);
 }
@@ -177,6 +160,7 @@ void cast_rays(t_game *game)
 	
 	i = 0;
 	game->rays->ray_angle = game->player.angle_rotation - (FOV / 2);
+	game->door.found_door = false; // just tmp;
 	while (i < game->rays_number)
 	{
 		angle = normalize_angle(game->rays->ray_angle);
