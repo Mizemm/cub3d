@@ -44,6 +44,7 @@ typedef struct s_horizontal {
 	double horzWallHitX;
 	double horzWallHitY;
 	bool foundHorzWall;
+	bool foundHorzDoor;
 } t_horizontal;
 
 typedef struct s_vertical {
@@ -54,6 +55,7 @@ typedef struct s_vertical {
 	double vertWallHitX;
 	double vertWallHitY;
 	bool foundVertWall;
+	bool foundVertDoor;
 } t_vertical;
 
 typedef struct s_player {
@@ -84,6 +86,7 @@ typedef struct s_game {
 	int minimap_width;
 	int minimap_height;
 	double rays_number;
+	bool is_door;
 	char **map;
 	char **elements;
 	char *no_path;

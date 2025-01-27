@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/27 21:40:18 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:54:41 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,21 @@ double calculate_distance(double x1, double y1, double x2, double y2)
 
 void doors_allocted(t_game *game)
 {
-	int x;
-	int y;
+	(void)game;
+	// int x;
+	// int y;
 
-	x = 0;
-	y = 0;
-	while (y < game->height * UNIT_SIZE)
-	{
-		x = 0;
-		while (x < game->width * UNIT_SIZE)
-		{
-			if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
-				printf("hello\n");
-			x++;
-		}
-		y++;
-	}
+	// x = 0;
+	// y = 0;
+	// while (y < game->height * UNIT_SIZE)
+	// {
+	// 	x = 0;
+	// 	while (x < game->width * UNIT_SIZE)
+	// 	{
+	// 		if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
+	// 			printf("hello\n");
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 }

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/27 21:12:19 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/27 23:04:39 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void rebuild_game(t_game *game)
 	mlx_delete_image(game->mlx, game->minimap_img);
 	mlx_delete_image(game->mlx, game->image);
 	draw_background(game);
-	// draw_wall(game);
-	// draw_doors(game);
-	// draw_player(game);
+	draw_wall(game);
+	draw_doors(game);
+	draw_player(game);
 	draw_minimap(game);
 	cast_rays(game);
 }
@@ -28,9 +28,9 @@ void ft_raycasting(t_game *game)
 {
 	draw_background(game);
 	find_player(game);
-	// draw_wall(game);
-	// draw_doors(game);
-	// draw_player(game);
+	draw_wall(game);
+	draw_doors(game);
+	draw_player(game);
 	draw_minimap(game);
 	cast_rays(game);
 }
@@ -47,7 +47,6 @@ int main(int ac, char **av)
 	init_struct(game);
 	parsing(game, av[1]);
 	ft_raycasting(game);
-	doors_allocted(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);
 	return (0);
