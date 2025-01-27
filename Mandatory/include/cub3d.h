@@ -31,10 +31,9 @@ typedef struct s_dda {
 }	t_dda;
 
 typedef struct s_doors {
-	bool foundHerzDoor;
-	bool foundVertDoor;
-	bool found_door;
-	bool is_open;
+	double x;
+	double y;
+	struct s_doors *next;
 } t_doors;
 
 typedef struct s_horizontal {
@@ -100,7 +99,7 @@ typedef struct s_game {
 	t_ray *rays;
 	t_player player;
 	t_vertical vertical;
-	t_doors door;
+	t_doors *door;
 	t_horizontal horizontal;
 } t_game;
 
@@ -134,6 +133,7 @@ int		ceiling_color_check_2(t_game *game);
 
 size_t count_width(char **map);
 size_t count_height(char **map);
+int	doors_counter(t_game *game);
 void parsing(t_game *game, char *line);
 
 // raycast function 
@@ -170,3 +170,4 @@ unsigned int		rgbt_color(int t, int r, int g, int b);
 int depth_color(double distance, int terp);
 void find_player(t_game *game);
 void draw_minimap(t_game *game);
+void doors_allocted(t_game *game);

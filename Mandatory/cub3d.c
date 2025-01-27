@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/25 21:10:10 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:12:19 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int main(int ac, char **av)
 	init_struct(game);
 	parsing(game, av[1]);
 	ft_raycasting(game);
+	doors_allocted(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);
 	return (0);

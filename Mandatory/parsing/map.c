@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:38:03 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/22 17:14:18 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/27 20:41:43 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	map(t_game *game, char *line)
 	i = 0;
 	j = map_counter(line, str);
 	fd = open(line, O_RDONLY);
-	game->map = malloc(sizeof(char *) * (j + 1));	
+	game->map = malloc(sizeof(char *) * (j + 1));
 	while (str[i] && map_finder(str[i]) == 0)
 		i++;
 	j = 0;
