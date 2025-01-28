@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/26 18:42:40 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/29 00:24:25 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,32 @@ void rotate_left(t_game *game)
 	game->player.rotate_direction = -1;
 	game->player.angle_rotation += game->player.rotate_direction * game->player.rotate_speed;
 	game->player.angle_rotation = normalize_angle(game->player.angle_rotation);
+}
+
+void open_door(t_game *game)
+{
+	int i;
+	int midd_index;
+	double distance;
+	t_ray *midd_ray;
+	
+	midd_index = game->rays_number / 2;
+	midd_ray = &game->rays[midd_index];
+	i = 0;
+	if (midd_ray->foundDoor)
+	{
+		distance = calculate_distance(game->player.position_x, game->player.position_y, midd_ray->wallHitX, midd_ray->wallHitY);
+		int gridd_x = (midd_ray->wallHitX / UNIT_SIZE);
+		int gridd_y = (midd_ray->wallHitY / UNIT_SIZE);
+		while (i < doors_counter(game))
+		{
+			if (gridd_x == game->doors[i].x && gridd_y == game->doors[i].y)
+			{
+				printf("------> x: %d y: %d\n", game->doors[i].x, game->doors[i].y);
+			}
+			i++;
+		}
+	}
 }
 
 void key_hook(mlx_key_data_t key, void *param)
@@ -45,6 +71,8 @@ void key_hook(mlx_key_data_t key, void *param)
 		backward_move(game);
 	else if (key.key == MLX_KEY_W && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
 		forward_move(game);
+	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
+		open_door(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	rebuild_game(game);

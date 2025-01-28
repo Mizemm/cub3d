@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/27 21:54:41 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/29 00:24:47 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,28 +78,52 @@ double calculate_distance(double x1, double y1, double x2, double y2)
 	return (sqrt((dx * dx) + (dy * dy)));
 }
 
-// void add_door(t_doors **door, double x, double y)
-// {
-	
-// }
+int init_door(t_game *game)
+{
+	int door_size;
+
+	door_size = doors_counter(game);
+	if (door_size <= 0)
+	{
+		game->doors = NULL;
+		return (1);
+	}
+	game->doors = malloc(sizeof(t_doors) * (door_size));
+	if (!game->doors)
+	{
+		free(game->rays);
+		free(game);
+		exit(EXIT_FAILURE);
+	}
+	return (0);
+}
 
 void doors_allocted(t_game *game)
 {
-	(void)game;
-	// int x;
-	// int y;
-
-	// x = 0;
-	// y = 0;
-	// while (y < game->height * UNIT_SIZE)
-	// {
-	// 	x = 0;
-	// 	while (x < game->width * UNIT_SIZE)
-	// 	{
-	// 		if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
-	// 			printf("hello\n");
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
+	int x;
+	int y;
+	int index;
+	
+	x = 0;
+	y = 0;
+	index = 0;
+	if (init_door(game) == -1)
+		return ;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			// printf("%c", game->map[y][x]);
+			if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
+			{
+				game->doors[index].x = x;
+				game->doors[index].y = y;
+				// printf("door[%d]: grid position: x -> %d y -> %d\n", index, x, y);
+				index++;
+			}
+			x++;
+		}
+		y++;
+	}
 }

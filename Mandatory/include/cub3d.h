@@ -31,9 +31,9 @@ typedef struct s_dda {
 }	t_dda;
 
 typedef struct s_doors {
-	double x;
-	double y;
-	struct s_doors *next;
+	int x;
+	int y;
+	// struct s_doors *next;
 } t_doors;
 
 typedef struct s_horizontal {
@@ -102,7 +102,7 @@ typedef struct s_game {
 	t_ray *rays;
 	t_player player;
 	t_vertical vertical;
-	t_doors *door;
+	t_doors *doors;
 	t_horizontal horizontal;
 } t_game;
 
