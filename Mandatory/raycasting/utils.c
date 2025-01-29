@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/29 00:24:47 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/29 23:54:47 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,10 @@ void doors_allocted(t_game *game)
 			{
 				game->doors[index].x = x;
 				game->doors[index].y = y;
+				if (game->map[y][x] == 'C')
+					game->doors[index].is_closed = true;
+				else
+					game->doors[index].is_closed = false;
 				// printf("door[%d]: grid position: x -> %d y -> %d\n", index, x, y);
 				index++;
 			}

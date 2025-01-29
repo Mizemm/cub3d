@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/29 00:23:42 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/29 23:12:51 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void horizontal_intersection(t_game *game, double angle)
 		}
 		nextHorzStepX += game->horizontal.x_step;
 		nextHorzStepY += game->horizontal.y_step;
-	
 	}
 }
 
@@ -97,9 +96,9 @@ void vertical_intersection(t_game *game, double angle)
 			&& nextVertStepY >= 0 && nextVertStepY <= game->height * UNIT_SIZE)
 	{
 		checkStepX = nextVertStepX;
-		// if (is_facing_left(angle))
-		// 	checkStepX -= 1;
 		checkStepY = nextVertStepY;
+		// if (is_facing_left(angle))
+			// checkStepX -= 1;
 		if (is_doors(game, checkStepX, checkStepY))
 			game->vertical.foundVertDoor = true;
 		if (is_wall(game, checkStepX, checkStepY)
@@ -165,11 +164,11 @@ void cast_rays(t_game *game)
 		i++;
 	}
 	i = 0;
-	// render_wall(game, game->rays);
-	while (i < game->rays_number)
-	{
-		// draw_line(game, game->rays[i]);
-		dda_test(game, game->rays[i]);
-		i++;
-	}
+	render_wall(game, game->rays);
+	// while (i < game->rays_number)
+	// {
+	// 	// draw_line(game, game->rays[i]);
+	// 	dda_test(game, game->rays[i]);
+	// 	i++;
+	// }
 }

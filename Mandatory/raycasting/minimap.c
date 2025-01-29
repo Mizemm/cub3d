@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:58:06 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/27 20:39:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/29 18:29:32 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int check_for_draw(t_game *game, int x, int y)
 		return (1);
 	if (game->map[yd][xd] == 'C')
 		return (2);
+	if (game->map[yd][xd] == 'O')
+		return (3);
 	return (0);
 }
 
@@ -125,6 +127,8 @@ void darw_object(t_game *game)
 				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(67, 67, 67, 255));
 			if (status == 2)
 				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(107, 229, 184, 255));
+			if (status == 3)
+				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(204, 204, 255, 255));
 			x++;
 		}
 		y++;

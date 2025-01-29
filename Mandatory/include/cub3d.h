@@ -33,7 +33,7 @@ typedef struct s_dda {
 typedef struct s_doors {
 	int x;
 	int y;
-	// struct s_doors *next;
+	bool is_closed;
 } t_doors;
 
 typedef struct s_horizontal {

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/29 00:24:25 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/29 23:56:00 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,59 @@ void open_door(t_game *game)
 {
 	int i;
 	int midd_index;
+	int grid_x;
+	int grid_y;
 	double distance;
 	t_ray *midd_ray;
 	
 	midd_index = game->rays_number / 2;
 	midd_ray = &game->rays[midd_index];
-	i = 0;
-	if (midd_ray->foundDoor)
+	distance = calculate_distance(game->player.position_x, game->player.position_y, midd_ray->wallHitX, midd_ray->wallHitY);
+	grid_x = (int)(midd_ray->wallHitX / UNIT_SIZE);
+	grid_y = (int)(midd_ray->wallHitY / UNIT_SIZE);
+	if (midd_ray->foundDoor && distance <= 65)
 	{
-		distance = calculate_distance(game->player.position_x, game->player.position_y, midd_ray->wallHitX, midd_ray->wallHitY);
-		int gridd_x = (midd_ray->wallHitX / UNIT_SIZE);
-		int gridd_y = (midd_ray->wallHitY / UNIT_SIZE);
+		i = 0;
+		// printf("----> x: %d ----> y: %d\n", grid_x, grid_y);
 		while (i < doors_counter(game))
 		{
-			if (gridd_x == game->doors[i].x && gridd_y == game->doors[i].y)
+			if (grid_x == game->doors[i].x && grid_y == game->doors[i].y && game->doors[i].is_closed)
 			{
-				printf("------> x: %d y: %d\n", game->doors[i].x, game->doors[i].y);
+				game->map[grid_y][grid_x] = 'O';
+				game->doors[i].is_closed = false;
+				break;
+			}
+			i++;
+		}
+	}
+}
+
+void close_door(t_game *game)
+{
+	int i;
+	int midd_index;
+	int grid_x;
+	int grid_y;
+	double distance;
+	t_ray *midd_ray;
+	
+	midd_index = game->rays_number / 2;
+	midd_ray = &game->rays[midd_index];
+	distance = calculate_distance(game->player.position_x, game->player.position_y, midd_ray->wallHitX, midd_ray->wallHitY);
+	grid_x = (int)(midd_ray->wallHitX / UNIT_SIZE);
+	grid_y = (int)(midd_ray->wallHitY / UNIT_SIZE);
+	// printf("dis: %f\n", distance);
+	if (midd_ray->foundDoor && distance <= 65)
+	{
+		i = 0;
+		// printf("----> x: %d ----> y: %d\n", grid_x, grid_y);
+		while (i < doors_counter(game))
+		{
+			if (grid_x == game->doors[i].x && grid_y == game->doors[i].y && !game->doors[i].is_closed)
+			{
+				game->map[grid_y][grid_x] = 'C';
+				game->doors[i].is_closed = true;
+				break;
 			}
 			i++;
 		}
@@ -73,6 +110,8 @@ void key_hook(mlx_key_data_t key, void *param)
 		forward_move(game);
 	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
 		open_door(game);
+	else if (key.key == MLX_KEY_C && key.action == MLX_PRESS)
+		close_door(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	rebuild_game(game);
