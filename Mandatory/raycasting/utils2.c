@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/18 17:56:25 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/30 00:52:08 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,9 @@ int depth_color(double distance, int terp)
 		brightness = 50;
     return (int)brightness;
 }
+
+// void mouse_hook(void *param)
+// {
+// 	int mouse_x;
+// 	int mouse_y;
+// }

@@ -161,7 +161,8 @@ bool	is_facing_left(double angle);
 bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
 
-void	key_hook(mlx_key_data_t key, void *param);
+void	movement_hook(mlx_key_data_t key, void *param);
+// void 	mouse_hook(t_game *game);
 
 double	normalize_angle(double angle);
 void 	find_distance(t_game *game, t_ray *ray, double ray_angle);

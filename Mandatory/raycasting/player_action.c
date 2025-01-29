@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/29 23:56:00 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/01/30 00:43:04 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void close_door(t_game *game)
 	distance = calculate_distance(game->player.position_x, game->player.position_y, midd_ray->wallHitX, midd_ray->wallHitY);
 	grid_x = (int)(midd_ray->wallHitX / UNIT_SIZE);
 	grid_y = (int)(midd_ray->wallHitY / UNIT_SIZE);
-	// printf("dis: %f\n", distance);
 	if (midd_ray->foundDoor && distance <= 65)
 	{
 		i = 0;
@@ -89,7 +88,7 @@ void close_door(t_game *game)
 	}
 }
 
-void key_hook(mlx_key_data_t key, void *param)
+void movement_hook(mlx_key_data_t key, void *param)
 {
 	t_game *game;
 	
