@@ -80,6 +80,12 @@ typedef struct s_ray {
 	bool foundDoor;
 } t_ray;
 
+typedef struct s_textures {
+	mlx_texture_t	*wall_texture[4];
+	double 			ray_positionX;
+	double 			ray_positionY;
+} t_textures;
+
 typedef struct s_game {
 	int width;
 	int height;
@@ -104,6 +110,7 @@ typedef struct s_game {
 	t_vertical vertical;
 	t_doors *doors;
 	t_horizontal horizontal;
+	t_textures *textures;
 } t_game;
 
 // parsing function 
@@ -137,6 +144,8 @@ int		ceiling_color_check_2(t_game *game);
 size_t count_width(char **map);
 size_t count_height(char **map);
 int	doors_counter(t_game *game);
+void load_textures(t_game *game);
+void render_wall(t_game *game, t_ray *ray);
 void parsing(t_game *game, char *line);
 
 // raycast function 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/30 00:44:45 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/03 00:10:04 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int main(int ac, char **av)
 		return (1);
 	init_struct(game);
 	parsing(game, av[1]);
+	load_textures(game);
 	ft_raycasting(game);
 	mlx_key_hook(game->mlx, movement_hook, game);
 	// mlx_mouse_hook(game->mlx, mouse_hook, game);
