@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:10:03 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/03 00:18:23 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/03 22:55:10 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,42 +46,50 @@ void render_wall(t_game *game, t_ray *ray)
 	{
 		if (ray[i].foundHorz)
         {
-            localX = ((ray[i].wallHitX / 30) - floor(ray[i].wallHitX / 30)) * game->textures->wall_texture[0]->width;
+            localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
             posX = (int)localX;
         }
 		if (ray[i].foundVert)
         {
-            localY = ((ray[i].wallHitY / 30) - floor(ray[i].wallHitY / 30)) * game->textures->wall_texture[0]->height;
+            localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[0]->height;
             posX = (int)localY;
         }
 		double p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
 		int walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
-		if (walltopPixel < 0)
-			walltopPixel = 0;
 		int wallbuttomPixel = (HEIGHT / 2) + (p_wall_height / 2);
-		if (wallbuttomPixel > HEIGHT)
-			wallbuttomPixel = HEIGHT;
 		int y = walltopPixel;
 		terp = depth_color(ray[i].distance, terp);
 		while (y < wallbuttomPixel)
 		{
             texture_index = 0;
 			if (ray[i].foundDoor)
-				mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, terp));			
+			{
+				if (y >=0 && y < HEIGHT)
+					mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, terp));
+			}
 			else if (ray[i].foundHorz)
 			{
-				posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
-                texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
-				mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
+				if (y >= 0 && y < HEIGHT)
+				{
+					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
+					texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
+						mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
+
+				}
 			}
 			else if (ray[i].foundVert)
 			{
-				posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
-                texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
-				mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
+				if (y >= 0 && y < HEIGHT)
+				{
+					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
+					texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
+						mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
+					
+				}
 			}
 			y++;
 		}
 		i++;
 	}
+
 }

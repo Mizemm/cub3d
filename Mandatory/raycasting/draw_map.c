@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/03 00:03:34 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/03 01:30:47 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void draw_background(t_game *game)
 		x = 0;
 		while (WIDTH > x)
 		{
-			mlx_put_pixel(game->image, x, y, 0x33030);
+			mlx_put_pixel(game->image, x, y, 0x36c7f2);
 			x++;	
 		}
 		y++;

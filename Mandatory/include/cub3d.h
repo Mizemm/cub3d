@@ -101,6 +101,8 @@ typedef struct s_game {
 	char *ea_path;
 	char *floor_color;
 	char *ceiling_color;
+	int floor_color_int[3];
+	int	ceiling_color_int[3];
 	char *trash;
 	mlx_t *mlx;
 	mlx_image_t *minimap_img;
@@ -140,6 +142,7 @@ int 	floor_color_check(t_game *game);
 int 	floor_color_check_2(t_game *game);
 int		ceiling_color_check(t_game *game);
 int		ceiling_color_check_2(t_game *game);
+uint32_t color(uint8_t *arr);
 
 size_t count_width(char **map);
 size_t count_height(char **map);
