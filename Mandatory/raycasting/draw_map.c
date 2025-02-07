@@ -6,9 +6,10 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/07 17:31:47 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/07 23:49:53 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/cub3d.h"
 
@@ -115,38 +116,38 @@ void draw_grid(t_game *game)
 		}
 	}
 }
-void render_wall(t_game *game, t_ray *ray)
-{
-	int i;
-	int terp;
+// void render_wall(t_game *game, t_ray *ray)
+// {
+// 	int i;
+// 	int terp;
 	
-	terp = 0;
-	i = 0;
-	double projection_distance = (WIDTH / 2) / tan(FOV / 2);
-	while (i < game->rays_number)
-	{
-		double p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
-		int walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
-		if (walltopPixel < 0)
-			walltopPixel = 0;
-		int wallbuttomPixel = (HEIGHT / 2) + (p_wall_height / 2);
-		if (wallbuttomPixel > HEIGHT)
-			wallbuttomPixel = HEIGHT;
-		int y = walltopPixel;
-		terp = depth_color(ray[i].distance, terp);
-		while (y < wallbuttomPixel)
-		{
-			if (ray[i].foundDoor)
-				mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, terp));				
-			else if (ray[i].foundHorz)
-				mlx_put_pixel(game->image, i, y, rgbt_color(204, 26, 198, terp));
-			else if (ray[i].foundVert)
-				mlx_put_pixel(game->image, i, y, rgbt_color(143, 16, 139, terp));
-			y++;
-		}
-		i++;
-	}
-}
+// 	terp = 0;
+// 	i = 0;
+// 	double projection_distance = (WIDTH / 2) / tan(FOV / 2);
+// 	while (i < game->rays_number)
+// 	{
+// 		double p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
+// 		int walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
+// 		if (walltopPixel < 0)
+// 			walltopPixel = 0;
+// 		int wallbuttomPixel = (HEIGHT / 2) + (p_wall_height / 2);
+// 		if (wallbuttomPixel > HEIGHT)
+// 			wallbuttomPixel = HEIGHT;
+// 		int y = walltopPixel;
+// 		terp = depth_color(ray[i].distance, terp);
+// 		while (y < wallbuttomPixel)
+// 		{
+// 			if (ray[i].foundDoor)
+// 				mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, terp));				
+// 			else if (ray[i].foundHorz)
+// 				mlx_put_pixel(game->image, i, y, rgbt_color(204, 26, 198, terp));
+// 			else if (ray[i].foundVert)
+// 				mlx_put_pixel(game->image, i, y, rgbt_color(143, 16, 139, terp));
+// 			y++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void draw_background(t_game *game)
 {
@@ -163,7 +164,7 @@ void draw_background(t_game *game)
 		x = 0;
 		while (WIDTH > x)
 		{
-			mlx_put_pixel(game->image, x, y, 0x33030);
+			mlx_put_pixel(game->image, x, y, 0x36c7f2);
 			x++;	
 		}
 		y++;

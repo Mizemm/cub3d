@@ -6,9 +6,10 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/07 23:46:10 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/07 23:58:05 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "include/cub3d.h"
 
@@ -52,8 +53,9 @@ int main(int ac, char **av)
 		return (1);
 	init_struct(game);
 	parsing(game, av[1]);
+	load_textures(game);
 	ft_raycasting(game);
-	setup_mouse(game);
+	// setup_mouse(game);
 	mlx_key_hook(game->mlx, movement_hook, game);
 	mlx_loop(game->mlx);
 	return (0);

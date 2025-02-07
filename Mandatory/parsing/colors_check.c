@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 23:20:10 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/21 23:30:08 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/03 00:39:12 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int floor_color_check_2(t_game *game)
 	}
 	if (i != 3)
 		return (1);
+	game->floor_color_int[0] = ft_atoi(ptr[0]);
+	game->floor_color_int[1] = ft_atoi(ptr[1]);
+	game->floor_color_int[2] = ft_atoi(ptr[2]);
 	ft_free(ptr);
 	return (0);
 }
@@ -99,6 +102,9 @@ int ceiling_color_check_2(t_game *game)
 	}
 	if (i != 3)
 		return (1);
+	game->ceiling_color_int[0] = ft_atoi(ptr[0]);
+	game->ceiling_color_int[1] = ft_atoi(ptr[1]);
+	game->ceiling_color_int[2] = ft_atoi(ptr[2]);
 	ft_free(ptr);
 	return (0);
 }
