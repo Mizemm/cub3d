@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/30 00:44:45 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/07 23:13:53 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void ft_raycasting(t_game *game)
 	cast_rays(game);
 }
 
+void setup_mouse(t_game *game)
+{
+	mlx_cursor_hook(game->mlx, mouse_hook, game);
+}
+
 int main(int ac, char **av)
 {
 	t_game *game;
@@ -48,8 +53,8 @@ int main(int ac, char **av)
 	init_struct(game);
 	parsing(game, av[1]);
 	ft_raycasting(game);
+	setup_mouse(game);
 	mlx_key_hook(game->mlx, movement_hook, game);
-	// mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

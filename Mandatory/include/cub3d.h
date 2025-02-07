@@ -6,14 +6,14 @@
 #include <limits.h>
 #include <math.h>
 #include <stdbool.h>
-// #include <../../MLX42/include/MLX42/MLX42.h>
+// #include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
 #include <MLX42.h>
 
 #define UNIT_SIZE 30
 #define FOV 60 * (M_PI / 180)
 #define MOVE_SPEED 5
-#define WIDTH 900
-#define HEIGHT 600
+#define WIDTH 1000
+#define HEIGHT 650
 #define MINIMAP_SCALE 0.2
 #define ZOOM 0.5
 
@@ -162,7 +162,7 @@ bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
 
 void	movement_hook(mlx_key_data_t key, void *param);
-// void 	mouse_hook(t_game *game);
+void 	mouse_hook(double xpos, double ypos, void *param);
 
 double	normalize_angle(double angle);
 void 	find_distance(t_game *game, t_ray *ray, double ray_angle);

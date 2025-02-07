@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/30 00:43:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/07 22:40:15 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void rotate_right(t_game *game)
 	game->player.angle_rotation = normalize_angle(game->player.angle_rotation);
 }
 
-void rotate_left(t_game *game)
+void rotate_left(t_game *game) 
 {
 	game->player.rotate_direction = -1;
 	game->player.angle_rotation += game->player.rotate_direction * game->player.rotate_speed;

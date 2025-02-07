@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/30 00:52:08 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/07 23:15:38 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,26 @@ int depth_color(double distance, int terp)
     return (int)brightness;
 }
 
-// void mouse_hook(void *param)
-// {
-// 	int mouse_x;
-// 	int mouse_y;
-// }
+void mouse_hook(double xpos, double ypos, void *param)
+{
+    static int prev_posx = -1;
+    t_game *game;
+
+    game = (t_game *)param;
+    mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+
+    if (prev_posx == -1)
+    {
+        prev_posx = xpos;
+    }
+    else
+    {
+        double sensitivity = 0.01;
+        double delta = (xpos - prev_posx) * sensitivity;
+        game->player.angle_rotation += delta;
+        game->player.angle_rotation = normalize_angle(game->player.angle_rotation);
+        prev_posx = xpos;
+    }
+    mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
+    rebuild_game(game);
+}
