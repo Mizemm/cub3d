@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/07 23:13:53 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/07 23:46:10 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void setup_mouse(t_game *game)
 }
 
 int main(int ac, char **av)
-{
+{	
 	t_game *game;
 
 	if (ac != 2)
