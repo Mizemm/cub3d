@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/30 00:21:34 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/08 21:14:06 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void cast_rays(t_game *game)
 	}
 	i = 0;
 	render_wall(game, game->rays);
+	render_weapon(game); 
 	// while (i < game->rays_number)
 	// {
 	// 	// draw_line(game, game->rays[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/07 22:40:15 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/09 01:00:33 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void close_door(t_game *game)
 	if (midd_ray->foundDoor && distance <= 65)
 	{
 		i = 0;
-		// printf("----> x: %d ----> y: %d\n", grid_x, grid_y);
 		while (i < doors_counter(game))
 		{
 			if (grid_x == game->doors[i].x && grid_y == game->doors[i].y && !game->doors[i].is_closed)
@@ -114,4 +113,9 @@ void movement_hook(mlx_key_data_t key, void *param)
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	rebuild_game(game);
+	if (key.key == MLX_KEY_ENTER && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		animate_weapon(game);
+	if (key.key == MLX_KEY_ENTER && key.action == MLX_RELEASE)
+		deanimate_weapon(game);
+
 }

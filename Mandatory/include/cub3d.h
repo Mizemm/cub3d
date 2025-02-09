@@ -12,8 +12,8 @@
 #define UNIT_SIZE 30
 #define FOV 60 * (M_PI / 180)
 #define MOVE_SPEED 5
-#define WIDTH 1000
-#define HEIGHT 650
+#define WIDTH 1200
+#define HEIGHT 900
 #define MINIMAP_SCALE 0.2
 #define ZOOM 0.5
 
@@ -82,6 +82,11 @@ typedef struct s_ray {
 
 typedef struct s_textures {
 	mlx_texture_t	*wall_texture[4];
+	mlx_texture_t	*door_texture[1];
+	mlx_texture_t	*weapon_texture[2];
+	mlx_image_t		*weapon_img[2];
+	mlx_texture_t	*crosshair_texture[1];
+	mlx_image_t		*crosshair_img[1];
 	double 			ray_positionX;
 	double 			ray_positionY;
 } t_textures;
@@ -149,6 +154,9 @@ size_t count_height(char **map);
 int	doors_counter(t_game *game);
 void load_textures(t_game *game);
 void render_wall(t_game *game, t_ray *ray);
+void	render_weapon(t_game *game);
+void	animate_weapon(t_game *game);
+void	deanimate_weapon(t_game *game);
 void parsing(t_game *game, char *line);
 
 // raycast function 
