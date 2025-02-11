@@ -87,10 +87,15 @@ void render_wall(t_game *game, t_ray *ray)
 		while (y < wallbuttomPixel)
 		{
             texture_index = 0;
-			if (ray[i].foundDoor)
+			if (ray[i].foundHorzDoor)
 			{
 				if (y >=0 && y < HEIGHT)
 					mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, terp));
+			}
+			else if (ray[i].foundVertDoor)
+			{
+				if (y >=0 && y < HEIGHT)
+					mlx_put_pixel(game->image, i, y, rgbt_color(255, 0, 0, terp));
 			}
 			else if (ray[i].foundHorz)
 			{

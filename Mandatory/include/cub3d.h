@@ -44,7 +44,7 @@ typedef struct s_horizontal {
 	double horzWallHitX;
 	double horzWallHitY;
 	bool foundHorzWall;
-	bool foundHorzDoor;
+	bool closeHorzDoor;
 } t_horizontal;
 
 typedef struct s_vertical {
@@ -55,7 +55,7 @@ typedef struct s_vertical {
 	double vertWallHitX;
 	double vertWallHitY;
 	bool foundVertWall;
-	bool foundVertDoor;
+	bool closeVertDoor;
 } t_vertical;
 
 typedef struct s_player {
@@ -77,7 +77,8 @@ typedef struct s_ray {
 	double distance;
 	bool foundHorz;
 	bool foundVert;
-	bool foundDoor;
+	bool foundHorzDoor;
+	bool foundVertDoor;
 	bool foundNO;
 	bool foundSO;
 	bool foundEA;
