@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/10 19:46:28 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/11 17:58:48 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void setup_mouse(t_game *game)
 {
 	mlx_cursor_hook(game->mlx, mouse_hook, game);
 }
-
 int main(int ac, char **av)
 {	
 	t_game *game;
