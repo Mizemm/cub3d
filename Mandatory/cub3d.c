@@ -6,9 +6,10 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/11 21:32:40 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/11 21:34:31 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "include/cub3d.h"
@@ -43,7 +44,6 @@ void setup_mouse(t_game *game)
 {
 	mlx_cursor_hook(game->mlx, mouse_hook, game);
 }
-
 int main(int ac, char **av)
 {	
 	t_game *game;

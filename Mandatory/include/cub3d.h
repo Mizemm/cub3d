@@ -189,6 +189,7 @@ bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
 
 void	movement_hook(mlx_key_data_t key, void *param);
+void	animation_hook(mlx_key_data_t key, void *param);
 void 	mouse_hook(double xpos, double ypos, void *param);
 
 double	normalize_angle(double angle);
