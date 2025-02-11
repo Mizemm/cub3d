@@ -78,6 +78,10 @@ typedef struct s_ray {
 	bool foundHorz;
 	bool foundVert;
 	bool foundDoor;
+	bool foundNO;
+	bool foundSO;
+	bool foundEA;
+	bool foundWE;
 } t_ray;
 
 typedef struct s_textures {
@@ -96,6 +100,8 @@ typedef struct s_game {
 	int height;
 	int minimap_width;
 	int minimap_height;
+	int x_draw;
+	int y_draw;
 	double rays_number;
 	bool is_door;
 	char **map;
@@ -106,8 +112,8 @@ typedef struct s_game {
 	char *ea_path;
 	char *floor_color;
 	char *ceiling_color;
-	int floor_color_int[3];
-	int	ceiling_color_int[3];
+	int floor_color_int[4];
+	int	ceiling_color_int[4];
 	char *trash;
 	mlx_t *mlx;
 	mlx_image_t *minimap_img;
@@ -161,7 +167,8 @@ void parsing(t_game *game, char *line);
 
 // raycast function 
 void	init_struct(t_game *game);
-void	draw_background(t_game *game);
+void	draw_ceiling(t_game *game);
+void	draw_floor(t_game *game);
 void	draw_wall(t_game *game);
 void 	draw_doors(t_game *game);
 void	draw_player(t_game *game);
@@ -195,3 +202,4 @@ int depth_color(double distance, int terp);
 void find_player(t_game *game);
 void draw_minimap(t_game *game);
 void doors_allocted(t_game *game);
+void rays_direction(t_ray *ray);

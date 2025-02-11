@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/08 21:14:06 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/11 21:32:32 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,13 +154,18 @@ void cast_rays(t_game *game)
 	double angle;
 	
 	i = 0;
-	game->rays->ray_angle = game->player.angle_rotation - (FOV / 2);
+	angle = game->player.angle_rotation - (FOV / 2);
 	game->is_door = false;
 	while (i < game->rays_number)
 	{
-		angle = normalize_angle(game->rays->ray_angle);
-		find_distance(game, &game->rays[i], angle);
-		game->rays->ray_angle += (FOV / game->rays_number);
+		game->rays[i].foundNO = false;
+		game->rays[i].foundSO = false;
+		game->rays[i].foundEA = false;
+		game->rays[i].foundWE = false;
+		game->rays[i].ray_angle = normalize_angle(angle);
+		find_distance(game, &game->rays[i], game->rays[i].ray_angle);
+		rays_direction(&game->rays[i]);
+		angle += (FOV / game->rays_number);
 		i++;
 	}
 	i = 0;

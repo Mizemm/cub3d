@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/09 01:00:33 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/10 23:03:17 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,4 @@ void movement_hook(mlx_key_data_t key, void *param)
 		animate_weapon(game);
 	if (key.key == MLX_KEY_ENTER && key.action == MLX_RELEASE)
 		deanimate_weapon(game);
-
 }

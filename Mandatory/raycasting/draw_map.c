@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/07 23:49:53 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/10 23:29:42 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,27 +149,37 @@ void draw_grid(t_game *game)
 // 	}
 // }
 
-void draw_background(t_game *game)
+void draw_floor(t_game *game)
 {
-	size_t x;
-	size_t y;
+	while (HEIGHT > game->y_draw)
+	{
+		game->x_draw = 0;
+		while (WIDTH > game->x_draw)
+		{
+			mlx_put_pixel(game->image, game->x_draw, game->y_draw, rgbt_color(0, 153, 76, 255));
+			game->x_draw++;	
+		}
+		game->y_draw++;
+	}
+}
 
-	x = 0;
-	y = 0;
+void draw_ceiling(t_game *game)
+{
+	game->x_draw = 0;
+	game->y_draw = 0;
 	game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
 		return ;
-	while (HEIGHT > y)
+	while (HEIGHT / 2 > game->y_draw)
 	{
-		x = 0;
-		while (WIDTH > x)
+		game->x_draw = 0;
+		while (WIDTH > game->x_draw)
 		{
-			mlx_put_pixel(game->image, x, y, 0x36c7f2);
-			x++;	
+			mlx_put_pixel(game->image, game->x_draw, game->y_draw, rgbt_color(100, 183, 230, 255));
+			game->x_draw++;	
 		}
-		y++;
+		game->y_draw++;
 	}
-	// draw_grid(game);
 }
 
 void draw_doors(t_game *game)

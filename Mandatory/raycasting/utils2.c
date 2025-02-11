@@ -6,14 +6,14 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/07 23:49:29 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/11 21:27:48 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/cub3d.h"
 
-unsigned rgbt_color(int r, int g, int b, int t)
+unsigned int rgbt_color(int r, int g, int b, int t)
 {
 	return ((r << 24) | (g << 16) | (b << 8) | t);
 }
@@ -51,4 +51,17 @@ void mouse_hook(double xpos, double ypos, void *param)
     }
     mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
     rebuild_game(game);
+}
+
+void rays_direction(t_ray *ray)
+{
+	double angle = ray->ray_angle;
+	if (is_facing_up(angle))
+		ray->foundNO = true;
+	if (is_facing_down(angle))
+		ray->foundSO = true;
+	if (is_facing_right(angle))
+		ray->foundEA = true;
+	if (is_facing_left(angle))
+		ray->foundWE = true;
 }

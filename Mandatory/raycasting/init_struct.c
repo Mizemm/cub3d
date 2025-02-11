@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/03 00:09:39 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/10 23:08:11 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void init_struct(t_game *game)
 
 	game->width = 0;
 	game->height = 0;
+	game->x_draw = 0;
+	game->y_draw = 0;
 	game->minimap_width = 0;
 	game->minimap_height = 0;
 	game->elements = NULL;
