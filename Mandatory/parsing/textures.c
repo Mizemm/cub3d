@@ -13,31 +13,21 @@
 #include "../include/cub3d.h"
 
 uint32_t color(uint8_t *arr)
-{ 
-	// return ((arr[0] << 24) | (arr[1] << 16) | (arr[2] << 8) | 0xFF);
-	static int i =0;
+{
 	uint32_t color = (arr[0] << 24) | (arr[1] << 16) | (arr[2] << 8) | 0xFF;
-
-
-	if (i == 0)
-	{
-		printf("av[0: %d, av1: %d , av2 : %d \n", arr[0], arr[1], arr[2]);
-		printf("COLOR : %X\n", color);
-		i++;
-	}
 	return (color);
 }
 
 void load_textures(t_game *game)
 {
-    game->textures->wall_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->wall_texture[1] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->wall_texture[2] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->wall_texture[3] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->door_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/door.png");
-    game->textures->weapon_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/w1.png");
-    game->textures->weapon_texture[1] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/w2.png");
-    game->textures->crosshair_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/crosshair.png");
+    game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/door.png");
+    game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w1.png");
+    game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w2.png");
+    game->textures->crosshair_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/crosshair.png");
 	game->textures->weapon_img[0] = mlx_texture_to_image(game->mlx, game->textures->weapon_texture[0]);
 	game->textures->weapon_img[1] = mlx_texture_to_image(game->mlx, game->textures->weapon_texture[1]);
 	game->textures->crosshair_img[0] = mlx_texture_to_image(game->mlx, game->textures->crosshair_texture[0]);
@@ -71,13 +61,17 @@ void render_wall(t_game *game, t_ray *ray)
 	{
 		if (ray[i].foundHorz)
         {
-            localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
-            posX = (int)localX;
+            
         }
 		if (ray[i].foundVert)
         {
-            localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[0]->height;
-            posX = (int)localY;
+            
+        }
+		if (ray[i].foundHorzDoor)
+        {
+        }
+		if (ray[i].foundVertDoor)
+        {
         }
 		p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
 		walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
@@ -89,31 +83,47 @@ void render_wall(t_game *game, t_ray *ray)
             texture_index = 0;
 			if (ray[i].foundHorzDoor)
 			{
-				if (y >=0 && y < HEIGHT)
-					mlx_put_pixel(game->image, i, y, rgbt_color(107, 229, 184, terp));
+				if (y >= 0 && y < HEIGHT)
+				{
+        	    	localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->door_texture[0]->width;
+        		    posX = (int)localX;
+					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->door_texture[0]->height);
+					texture_index = (posY * game->textures->door_texture[0]->width + posX) * 4;
+					mlx_put_pixel(game->image, i, y, color(&game->textures->door_texture[0]->pixels[texture_index]));
+
+				}
 			}
 			else if (ray[i].foundVertDoor)
 			{
-				if (y >=0 && y < HEIGHT)
-					mlx_put_pixel(game->image, i, y, rgbt_color(255, 0, 0, terp));
+				if (y >= 0 && y < HEIGHT)
+				{
+            		localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->door_texture[0]->width;
+        	    	posX = (int)localY;
+					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->door_texture[0]->width);
+					texture_index = (posY * game->textures->door_texture[0]->height + posX) * 4;
+					mlx_put_pixel(game->image, i, y, color(&game->textures->door_texture[0]->pixels[texture_index]));
+				}
 			}
 			else if (ray[i].foundHorz)
 			{
 				if (y >= 0 && y < HEIGHT)
 				{
+					localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
+           			posX = (int)localX;
 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
 					texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
-						mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
-
+					mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
 				}
 			}
 			else if (ray[i].foundVert)
 			{
 				if (y >= 0 && y < HEIGHT)
 				{
-					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
+					localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
+            		posX = (int)localY;
+					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->width);
 					texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
-						mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
+					mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
 					
 				}
 			}
