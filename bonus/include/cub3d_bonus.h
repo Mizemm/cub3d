@@ -143,7 +143,7 @@ void 	find_distance(t_game *game, t_ray *ray, double ray_angle);
 void 	cast_rays(t_game *game);
 double 	calculate_distance(double x1, double y1, double x2, double y2);
 
-void 	render_wall(t_game *game, t_ray *ray);
+void 	render_textures(t_game *game, t_ray *ray);
 unsigned int		rgbt_color(int t, int r, int g, int b);
-int depth_color(double distance, int terp);
+// int depth_color(double distance, int terp);
 void find_player(t_game *game);

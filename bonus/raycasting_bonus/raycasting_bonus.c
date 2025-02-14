@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/20 22:04:06 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/14 19:02:11 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void cast_rays(t_game *game)
 		i++;
 	}
 	i = 0;
-	render_wall(game, game->rays);
+	render_textures(game, game->rays);
 	// while (i < game->rays_number)
 	// {
 	// 	// draw_line(game, game->rays[i]);

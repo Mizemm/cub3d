@@ -168,6 +168,8 @@ void 	render_NO(t_game *game, t_ray *ray, int i, int y);
 void 	render_EA(t_game *game, t_ray *ray, int i, int y);
 void 	render_SO(t_game *game, t_ray *ray, int i, int y);
 void 	render_WE(t_game *game, t_ray *ray, int i, int y);
+void 	render_HorzDoor(t_game *game, t_ray *ray, int i, int y);
+void 	render_VertDoor(t_game *game, t_ray *ray, int i, int y);
 void	render_weapon(t_game *game);
 void	animate_weapon(t_game *game);
 void	deanimate_weapon(t_game *game);

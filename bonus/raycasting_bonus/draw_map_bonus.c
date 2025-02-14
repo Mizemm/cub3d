@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/20 22:03:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/14 19:08:06 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void draw_grid(t_game *game)
 		}
 	}
 }
-void render_wall(t_game *game, t_ray *ray)
+void render_textures(t_game *game, t_ray *ray)
 {
 	int i;
 	int terp;
@@ -133,7 +133,6 @@ void render_wall(t_game *game, t_ray *ray)
 		if (wallbuttomPixel > HEIGHT)
 			wallbuttomPixel = HEIGHT;
 		int y = walltopPixel;
-		terp = depth_color(ray[i].distance, terp);
 		while (y < wallbuttomPixel)
 		{
 			if (ray[i].foundHorz)

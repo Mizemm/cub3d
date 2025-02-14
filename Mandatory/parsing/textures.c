@@ -45,12 +45,7 @@ void render_textures(t_game *game, t_ray *ray)
 {
 	int i;
 	int y;
-	double localX;
-	double localY;
-	int posX;
-	int posY;
-	int texture_index;
-
+	
 	i = 0;
 	game->textures->projection_distance = (WIDTH / 2) / tan(FOV / 2);
 	while (i < game->rays_number)
@@ -61,133 +56,19 @@ void render_textures(t_game *game, t_ray *ray)
 		y = game->textures->walltopPixel;
 		while (y < game->textures->wallbuttomPixel)
 		{
-            texture_index = 0;
-			if (ray[i].foundNO && (y >= 0 && y < HEIGHT))
-				render_NO(game, ray, i, y);
-			else if (ray[i].foundEA && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundHorz && (y >= 0 && y < HEIGHT))
 				render_EA(game, ray, i, y);
-			else if (ray[i].foundWE && (y >= 0 && y < HEIGHT))
-				render_WE(game, ray, i, y);
-			else if (ray[0].foundSO && (y >= 0 && y < HEIGHT))
-				render_SO(game, ray, i, y);
-			else if (ray[i].foundHorzDoor)
-			{
-				if (y >= 0 && y < HEIGHT)
-				{
-        	    	localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->door_texture[0]->width;
-        		    posX = (int)localX;
-					posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->door_texture[0]->height);
-					texture_index = (posY * game->textures->door_texture[0]->width + posX) * 4;
-					mlx_put_pixel(game->image, i, y, color(&game->textures->door_texture[0]->pixels[texture_index]));
-
-				}
-			}
-			else if (ray[i].foundVertDoor)
-			{
-				if (y >= 0 && y < HEIGHT)
-				{
-            		localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->door_texture[0]->width;
-        	    	posX = (int)localY;
-					posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->door_texture[0]->width);
-					texture_index = (posY * game->textures->door_texture[0]->height + posX) * 4;
-					mlx_put_pixel(game->image, i, y, color(&game->textures->door_texture[0]->pixels[texture_index]));
-				}
-			}
+			if (ray[i].foundVert && (y >= 0 && y < HEIGHT))
+				render_NO(game, ray, i, y);
+			if (ray[i].foundHorzDoor && (y >= 0 && y < HEIGHT))
+				render_HorzDoor(game, ray, i, y);
+			if (ray[i].foundVertDoor && (y >= 0 && y < HEIGHT))
+				render_VertDoor(game, ray, i, y);
 			y++;
 		}
 		i++;
 	}
 }
-
-
-// void render_textures(t_game *game, t_ray *ray)
-// {
-// 	int i;
-// 	double p_wall_height;
-// 	int walltopPixel;
-// 	int wallbuttomPixel;
-// 	int y;
-// 	double localX;
-// 	double localY;
-// 	int posX;
-// 	int posY;
-// 	int texture_index;
-// 	double projection_distance;
-
-// 	i = 0;
-// 	projection_distance = (WIDTH / 2) / tan(FOV / 2);
-// 	while (i < game->rays_number)
-// 	{
-// 		p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
-// 		walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
-// 		wallbuttomPixel = (HEIGHT / 2) + (p_wall_height / 2);
-// 		y = walltopPixel;
-// 		while (y < wallbuttomPixel)
-// 		{
-//             texture_index = 0;
-// 				if (ray[i].foundEA && (y >= 0 && y < HEIGHT))
-// 				{
-// 					localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[1]->width;
-//            			posX = (int)localX;
-// 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[1]->height);
-// 					texture_index = (posY * game->textures->wall_texture[1]->width + posX) * 4;
-// 					mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[1]->pixels[texture_index]));
-// 				}
-// 				else if (ray[i].foundWE && (y >= 0 && y < HEIGHT))
-// 				{
-// 					localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[3]->width;
-//            			posX = (int)localX;
-// 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[3]->height);
-// 					texture_index = (posY * game->textures->wall_texture[3]->width + posX) * 4;
-// 					mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[3]->pixels[texture_index]));
-// 				}
-// 				else if (ray[i].foundNO && (y >= 0 && y < HEIGHT))
-// 				{
-// 					localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
-//             		posX = (int)localY;
-// 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[0]->height);
-// 					texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
-// 					mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
-					
-// 				}
-// 				else if (ray[0].foundSO && (y >= 0 && y < HEIGHT))
-// 				{
-// 					localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[2]->width;
-//             		posX = (int)localY;
-// 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->wall_texture[2]->height);
-// 					texture_index = (posY * game->textures->wall_texture[2]->width + posX) * 4;
-// 					mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[2]->pixels[texture_index]));
-					
-// 				}
-// 			if (ray[i].foundHorzDoor)
-// 			{
-// 				if (y >= 0 && y < HEIGHT)
-// 				{
-//         	    	localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->door_texture[0]->width;
-//         		    posX = (int)localX;
-// 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->door_texture[0]->height);
-// 					texture_index = (posY * game->textures->door_texture[0]->width + posX) * 4;
-// 					mlx_put_pixel(game->image, i, y, color(&game->textures->door_texture[0]->pixels[texture_index]));
-
-// 				}
-// 			}
-// 			if (ray[i].foundVertDoor)
-// 			{
-// 				if (y >= 0 && y < HEIGHT)
-// 				{
-//             		localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->door_texture[0]->width;
-//         	    	posX = (int)localY;
-// 					posY = (int)(((y - walltopPixel) / p_wall_height) * game->textures->door_texture[0]->width);
-// 					texture_index = (posY * game->textures->door_texture[0]->height + posX) * 4;
-// 					mlx_put_pixel(game->image, i, y, color(&game->textures->door_texture[0]->pixels[texture_index]));
-// 				}
-// 			}
-// 			y++;
-// 		}
-// 		i++;
-// 	}
-
-// }
 
 void	render_weapon(t_game *game)
 {
