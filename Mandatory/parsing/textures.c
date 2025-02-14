@@ -20,14 +20,14 @@ uint32_t color(uint8_t *arr)
 
 void load_textures(t_game *game)
 {
-    game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/wall.png");
-    game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/door.png");
-    game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w1.png");
-    game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w2.png");
-    game->textures->crosshair_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/crosshair.png");
+    game->textures->wall_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->wall_texture[1] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->wall_texture[2] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->wall_texture[3] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/wall.png");
+    game->textures->door_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/door.png");
+    game->textures->weapon_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/w1.png");
+    game->textures->weapon_texture[1] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/w2.png");
+    game->textures->crosshair_texture[0] = mlx_load_png("/Users/asalmi/cursus/cub3d/Mandatory/images/crosshair.png");
 	game->textures->weapon_img[0] = mlx_texture_to_image(game->mlx, game->textures->weapon_texture[0]);
 	game->textures->weapon_img[1] = mlx_texture_to_image(game->mlx, game->textures->weapon_texture[1]);
 	game->textures->crosshair_img[0] = mlx_texture_to_image(game->mlx, game->textures->crosshair_texture[0]);
