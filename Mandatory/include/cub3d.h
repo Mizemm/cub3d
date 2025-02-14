@@ -92,8 +92,10 @@ typedef struct s_textures {
 	mlx_image_t		*weapon_img[2];
 	mlx_texture_t	*crosshair_texture[1];
 	mlx_image_t		*crosshair_img[1];
-	double 			ray_positionX;
-	double 			ray_positionY;
+	double p_wall_height;
+	double projection_distance;
+	int walltopPixel;
+	int wallbuttomPixel;
 } t_textures;
 
 typedef struct s_game {
@@ -160,11 +162,17 @@ size_t count_width(char **map);
 size_t count_height(char **map);
 int	doors_counter(t_game *game);
 void load_textures(t_game *game);
-void render_wall(t_game *game, t_ray *ray);
+void parsing(t_game *game, char *line);
+void 	render_textures(t_game *game, t_ray *ray);
+void 	render_NO(t_game *game, t_ray *ray, int i, int y);
+void 	render_EA(t_game *game, t_ray *ray, int i, int y);
+void 	render_SO(t_game *game, t_ray *ray, int i, int y);
+void 	render_WE(t_game *game, t_ray *ray, int i, int y);
+void 	render_HorzDoor(t_game *game, t_ray *ray, int i, int y);
+void 	render_VertDoor(t_game *game, t_ray *ray, int i, int y);
 void	render_weapon(t_game *game);
 void	animate_weapon(t_game *game);
 void	deanimate_weapon(t_game *game);
-void parsing(t_game *game, char *line);
 
 // raycast function 
 void	init_struct(t_game *game);
@@ -198,9 +206,9 @@ void 	find_distance(t_game *game, t_ray *ray, double ray_angle);
 void 	cast_rays(t_game *game);
 double 	calculate_distance(double x1, double y1, double x2, double y2);
 
-void 	render_wall(t_game *game, t_ray *ray);
+void 	render_textures(t_game *game, t_ray *ray);
 unsigned int		rgbt_color(int t, int r, int g, int b);
-int depth_color(double distance, int terp);
+// int depth_color(double distance, int terp);
 void find_player(t_game *game);
 void draw_minimap(t_game *game);
 void doors_allocted(t_game *game);
