@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/11 21:27:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/14 19:08:57 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ unsigned int rgbt_color(int r, int g, int b, int t)
 	return ((r << 24) | (g << 16) | (b << 8) | t);
 }
 
-int depth_color(double distance, int terp)
-{
-	(void)terp;
-    double brightness = 200 - (distance * 0.7);
-    if (brightness > 150)
-        brightness = 150;
-	if (brightness < 50)
-		brightness = 50;
-    return (int)brightness;
-}
+// int depth_color(double distance, int terp)
+// {
+// 	(void)terp;
+//     double brightness = 200 - (distance * 0.7);
+//     if (brightness > 150)
+//         brightness = 150;
+// 	if (brightness < 50)
+// 		brightness = 50;
+//     return (int)brightness;
+// }
 
 void mouse_hook(double xpos, double ypos, void *param)
 {
