@@ -72,6 +72,7 @@ void render_wall(t_game *game, t_ray *ray)
         }
 		if (ray[i].foundVertDoor)
         {
+			
         }
 		p_wall_height = (UNIT_SIZE / ray[i].distance) * projection_distance;
 		walltopPixel = (HEIGHT / 2) - (p_wall_height / 2);
