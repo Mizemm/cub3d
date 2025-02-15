@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/14 19:08:57 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/15 00:49:10 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void mouse_hook(double xpos, double ypos, void *param)
 void rays_direction(t_ray *ray)
 {
 	double angle = ray->ray_angle;
-	if (is_facing_up(angle))
+	if (is_facing_up(angle) && ray->foundHorz)
 		ray->foundNO = true;
-	if (is_facing_down(angle))
+	if (is_facing_down(angle) && ray->foundHorz)
 		ray->foundSO = true;
-	if (is_facing_right(angle))
+	if (is_facing_right(angle) && ray->foundVert)
 		ray->foundEA = true;
-	if (is_facing_left(angle))
+	if (is_facing_left(angle) && ray->foundVert)
 		ray->foundWE = true;
 }
