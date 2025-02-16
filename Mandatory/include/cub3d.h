@@ -6,8 +6,8 @@
 #include <limits.h>
 #include <math.h>
 #include <stdbool.h>
-// #include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
-#include <MLX42.h>
+#include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
+// #include <MLX42.h>
 
 #define UNIT_SIZE 30
 #define FOV 60 * (M_PI / 180)
@@ -183,7 +183,7 @@ void 	draw_doors(t_game *game);
 void	draw_player(t_game *game);
 void 	draw_line(t_game *game, t_ray ray);
 void 	dda_test(t_game *game, t_ray ray);
-void	rebuild_game(t_game *game);
+void	rebuild_game(void *param);
 
 void 	right_move(t_game *game);
 void	left_move(t_game *game);
@@ -197,7 +197,8 @@ bool	is_facing_left(double angle);
 bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
 
-void	movement_hook(mlx_key_data_t key, void *param);
+// void	movement_hook(mlx_key_data_t key, void *param);
+void	movement_hook(void *param);
 void	animation_hook(mlx_key_data_t key, void *param);
 void 	mouse_hook(double xpos, double ypos, void *param);
 

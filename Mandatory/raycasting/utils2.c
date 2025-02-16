@@ -6,9 +6,10 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:50:09 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/15 00:44:55 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/15 20:52:28 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "../include/cub3d.h"
@@ -60,8 +61,8 @@ void rays_direction(t_ray *ray)
 		ray->foundNO = true;
 	if (is_facing_down(angle) && ray->foundHorz)
 		ray->foundSO = true;
-	if (is_facing_right(angle) && ray->foundHorz)
+	if (is_facing_right(angle) && ray->foundVert)
 		ray->foundEA = true;
-	if (is_facing_left(angle) && ray->foundHorz)
+	if (is_facing_left(angle) && ray->foundVert)
 		ray->foundWE = true;
 }
