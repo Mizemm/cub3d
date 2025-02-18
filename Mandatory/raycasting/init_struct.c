@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/18 22:46:19 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/19 00:38:15 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,28 @@ void init_struct(t_game *game)
 		free(game);
 		return ;
 	}
-	// game->rays->foundDoor = false;
 	game->rays->foundHorz = false;
 	game->rays->foundVert = false;
-	// game->door = malloc(sizeof(t_doors) * )
+	game->rays->foundHorzDoor = false;
+	game->rays->foundVertDoor = false;
+	game->rays->openHorzDoor = false;
+	game->rays->openVertDoor = false;
+	game->horizontal.x_open = 0;
+	game->horizontal.y_open = 0;
+	game->vertical.x_open = 0;
+	game->vertical.y_open = 0;
 	game->player.position_x = 0;
 	game->player.position_y = 0;
 	game->minimap_width = 7 * UNIT_SIZE;
 	game->minimap_height = 5 * UNIT_SIZE;
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
+	if (!mlx)
+		return ;
 	game->mlx = mlx;
 	game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
 		return ;
-	
 	game->minimap_img = mlx_new_image(game->mlx, game->minimap_width, game->minimap_height);
 	if ((!game->minimap_img) || (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10)) < 0)
-		return ;
-	if (!mlx)
 		return ;
 }
