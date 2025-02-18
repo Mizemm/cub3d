@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/14 19:09:09 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/18 22:45:28 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,9 @@ void draw_ceiling(t_game *game)
 {
 	game->x_draw = 0;
 	game->y_draw = 0;
-	game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
-		return ;
+	// game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	// if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
+	// 	return ;
 	while (HEIGHT / 2 > game->y_draw)
 	{
 		game->x_draw = 0;
@@ -148,6 +148,29 @@ void draw_ceiling(t_game *game)
 		}
 		game->y_draw++;
 	}
+}
+
+void draw_background(t_game *game)
+{
+	size_t x;
+	size_t y;
+
+	x = 0;
+	y = 0;
+	// game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	// if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
+	// 	return ;
+	while (HEIGHT > y)
+	{
+		x = 0;
+		while (WIDTH > x)
+		{
+			mlx_put_pixel(game->image, x, y, 0x33030);
+			x++;
+		}
+		y++;
+	}
+	// draw_grid(game);
 }
 
 void draw_doors(t_game *game)

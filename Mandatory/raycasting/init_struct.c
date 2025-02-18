@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/10 23:08:11 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/18 22:46:19 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,17 @@ void init_struct(t_game *game)
 	// game->door = malloc(sizeof(t_doors) * )
 	game->player.position_x = 0;
 	game->player.position_y = 0;
+	game->minimap_width = 7 * UNIT_SIZE;
+	game->minimap_height = 5 * UNIT_SIZE;
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	game->mlx = mlx;
+	game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
+		return ;
+	
+	game->minimap_img = mlx_new_image(game->mlx, game->minimap_width, game->minimap_height);
+	if ((!game->minimap_img) || (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10)) < 0)
+		return ;
 	if (!mlx)
 		return ;
 }

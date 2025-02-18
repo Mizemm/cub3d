@@ -183,7 +183,7 @@ void 	draw_doors(t_game *game);
 void	draw_player(t_game *game);
 void 	draw_line(t_game *game, t_ray ray);
 void 	dda_test(t_game *game, t_ray ray);
-void	rebuild_game(void *param);
+void rebuild_game(t_game *game);
 
 void 	right_move(t_game *game);
 void	left_move(t_game *game);
@@ -197,7 +197,7 @@ bool	is_facing_left(double angle);
 bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
 
-// void	movement_hook(mlx_key_data_t key, void *param);
+void	movement_hook1(mlx_key_data_t key, void *param);
 void	movement_hook(void *param);
 void	animation_hook(mlx_key_data_t key, void *param);
 void 	mouse_hook(double xpos, double ypos, void *param);
@@ -214,3 +214,4 @@ void find_player(t_game *game);
 void draw_minimap(t_game *game);
 void doors_allocted(t_game *game);
 void rays_direction(t_ray *ray);
+void draw_background(t_game *game);

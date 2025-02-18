@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_walls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2325/02/04 23:36:40 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/15 16:45:17 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/16 23:49:44 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void render_NO(t_game *game, t_ray *ray, int i, int y)
 	int posX;
 	int posY;
 
-    localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
+    localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[3]->width;
     posX = (int)localY;
-	posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->wall_texture[0]->height);
-	texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
-	mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
+	posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->wall_texture[3]->height);
+	texture_index = (posY * game->textures->wall_texture[3]->width + posX) * 4;
+	mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[3]->pixels[texture_index]));
 }
 void render_SO(t_game *game, t_ray *ray, int i, int y)
 {

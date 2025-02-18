@@ -58,11 +58,11 @@ void render_textures(t_game *game, t_ray *ray)
 		{
 			if (ray[i].foundHorz && (y >= 0 && y < HEIGHT))
 				render_EA(game, ray, i, y);
-			else if (ray[i].foundVert && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundVert && (y >= 0 && y < HEIGHT))
 				render_NO(game, ray, i, y);
-			else if (ray[i].foundHorzDoor && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundHorzDoor && (y >= 0 && y < HEIGHT))
 				render_HorzDoor(game, ray, i, y);
-			else if (ray[i].foundVertDoor && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundVertDoor && (y >= 0 && y < HEIGHT))
 				render_VertDoor(game, ray, i, y);
 			y++;
 		}
@@ -86,7 +86,6 @@ void	animate_weapon(t_game *game)
 {
 	game->textures->weapon_img[0]->enabled = false;
 	game->textures->weapon_img[1]->enabled = true;
-
 }
 
 void	deanimate_weapon(t_game *game)

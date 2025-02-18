@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:58:06 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/16 01:20:49 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/18 22:43:50 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void darw_object(t_game *game)
 		x = 0;
 		while (x < game->minimap_width)
 		{
-			status = check_for_draw(game, x, y);
+			status = check_for_draw(game, x, y); 
 			if (status == 0)
 				mlx_put_pixel(game->minimap_img, x, y, rgbt_color(255, 255, 255, 255));
 			if (status == 1)
@@ -137,16 +137,16 @@ void darw_object(t_game *game)
 
 void draw_minimap(t_game *game)
 {
-	game->minimap_width = 7 * UNIT_SIZE;
-	game->minimap_height = 5 * UNIT_SIZE;
+	// game->minimap_width = 7 * UNIT_SIZE;
+	// game->minimap_height = 5 * UNIT_SIZE;
 	int i;
 	int j;
 	
 	i = 0;
 	j = 0;
-	game->minimap_img = mlx_new_image(game->mlx, game->minimap_width, game->minimap_height);
-	if ((!game->minimap_img) || (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10)) < 0)
-		return ;
+	// game->minimap_img = mlx_new_image(game->mlx, game->minimap_width, game->minimap_height);
+	// if ((!game->minimap_img) || (mlx_image_to_window(game->mlx, game->minimap_img, 10, 10)) < 0)
+	// 	return ;
 	darw_object(game);
 	minimap_player(game);
 }

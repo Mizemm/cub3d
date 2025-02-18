@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/16 01:35:11 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/18 22:54:02 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,37 +88,38 @@ void close_door(t_game *game)
 	}
 }
 
-// void movement_hook(mlx_key_data_t key, void *param)
-// {
-// 	t_game *game;
+void movement_hook1(mlx_key_data_t key, void *param)
+{
+	t_game *game;
 	
-// 	game = param;
-// 	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
-// 		mlx_close_window(game->mlx);
-// 	else if (key.key == MLX_KEY_RIGHT && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		rotate_right(game);
-// 	else if (key.key == MLX_KEY_LEFT && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		rotate_left(game);
-// 	else if (key.key == MLX_KEY_D && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		right_move(game);
-// 	else if (key.key == MLX_KEY_A && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		left_move(game);
-// 	else if (key.key == MLX_KEY_S && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		backward_move(game);
-// 	else if (key.key == MLX_KEY_W && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		forward_move(game);
-// 	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
-// 		open_door(game);
-// 	else if (key.key == MLX_KEY_C && key.action == MLX_PRESS)
-// 		close_door(game);
-// 	game->player.rotate_direction = 0;
-// 	game->player.move_direction = 0;
-// 	rebuild_game(game);
-// 	if (key.key == MLX_KEY_ENTER && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
-// 		animate_weapon(game);
-// 	if (key.key == MLX_KEY_ENTER && key.action == MLX_RELEASE)
-// 		deanimate_weapon(game);
-// }
+	game = param;
+	if (key.key == MLX_KEY_ESCAPE && key.action == MLX_PRESS)
+		mlx_close_window(game->mlx);
+	else if (key.key == MLX_KEY_RIGHT && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		rotate_right(game);
+	else if (key.key == MLX_KEY_LEFT && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		rotate_left(game);
+	else if (key.key == MLX_KEY_D && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		right_move(game);
+	else if (key.key == MLX_KEY_A && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		left_move(game);
+	else if (key.key == MLX_KEY_S && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		backward_move(game);
+	else if (key.key == MLX_KEY_W && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		forward_move(game);
+	else if (key.key == MLX_KEY_F && key.action == MLX_PRESS)
+		open_door(game);
+	else if (key.key == MLX_KEY_C && key.action == MLX_PRESS)
+		close_door(game);
+	game->player.rotate_direction = 0;
+	game->player.move_direction = 0;
+	rebuild_game(game);
+	if (key.key == MLX_KEY_ENTER && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		animate_weapon(game);
+	if (key.key == MLX_KEY_ENTER && key.action == MLX_RELEASE)
+		deanimate_weapon(game);
+	rebuild_game(game);
+}
 
 void movement_hook(void *param)
 {
@@ -145,8 +146,9 @@ void movement_hook(void *param)
 		close_door(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
+	rebuild_game(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ENTER))
 		animate_weapon(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ENTER))
+	if (!mlx_is_key_down(game->mlx, MLX_KEY_ENTER))
 		deanimate_weapon(game);
 }

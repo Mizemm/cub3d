@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/16 00:11:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/18 22:47:56 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ void cast_rays(t_game *game)
 		i++;
 	}
 	render_textures(game, game->rays);
-	render_weapon(game);
 	// i = 0;
 	// while (i < game->rays_number)
 	// {
