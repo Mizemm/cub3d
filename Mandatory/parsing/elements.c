@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/27 20:40:21 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/16 20:27:53 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	struct_elements(t_game *game)
 		return 1;
 	while (game->elements[i])
 	{
-		str = ft_split(game->elements[i], " 	");
+		str = ft_split(game->elements[i], " \t");
 		if (ft_strcmp(str[0], "NO") == 0)
 		{
 			game->no_path = ft_strdup(str[1]);

@@ -118,6 +118,7 @@ typedef struct s_game {
 	int floor_color_int[4];
 	int	ceiling_color_int[4];
 	char *trash;
+	char player_direction;
 	mlx_t *mlx;
 	mlx_image_t *minimap_img;
 	mlx_image_t *image;
