@@ -118,6 +118,7 @@ typedef struct s_game {
 	int floor_color_int[4];
 	int	ceiling_color_int[4];
 	char *trash;
+	char player_direction;
 	mlx_t *mlx;
 	mlx_image_t *minimap_img;
 	mlx_image_t *image;
@@ -197,8 +198,8 @@ bool	is_facing_left(double angle);
 bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
 
-// void	movement_hook(mlx_key_data_t key, void *param);
-void	movement_hook(void *param);
+void	movement_hook(mlx_key_data_t key, void *param);
+// void	movement_hook(void *param);
 void	animation_hook(mlx_key_data_t key, void *param);
 void 	mouse_hook(double xpos, double ypos, void *param);
 

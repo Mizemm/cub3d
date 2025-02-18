@@ -21,9 +21,9 @@ uint32_t color(uint8_t *arr)
 void load_textures(t_game *game)
 {
     game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
-    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/EA.png");
-    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/SO.png");
-    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/WE.png");
+    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
+    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
+    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
     game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/door.png");
     game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w1.png");
     game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w2.png");
@@ -56,13 +56,17 @@ void render_textures(t_game *game, t_ray *ray)
 		y = game->textures->walltopPixel;
 		while (y < game->textures->wallbuttomPixel)
 		{
-			if (ray[i].foundHorz && (y >= 0 && y < HEIGHT))
-				render_EA(game, ray, i, y);
-			else if (ray[i].foundVert && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundNO && (y >= 0 && y < HEIGHT))
 				render_NO(game, ray, i, y);
-			else if (ray[i].foundHorzDoor && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundSO && (y >= 0 && y < HEIGHT))
+				render_SO(game, ray, i, y);
+			if (ray[i].foundEA && (y >= 0 && y < HEIGHT))
+				render_EA(game, ray, i, y);
+			if (ray[i].foundWE && (y >= 0 && y < HEIGHT))
+				render_WE(game, ray, i, y);
+			if (ray[i].foundHorzDoor && (y >= 0 && y < HEIGHT))
 				render_HorzDoor(game, ray, i, y);
-			else if (ray[i].foundVertDoor && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundVertDoor && (y >= 0 && y < HEIGHT))
 				render_VertDoor(game, ray, i, y);
 			y++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/15 20:38:18 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/18 22:29:52 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void rebuild_game(t_game *game)
 {
-	// printf("############\n");
 	mlx_delete_image(game->mlx, game->minimap_img);
 	mlx_delete_image(game->mlx, game->image);
 	draw_ceiling(game);
@@ -59,8 +58,8 @@ int main(int ac, char **av)
 	load_textures(game);
 	ft_raycasting(game);
 	// setup_mouse(game);
-	mlx_loop_hook(game->mlx, &movement_hook, game);
-	// mlx_key_hook(game->mlx, movement_hook, game);
+	mlx_key_hook(game->mlx, movement_hook, game);
+	// mlx_loop_hook(game->mlx, &movement_hook, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

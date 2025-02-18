@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:19:22 by asalmi            #+#    #+#             */
-/*   Updated: 2023/11/30 17:14:55 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/18 19:24:34 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,3 @@ char    *get_next_line(int fd)
     edit_list(&list);
     return (next_line);
 }
-// int main()
-// {
-//     char *line;
-//     int num_line;
-    
-//     num_line = 1;
-//     int fd = open("test.txt", O_RDONLY);
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-// }

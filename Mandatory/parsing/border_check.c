@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:35:24 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/11 18:22:36 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/18 22:27:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int map_checker(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] != '1' && game->map[y][x] != '0' && game->map[y][x] != 'N' && game->map[y][x] != 'S' 
-				&& game->map[y][x] != 'W' && game->map[y][x] != 'E' && game->map[y][x] != 'O' && game->map[y][x] != 'C' && game->map[y][x] != ' ' && game->map[y][x] != '\n')
+				&& game->map[y][x] != 'W' && game->map[y][x] != 'E' && game->map[y][x] != 'O' && game->map[y][x]
+				 != 'C' && game->map[y][x] != ' ' && game->map[y][x] != '\n' && game->map[y][x] != '\t')
 				return (1);
 			x++;
 	    }
@@ -84,13 +85,25 @@ int map_checker_2(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == 'N')
+			{
+				game->player_direction = 'N';
 				flag++;
+			}
 			if (game->map[y][x] == 'S')
+			{
+				game->player_direction = 'S';
 				flag++;
+			}
 			if (game->map[y][x] == 'W')
+			{
+				game->player_direction = 'W';
 				flag++;
+			}
 			if (game->map[y][x] == 'E')
+			{
+				game->player_direction = 'E';
 				flag++;
+			}
 			x++;
 	    }
 		y++;
@@ -125,17 +138,42 @@ int map_checker_3(t_game *game)
 	}
 	return (0);
 }
+int empty_line(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
+			return (1);
+			i++;
+	}
+	return (0);
+}
+int map_checker_4(t_game *game)
+{
+	int x;
+	int y;
+
+
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		if (empty_line(game->map[y]) == 0 && (game->map[y + 1] && empty_line(game->map[y + 1]) == 1))
+			return (1);
+		y++;
+	}
+	return (0);
+}
 int	borders(t_game *game)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	if (map_checker(game) == 1)
-		return (1);
-	if (map_checker_2(game) == 1)
-		return (1);
-	if (map_checker_3(game) == 1)
+	if (map_checker(game) == 1 || map_checker_2(game) == 1 || map_checker_3(game) == 1 || map_checker_4(game) == 1)
 		return (1);
 	while (game->map[y])
 	{
