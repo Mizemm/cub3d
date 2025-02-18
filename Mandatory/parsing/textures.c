@@ -21,9 +21,9 @@ uint32_t color(uint8_t *arr)
 void load_textures(t_game *game)
 {
     game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
-    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
-    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
-    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/NO.png");
+    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/EA.png");
+    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/SO.png");
+    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/WE.png");
     game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/door.png");
     game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w1.png");
     game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w2.png");
