@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/18 23:04:05 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/19 00:32:38 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void ft_raycasting(t_game *game)
 // {
 // 	mlx_cursor_hook(game->mlx, mouse_hook, game);
 // }
-
+void leaks(void)
+{
+	system("leaks cub3d");
+}
 int main(int ac, char **av)
 {	
 	t_game *game;
@@ -55,6 +58,7 @@ int main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (1);
+	atexit(leaks);
 	init_struct(game);
 	parsing(game, av[1]);
 	load_textures(game);
@@ -62,5 +66,6 @@ int main(int ac, char **av)
 	// setup_mouse(game);
 	mlx_loop_hook(game->mlx, &movement_hook, game);
 	mlx_loop(game->mlx);
+	free_all(game);
 	return (0);
 }

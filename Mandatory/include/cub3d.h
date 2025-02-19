@@ -6,7 +6,7 @@
 #include <limits.h>
 #include <math.h>
 #include <stdbool.h>
-#include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
+#include </Users/mizem/MLX42/include/MLX42/MLX42.h>
 // #include <MLX42.h>
 
 #define UNIT_SIZE 30
@@ -174,6 +174,8 @@ void 	render_VertDoor(t_game *game, t_ray *ray, int i, int y);
 void	render_weapon(t_game *game);
 void	animate_weapon(t_game *game);
 void	deanimate_weapon(t_game *game);
+void	ft_free(char **arr);
+void	free_all(t_game *game);
 
 // raycast function 
 void	init_struct(t_game *game);

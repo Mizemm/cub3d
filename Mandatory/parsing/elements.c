@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/16 20:27:53 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/19 00:16:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	doors_counter(t_game *game)
 }
 int	elements_counter(char *line)
 {
-	char	*ptr;
     char    buffer[1024];
 	int		i;
 	int		j;
@@ -130,8 +129,8 @@ int	struct_elements(t_game *game)
 		}
 		else if (str && (str[0][0] >= 33 && str[0][0] <= 126))
 			game->trash = ft_strdup(str[0]);
-		i++;
 		ft_free(str);
+		i++;
 	}
 	if (flag != 6)
 		return (1);
