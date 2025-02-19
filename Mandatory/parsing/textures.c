@@ -20,10 +20,10 @@ uint32_t color(uint8_t *arr)
 
 void load_textures(t_game *game)
 {
-    game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/NO.png");
-    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/NO.png");
-    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/NO.png");
-    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/NO.png");
+    game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall1.png");
+    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall2.png");
+    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall1.png");
+    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall2.png");
     game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/door.png");
     game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/w1.png");
     game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/w2.png");

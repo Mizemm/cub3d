@@ -45,6 +45,9 @@ typedef struct s_horizontal {
 	double horzWallHitY;
 	bool foundHorzWall;
 	bool closeHorzDoor;
+	bool openHorzDoor;
+	int x_open;
+	int y_open;
 } t_horizontal;
 
 typedef struct s_vertical {
@@ -56,6 +59,9 @@ typedef struct s_vertical {
 	double vertWallHitY;
 	bool foundVertWall;
 	bool closeVertDoor;
+	bool openVertDoor;
+	int x_open;
+	int y_open;
 } t_vertical;
 
 typedef struct s_player {
@@ -79,6 +85,12 @@ typedef struct s_ray {
 	bool foundVert;
 	bool foundHorzDoor;
 	bool foundVertDoor;
+	bool openHorzDoor;
+	bool openVertDoor;
+	int h_openX;
+	int h_openY;
+	int v_openX;
+	int v_openY;
 	bool foundNO;
 	bool foundSO;
 	bool foundEA;
@@ -199,8 +211,9 @@ bool	is_facing_right(double angle);
 bool	is_facing_left(double angle);
 bool 	is_wall(t_game *game, double x, double y);
 bool 	is_doors(t_game *game, double x, double y);
+bool 	is_openDoor(t_game *game, double x, double y);
 
-void	movement_hook1(mlx_key_data_t key, void *param);
+// void	movement_hook1(mlx_key_data_t key, void *param);
 void	movement_hook(void *param);
 void	animation_hook(mlx_key_data_t key, void *param);
 void 	mouse_hook(double xpos, double ypos, void *param);

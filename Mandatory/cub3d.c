@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 00:32:38 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/19 01:30:40 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int main(int ac, char **av)
 	ft_raycasting(game);
 	// setup_mouse(game);
 	mlx_loop_hook(game->mlx, &movement_hook, game);
+	// mlx_delete_image(game->mlx, game->image);
+	// mlx_delete_image(game->mlx, game->minimap_img);
 	mlx_loop(game->mlx);
 	free_all(game);
 	return (0);
