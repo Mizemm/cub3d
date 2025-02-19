@@ -20,14 +20,14 @@ uint32_t color(uint8_t *arr)
 
 void load_textures(t_game *game)
 {
-    game->textures->wall_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall1.png");
-    game->textures->wall_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall2.png");
-    game->textures->wall_texture[2] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall1.png");
-    game->textures->wall_texture[3] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/wall2.png");
-    game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/door.png");
-    game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/w1.png");
-    game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/w2.png");
-    game->textures->crosshair_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/111/Mandatory/images/crosshair.png");
+    game->textures->wall_texture[0] = mlx_load_png(game->no_path);
+    game->textures->wall_texture[1] = mlx_load_png(game->ea_path);
+    game->textures->wall_texture[2] = mlx_load_png(game->so_path);
+    game->textures->wall_texture[3] = mlx_load_png(game->we_path);
+    game->textures->door_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/door.png");
+    game->textures->weapon_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w1.png");
+    game->textures->weapon_texture[1] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w2.png");
+    game->textures->crosshair_texture[0] = mlx_load_png("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/crosshair.png");
 	game->textures->weapon_img[0] = mlx_texture_to_image(game->mlx, game->textures->weapon_texture[0]);
 	game->textures->weapon_img[1] = mlx_texture_to_image(game->mlx, game->textures->weapon_texture[1]);
 	game->textures->crosshair_img[0] = mlx_texture_to_image(game->mlx, game->textures->crosshair_texture[0]);
@@ -37,10 +37,11 @@ void load_textures(t_game *game)
     || !game->textures->wall_texture[3] 
 	|| !game->textures->door_texture[0] 
 	|| !game->textures->weapon_texture[0] 
-	|| !game->textures->weapon_texture[1])
+	|| !game->textures->weapon_texture[1]
+	|| !game->textures->crosshair_texture[0])
         exit (1);
 }
-
+// void	render_textures_2(t_game *game, t_ray *ray, int y, )
 void render_textures(t_game *game, t_ray *ray)
 {
 	int i;

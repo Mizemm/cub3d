@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 01:30:40 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/19 20:37:59 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (1);
-	atexit(leaks);
+	// atexit(leaks);
 	init_struct(game);
 	parsing(game, av[1]);
 	load_textures(game);

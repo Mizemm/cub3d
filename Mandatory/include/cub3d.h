@@ -151,6 +151,7 @@ int     ft_strcmp(char *s1, char *s2);
 int		ft_atoi(char *str);
 char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
+char	*ft_strtrim(char *s1, char *set);
 char	**ft_split(char *s, char *c);
 char	*get_next_line(int fd);
 

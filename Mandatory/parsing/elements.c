@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/19 00:16:36 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/19 20:53:46 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,32 +99,32 @@ int	struct_elements(t_game *game)
 		str = ft_split(game->elements[i], " \t");
 		if (ft_strcmp(str[0], "NO") == 0)
 		{
-			game->no_path = ft_strdup(str[1]);
+			game->no_path =	ft_strtrim(str[1], "\n");
 			flag++;
 		}
 		else if (ft_strcmp(str[0], "SO") == 0)
 		{
-			game->so_path = ft_strdup(str[1]);
+			game->so_path = ft_strtrim(str[1], "\n");
 			flag++;
 		}
 		else if (ft_strcmp(str[0], "WE") == 0)
 		{
-			game->we_path = ft_strdup(str[1]);
+			game->we_path = ft_strtrim(str[1], "\n");
 			flag++;
 		}
 		else if (ft_strcmp(str[0], "EA") == 0)
 		{
-			game->ea_path = ft_strdup(str[1]);
+			game->ea_path = ft_strtrim(str[1], "\n");
 			flag++;
 		}
 		else if (ft_strcmp(str[0], "F") == 0)
 		{
-			game->floor_color = ft_strdup(str[1]);
+			game->floor_color = ft_strtrim(str[1], "\n");
 			flag++;
 		}
 		else if (ft_strcmp(str[0], "C") == 0)
 		{
-			game->ceiling_color = ft_strdup(str[1]);
+			game->ceiling_color = ft_strtrim(str[1], "\n");
 			flag++;
 		}
 		else if (str && (str[0][0] >= 33 && str[0][0] <= 126))
