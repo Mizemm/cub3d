@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 00:56:29 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/19 17:39:06 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void close_door(t_game *game)
 	{
         while (i < doors_counter(game))
         {
+			printf("%d\n", game->doors[i].y);
             if (game->doors[i].x == midd_ray->h_openX && game->doors[i].y == midd_ray->h_openY)
             {
                 game->map[midd_ray->h_openY][midd_ray->h_openX] = 'C';
