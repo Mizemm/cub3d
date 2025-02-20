@@ -151,6 +151,7 @@ int     ft_strcmp(char *s1, char *s2);
 int		ft_atoi(char *str);
 char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
+char	*ft_strtrim(char *s1, char *set);
 char	**ft_split(char *s, char *c);
 char	*get_next_line(int fd);
 
@@ -186,6 +187,8 @@ void 	render_VertDoor(t_game *game, t_ray *ray, int i, int y);
 void	render_weapon(t_game *game);
 void	animate_weapon(t_game *game);
 void	deanimate_weapon(t_game *game);
+void	ft_free(char **arr);
+void	free_all(t_game *game);
 
 // raycast function 
 void	init_struct(t_game *game);

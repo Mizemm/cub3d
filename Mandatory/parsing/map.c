@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:38:03 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/18 22:31:11 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/19 18:35:40 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int map_finder(char *str)
 	int j;
 
 	i = 0;
-	j = 0;
 	if (!str)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] == '1')
+		j = 0;
+		while (str[i + j] == '1')
 			j++;
 	    if (j >= 4)
 		    return (1);

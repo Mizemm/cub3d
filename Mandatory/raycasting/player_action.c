@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 17:39:06 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/19 22:49:50 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void open_door(t_game *game)
 	if ((midd_ray->foundVertDoor || midd_ray->foundHorzDoor) && distance <= 65)
 	{
 		i = 0;
-		// printf("----> x: %d ----> y: %d\n", grid_x, grid_y);
 		while (i < doors_counter(game))
 		{
 			if (grid_x == game->doors[i].x && grid_y == game->doors[i].y && game->doors[i].is_closed)
@@ -96,7 +95,6 @@ void close_door(t_game *game)
 	{
         while (i < doors_counter(game))
         {
-			printf("%d\n", game->doors[i].y);
             if (game->doors[i].x == midd_ray->h_openX && game->doors[i].y == midd_ray->h_openY)
             {
                 game->map[midd_ray->h_openY][midd_ray->h_openX] = 'C';
