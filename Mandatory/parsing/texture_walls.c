@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_walls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2325/02/04 23:36:40 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/18 23:06:59 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/21 19:39:22 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void render_WE(t_game *game, t_ray *ray, int i, int y)
 	int posX;
 	int posY;
 
-    localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[3]->width;
+    localY = ((ray[i].y_wallhit / UNIT_SIZE) - floor(ray[i].y_wallhit / UNIT_SIZE)) * game->textures->wall_texture[3]->width;
     posX = (int)localY;
-	posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->wall_texture[3]->height);
+	posY = (int)(((y - game->textures->walltoppixel) / game->textures->p_wall_height) * game->textures->wall_texture[3]->height);
 	texture_index = (posY * game->textures->wall_texture[3]->width + posX) * 4;
 	mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[3]->pixels[texture_index]));
 }
@@ -32,9 +32,9 @@ void render_EA(t_game *game, t_ray *ray, int i, int y)
 	int posX;
 	int posY;
 
-    localY = ((ray[i].wallHitY / UNIT_SIZE) - floor(ray[i].wallHitY / UNIT_SIZE)) * game->textures->wall_texture[1]->width;
+    localY = ((ray[i].y_wallhit / UNIT_SIZE) - floor(ray[i].y_wallhit / UNIT_SIZE)) * game->textures->wall_texture[1]->width;
     posX = (int)localY;
-	posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->wall_texture[1]->height);
+	posY = (int)(((y - game->textures->walltoppixel) / game->textures->p_wall_height) * game->textures->wall_texture[1]->height);
 	texture_index = (posY * game->textures->wall_texture[1]->width + posX) * 4;
 	mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[1]->pixels[texture_index]));
 }
@@ -45,9 +45,9 @@ void render_SO(t_game *game, t_ray *ray, int i, int y)
 	int posX;
 	int posY;
 
-    localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[2]->width;
+    localX = ((ray[i].x_wallhit / UNIT_SIZE) - floor(ray[i].x_wallhit / UNIT_SIZE)) * game->textures->wall_texture[2]->width;
     posX = (int)localX;
-	posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->wall_texture[2]->height);
+	posY = (int)(((y - game->textures->walltoppixel) / game->textures->p_wall_height) * game->textures->wall_texture[2]->height);
 	texture_index = (posY * game->textures->wall_texture[2]->width + posX) * 4;
 	mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[2]->pixels[texture_index]));
 }
@@ -58,9 +58,9 @@ void render_NO(t_game *game, t_ray *ray, int i, int y)
 	int posX;
 	int posY;
 
-	localX = ((ray[i].wallHitX / UNIT_SIZE) - floor(ray[i].wallHitX / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
+	localX = ((ray[i].x_wallhit / UNIT_SIZE) - floor(ray[i].x_wallhit / UNIT_SIZE)) * game->textures->wall_texture[0]->width;
     posX = (int)localX;
-	posY = (int)(((y - game->textures->walltopPixel) / game->textures->p_wall_height) * game->textures->wall_texture[0]->height);
+	posY = (int)(((y - game->textures->walltoppixel) / game->textures->p_wall_height) * game->textures->wall_texture[0]->height);
 	texture_index = (posY * game->textures->wall_texture[0]->width + posX) * 4;
 	mlx_put_pixel(game->image, i, y, color(&game->textures->wall_texture[0]->pixels[texture_index]));
 }

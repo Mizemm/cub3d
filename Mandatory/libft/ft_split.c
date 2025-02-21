@@ -6,81 +6,81 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 16:19:21 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/15 17:54:11 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/21 19:58:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int      words_nbr(char *s, char *c)
+int	words_nbr(char *s, char *c)
 {
-    int     i;
-    int     nbr;
+	int	i;
+	int	nbr;
 
-    i = 0;
-    nbr = 0;
-    while (s[i])
-    {
-        while (ft_mini_strchr(s[i], c) && s[i])
-            i++;
-    	if (!s[i])
-            return (nbr);
+	i = 0;
+	nbr = 0;
+	while (s[i])
+	{
+		while (ft_mini_strchr(s[i], c) && s[i])
+			i++;
+		if (!s[i])
+			return (nbr);
 		while (s[i] && !ft_mini_strchr(s[i], c))
-        	i++;
-        nbr++;
-    }
-    return (nbr);
+			i++;
+		nbr++;
+	}
+	return (nbr);
 }
 
-int      letters_nbr(char *s, char *c)
+int	letters_nbr(char *s, char *c)
 {
-        int     i;
+	int	i;
 
-        i = 0;
-        while (!ft_mini_strchr(s[i], c) && s[i])
-                i++;
-        return (i);
+	i = 0;
+	while (!ft_mini_strchr(s[i], c) && s[i])
+		i++;
+	return (i);
 }
 
-char     **ft_free_2(char **str, int y)
+char	**ft_free_2(char **str, int y)
 {
-        int     i;
+	int	i;
 
-        i = 0;
-        while (i < y)
-        {
-                free(str[i]);
-                i++;
-        }
-        free(str);
-        return (NULL);
+	i = 0;
+	while (i < y)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
 }
 
-char    **ft_split(char *s, char *c)
+char	**ft_split(char *s, char *c)
 {
-        int             i;
-        int             y;
-        int             nbr;
-        char   			**str;
+	int		i;
+	int		y;
+	int		nbr;
+	char	**str;
 
-        y = 0;
-        i = 0;
-        if (!s)
-            return (NULL);
-        nbr = words_nbr(s, c);
-        str = (char **)malloc((nbr + 1) * sizeof(char *));
-        if (str == NULL)
-                return (NULL);
-        while (nbr-- > 0)
-        {
-                while (s[i] && ft_mini_strchr(s[i], c))
-                        i++;
-                str[y] = ft_substr(s, i, letters_nbr(&s[i], c));
-                if (str[y] == NULL)
-                        return (ft_free_2(str, y));
-                i = i + letters_nbr(&s[i], c);
-                y++;
-        }
-        str[y] = NULL;
-        return (str);
+	y = 0;
+	i = 0;
+	if (!s)
+		return (NULL);
+	nbr = words_nbr(s, c);
+	str = (char **)malloc((nbr + 1) * sizeof(char *));
+	if (str == NULL)
+		return (NULL);
+	while (nbr-- > 0)
+	{
+		while (s[i] && ft_mini_strchr(s[i], c))
+			i++;
+		str[y] = ft_substr(s, i, letters_nbr(&s[i], c));
+		if (str[y] == NULL)
+			return (ft_free_2(str, y));
+		i = i + letters_nbr(&s[i], c);
+		y++;
+	}
+	str[y] = NULL;
+	return (str);
 }

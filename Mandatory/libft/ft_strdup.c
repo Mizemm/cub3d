@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:59:14 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/19 19:31:18 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/21 19:59:08 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strdup(char *s1)
 {
-	int	i;
-	int	y;
+	int		i;
+	int		y;
 	char	*dst;
 
 	i = ft_strlen(s1);

@@ -6,16 +6,15 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:13:36 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/21 23:15:39 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/21 19:51:09 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 int	ft_isdigit(char c)
-{	
+{
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
-

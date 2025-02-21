@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 16:23:23 by mizem             #+#    #+#             */
-/*   Updated: 2025/01/14 22:37:49 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/21 19:59:55 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 char	*ft_substr(char *s, int start, int len)
 {
 	char	*dst;
-	int	i;
-	int	srclen;
-	int	khawi;
+	int		i;
+	int		srclen;
+	int		khawi;
 
 	i = 0;
 	if (!s)

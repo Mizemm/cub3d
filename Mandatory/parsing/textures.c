@@ -52,22 +52,22 @@ void render_textures(t_game *game, t_ray *ray)
 	while (i < game->rays_number)
 	{
 		game->textures->p_wall_height = (UNIT_SIZE / ray[i].distance) * game->textures->projection_distance;
-		game->textures->walltopPixel = (HEIGHT / 2) - (game->textures->p_wall_height / 2);
-		game->textures->wallbuttomPixel = (HEIGHT / 2) + (game->textures->p_wall_height / 2);
-		y = game->textures->walltopPixel;
-		while (y < game->textures->wallbuttomPixel)
+		game->textures->walltoppixel = (HEIGHT / 2) - (game->textures->p_wall_height / 2);
+		game->textures->wallbuttompixel = (HEIGHT / 2) + (game->textures->p_wall_height / 2);
+		y = game->textures->walltoppixel;
+		while (y < game->textures->wallbuttompixel)
 		{
-			if (ray[i].foundNO && (y >= 0 && y < HEIGHT))
+			if (ray[i].found_no && (y >= 0 && y < HEIGHT))
 				render_NO(game, ray, i, y);
-			if (ray[i].foundSO && (y >= 0 && y < HEIGHT))
+			if (ray[i].found_so && (y >= 0 && y < HEIGHT))
 				render_SO(game, ray, i, y);
-			if (ray[i].foundEA && (y >= 0 && y < HEIGHT))
+			if (ray[i].found_ea && (y >= 0 && y < HEIGHT))
 				render_EA(game, ray, i, y);
-			if (ray[i].foundWE && (y >= 0 && y < HEIGHT))
+			if (ray[i].found_we && (y >= 0 && y < HEIGHT))
 				render_WE(game, ray, i, y);
-			if (ray[i].foundHorzDoor && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundhorzdoor && (y >= 0 && y < HEIGHT))
 				render_HorzDoor(game, ray, i, y);
-			if (ray[i].foundVertDoor && (y >= 0 && y < HEIGHT))
+			if (ray[i].foundvertdoor && (y >= 0 && y < HEIGHT))
 				render_VertDoor(game, ray, i, y);
 			y++;
 		}
@@ -76,11 +76,11 @@ void render_textures(t_game *game, t_ray *ray)
 }
 
 
-void	render_weapon(t_game *game)
+void	load_weapon(t_game *game)
 {
-	int y = HEIGHT;
-	int y2 = HEIGHT - 150;
-    int x = 400;
+	int y = HEIGHT + (HEIGHT / 2.4);
+	int y2 = HEIGHT + (HEIGHT / 2.4) - 150;
+    int x = WIDTH / 2.855;
 	mlx_image_to_window(game->mlx, game->textures->weapon_img[0], y, x);
 	mlx_image_to_window(game->mlx, game->textures->weapon_img[1], y2, x);
 	mlx_image_to_window(game->mlx, game->textures->crosshair_img[0], WIDTH / 2, HEIGHT / 2);
