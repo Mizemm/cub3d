@@ -6,9 +6,10 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/22 20:52:13 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 21:02:04 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "include/cub3d.h"
 
@@ -43,10 +44,39 @@ void ft_raycasting(t_game *game)
 // 	mlx_cursor_hook(game->mlx, mouse_hook, game);
 // }
 	
+void setup_mouse(double xpos, double ypos, void *param)
+{
+	t_game *game = param;
+	int x = 0;
+	int y = 0;
+	int dfs = 0;
+	const int center_x = WIDTH / 2;
+	mlx_get_mouse_pos(game->mlx, &x, &y);
+	dfs = x - center_x;
+	if (dfs < 0)
+		rotate_left(game);
+	if (dfs > 0)
+		rotate_right(game);
+	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
+}
+
+void set_player_direction(t_game *game)
+{
+	if (game->player_direction == 'N')
+		game->player.angle_rotation = (3 * M_PI) / 2;
+	else if (game->player_direction == 'S')
+		game->player.angle_rotation = M_PI / 2;
+	else if (game->player_direction == 'E')
+		game->player.angle_rotation = 2 * M_PI;
+	else if (game->player_direction == 'W')
+		game->player.angle_rotation = M_PI;
+}
+
 void leaks(void)
 {
 	system("leaks cub3d");
 }
+
 int main(int ac, char **av)
 {	
 	t_game *game;
@@ -59,14 +89,17 @@ int main(int ac, char **av)
 	atexit(leaks);
 	init_struct(game);
 	parsing(game, av[1]);
+	set_player_direction(game);
 	load_textures(game);
 	render_weapon(game);
 	ft_raycasting(game);
-	// setup_mouse(game);
+	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	mlx_cursor_hook(game->mlx, setup_mouse, game);
 	mlx_loop_hook(game->mlx, &movement_hook, game);
 	// mlx_delete_image(game->mlx, game->image);
 	// mlx_delete_image(game->mlx, game->minimap_img);
 	mlx_loop(game->mlx);
-	free_all(game);
+	// free_all(game);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 17:35:33 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/22 21:03:44 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int init_door(t_game *game)
 	game->doors = malloc(sizeof(t_doors) * (door_size));
 	if (!game->doors)
 	{
-		free(game->rays);
-		free(game);
+		// free(game->rays);
+		// free(game);
 		exit(EXIT_FAILURE);
 	}
 	return (0);
@@ -113,7 +113,6 @@ void doors_allocted(t_game *game)
 	int y;
 	int index;
 	
-	x = 0;
 	y = 0;
 	index = 0;
 	if (init_door(game) == -1)
@@ -123,7 +122,6 @@ void doors_allocted(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			// printf("%c", game->map[y][x]);
 			if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
 			{
 				game->doors[index].x = x;
@@ -132,7 +130,6 @@ void doors_allocted(t_game *game)
 					game->doors[index].is_closed = true;
 				else
 					game->doors[index].is_closed = false;
-				// printf("door[%d]: grid position: x -> %d y -> %d\n", index, x, y);
 				index++;
 			}
 			x++;

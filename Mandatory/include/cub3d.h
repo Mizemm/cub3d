@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:57 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 21:03:08 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef struct s_dda {
 	int	err;
 	int	e2;
 }	t_dda;
+
+typedef struct s_minimap {
+	double steps;
+	double x_inc;
+	double y_inc;
+} t_minimap;
 
 typedef struct s_doors {
 	int		x;
@@ -155,6 +161,7 @@ typedef struct s_game {
 	t_doors *doors;
 	t_horizontal horizontal;
 	t_textures *textures;
+	t_minimap minimap;
 } t_game;
 
 // LIBFT FUNCTIONS //
@@ -255,11 +262,11 @@ void			render_textures(t_game *game, t_ray *ray);
 unsigned int	rgbt_color(int t, int r, int g, int b);
 
 // int depth_color(double distance, int terp);
-
-void			find_player(t_game *game);
-void			draw_minimap(t_game *game);
-void			doors_allocted(t_game *game);
-void			rays_direction(t_ray *ray);
-void			draw_background(t_game *game);
-
+void find_player(t_game *game);
+void draw_minimap(t_game *game);
+void doors_allocted(t_game *game);
+void rays_direction(t_ray *ray);
+void draw_background(t_game *game);
+void rotate_right(t_game *game);
+void rotate_left(t_game *game);
 #endif

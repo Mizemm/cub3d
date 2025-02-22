@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO /Users/asalmi/cursus/cub3d/Mandatory/images/wall1.png
+SO /Users/asalmi/cursus/cub3d/Mandatory/images/wall1.png
+WE /Users/asalmi/cursus/cub3d/Mandatory/images/wall2.png
+EA /Users/asalmi/cursus/cub3d/Mandatory/images/wall2.png
 
 F 255,0,0
 C 94,157,52

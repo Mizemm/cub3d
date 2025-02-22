@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/22 20:21:54 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 21:03:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void rotate_right(t_game *game)
 	game->player.angle_rotation = normalize_angle(game->player.angle_rotation);
 }
 
-void rotate_left(t_game *game) 
+void rotate_left(t_game *game)
 {
 	game->player.rotate_direction = -1;
 	game->player.angle_rotation += game->player.rotate_direction * game->player.rotate_speed;
@@ -43,8 +43,8 @@ void open_door(t_game *game)
 	grid_y = (int)(midd_ray->wallHitY / UNIT_SIZE);
 	if ((midd_ray->foundVertDoor || midd_ray->foundHorzDoor) && distance <= 65)
 	{
-		i = 0;
-		while (i < doors_counter(game))
+		i = -1;
+		while (++i < doors_counter(game))
 		{
 			if (grid_x == game->doors[i].x && grid_y == game->doors[i].y && game->doors[i].is_closed)
 			{
@@ -52,7 +52,6 @@ void open_door(t_game *game)
 				game->doors[i].is_closed = false;
 				break;
 			}
-			i++;
 		}
 	}
 }
@@ -66,14 +65,11 @@ int check_for_open(t_game *game, int door_x, int door_y)
     return (0);
 }
 
-void close_door(t_game *game)
+void open_vert(t_game *game, t_ray *midd_ray)
 {
-    int i = 0;
-    int midd_index;
-    t_ray *midd_ray;
-    midd_index = game->rays_number / 2;
-    midd_ray = &game->rays[midd_index];
-    find_distance(game, midd_ray, game->player.angle_rotation);
+    int i;
+	
+	i = 0;
 	if (midd_ray->openVertDoor 
 		&& check_for_open(game, midd_ray->v_openX, midd_ray->v_openY))
 	{
@@ -87,7 +83,13 @@ void close_door(t_game *game)
             i++;
         }
 	}
-    i = 0;
+}
+
+void open_horz(t_game *game, t_ray *midd_ray)
+{
+	int i;
+
+	i = 0;
 	if (midd_ray->openHorzDoor
 		&& check_for_open(game, midd_ray->h_openX, midd_ray->h_openY))
 	{
@@ -102,6 +104,49 @@ void close_door(t_game *game)
             i++;
     	}	
 	}
+}
+
+
+void close_door(t_game *game)
+{
+    int i = 0;
+    int midd_index;
+    t_ray *midd_ray;
+	double dis_h;
+	double dis_v;
+    midd_index = game->rays_number / 2;
+    midd_ray = &game->rays[midd_index];
+    find_distance(game, midd_ray, game->player.angle_rotation);
+	// if (midd_ray->openVertDoor 
+	// 	&& check_for_open(game, midd_ray->v_openX, midd_ray->v_openY))
+	// {
+    //     while (i < doors_counter(game))
+    //     {
+    //         if (game->doors[i].x == midd_ray->v_openX && game->doors[i].y == midd_ray->v_openY)
+    //         {
+    //             game->map[midd_ray->v_openY][midd_ray->v_openX] = 'C';
+    //             game->doors[i].is_closed = true;
+    //         }
+    //         i++;
+    //     }
+	// }
+	open_vert(game, midd_ray);
+	open_horz(game, midd_ray);
+    // i = 0;
+	// if (midd_ray->openHorzDoor
+	// 	&& check_for_open(game, midd_ray->h_openX, midd_ray->h_openY))
+	// {
+    //     while (i < doors_counter(game))
+    //     {
+    //         if (game->doors[i].x == midd_ray->h_openX && game->doors[i].y == midd_ray->h_openY)
+    //         {
+    //             game->map[midd_ray->h_openY][midd_ray->h_openX] = 'C';
+    //             game->doors[i].is_closed = true;
+    //             break;
+    //         }
+    //         i++;
+    // 	}	
+	// }
 }
 
 void movement_hook(void *param)
