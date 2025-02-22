@@ -30,6 +30,12 @@ typedef struct s_dda {
 	int e2;
 }	t_dda;
 
+typedef struct s_minimap {
+	double steps;
+	double x_inc;
+	double y_inc;
+} t_minimap;
+
 typedef struct s_doors {
 	int x;
 	int y;
@@ -140,6 +146,7 @@ typedef struct s_game {
 	t_doors *doors;
 	t_horizontal horizontal;
 	t_textures *textures;
+	t_minimap minimap;
 } t_game;
 
 // parsing function 
@@ -232,3 +239,5 @@ void draw_minimap(t_game *game);
 void doors_allocted(t_game *game);
 void rays_direction(t_ray *ray);
 void draw_background(t_game *game);
+void rotate_right(t_game *game);
+void rotate_left(t_game *game);
