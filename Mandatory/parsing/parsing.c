@@ -6,13 +6,13 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 20:45:47 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 20:38:21 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void parsing(t_game *game, char *line)
+void	parsing(t_game *game, char *line)
 {
 	if (file_check(line) == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/19 01:28:58 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 20:21:54 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void close_door(t_game *game)
     int i = 0;
     int midd_index;
     t_ray *midd_ray;
-	double dis_h;
-	double dis_v;
     midd_index = game->rays_number / 2;
     midd_ray = &game->rays[midd_index];
     find_distance(game, midd_ray, game->player.angle_rotation);

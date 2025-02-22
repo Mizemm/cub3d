@@ -6,25 +6,11 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:36:14 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/19 00:32:14 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 20:48:35 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-// void	delete_texture(t_map *var)
-// {
-// 	if (var->walls_texture)
-// 		mlx_delete_texture(var->walls_texture);
-// 	if (var->player_texture)
-// 		mlx_delete_texture(var->player_texture);
-// 	if (var->exit_texture)
-// 		mlx_delete_texture(var->exit_texture);
-// 	if (var->background_texture)
-// 		mlx_delete_texture(var->background_texture);
-// 	if (var->banana_texture)
-// 		mlx_delete_texture(var->banana_texture);
-// }
 
 void	ft_free(char **arr)
 {
@@ -38,6 +24,7 @@ void	ft_free(char **arr)
 	}
 	free(arr);
 }
+
 void	free_textures(t_game *game)
 {
 	if (game->textures->wall_texture[0])
@@ -52,11 +39,12 @@ void	free_textures(t_game *game)
 		mlx_delete_texture(game->textures->door_texture[0]);
 	if (game->textures->weapon_texture[0])
 		mlx_delete_texture(game->textures->weapon_texture[0]);
-	if (game->textures->weapon_texture[1])	
+	if (game->textures->weapon_texture[1])
 		mlx_delete_texture(game->textures->weapon_texture[1]);
 	if (game->textures->crosshair_texture[0])
 		mlx_delete_texture(game->textures->crosshair_texture[0]);
 }
+
 void	free_all(t_game *game)
 {
 	free_textures(game);
@@ -70,7 +58,7 @@ void	free_all(t_game *game)
 		free(game->so_path);
 	if (game->we_path)
 		free(game->we_path);
-	if (game->ea_path)	
+	if (game->ea_path)
 		free(game->ea_path);
 	if (game->floor_color)
 		free(game->floor_color);

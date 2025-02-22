@@ -1,54 +1,69 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <limits.h>
-#include <math.h>
-#include <stdbool.h>
-#include </Users/mizem/MLX42/include/MLX42/MLX42.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
+/*   Updated: 2025/02/22 20:18:57 by mizem            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# define UNIT_SIZE 30
+# define FOV (60 * (M_PI / 180))
+# define MOVE_SPEED 5
+# define WIDTH 2000
+# define HEIGHT 1200
+# define MINIMAP_SCALE 0.2
+# define ZOOM 0.5
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <string.h>
+# include <limits.h>
+# include <math.h>
+# include <stdbool.h>
+# include </Users/mizem/MLX42/include/MLX42/MLX42.h>
 // #include <MLX42.h>
 
-#define UNIT_SIZE 30
-#define FOV 60 * (M_PI / 180)
-#define MOVE_SPEED 5
-#define WIDTH 1200
-#define HEIGHT 900
-#define MINIMAP_SCALE 0.2
-#define ZOOM 0.5
-
 typedef struct s_dda {
-	int x0;
-	int y0;
-	int x1;
-	int y1;
-	int dx;
-	int dy;
-	int stepx;
-	int stepy;
-	int err;
-	int e2;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
+	int	dx;
+	int	dy;
+	int	stepx;
+	int	stepy;
+	int	err;
+	int	e2;
 }	t_dda;
 
 typedef struct s_doors {
-	int x;
-	int y;
-	bool is_closed;
-} t_doors;
+	int		x;
+	int		y;
+	bool	is_closed;
+}	t_doors;
 
 typedef struct s_horizontal {
-	double x_intercept;
-	double y_intercept;
-	double x_step;
-	double y_step;
-	double horzWallHitX;
-	double horzWallHitY;
-	bool foundHorzWall;
-	bool closeHorzDoor;
-	bool openHorzDoor;
-	int x_open;
-	int y_open;
-} t_horizontal;
+	double		x_intercept;
+	double		y_intercept;
+	double		x_step;
+	double		y_step;
+	double		horzWallHitX;
+	double		horzWallHitY;
+	bool		foundHorzWall;
+	bool		closeHorzDoor;
+	bool		openHorzDoor;
+	int			x_open;
+	int			y_open;
+}	t_horizontal;
 
 typedef struct s_vertical {
 	double x_intercept;
@@ -142,93 +157,109 @@ typedef struct s_game {
 	t_textures *textures;
 } t_game;
 
-// parsing function 
+// LIBFT FUNCTIONS //
 
-int		ft_strlen(char *s);
-int		ft_isdigit(char c);
-int		ft_mini_strchr(char s, char *c);
-int     ft_strcmp(char *s1, char *s2);
-int		ft_atoi(char *str);
-char	*ft_strdup(char *s1);
-char	*ft_substr(char *s, int start, int len);
-char	*ft_strtrim(char *s1, char *set);
-char	**ft_split(char *s, char *c);
-char	*get_next_line(int fd);
+int				ft_strlen(char *s);
+int				ft_isdigit(char c);
+int				ft_mini_strchr(char s, char *c);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_atoi(char *str);
+char			*ft_strdup(char *s1);
+char			*ft_substr(char *s, int start, int len);
+char			*ft_strtrim(char *s1, char *set);
+char			**ft_split(char *s, char *c);
 
-size_t 	count_width(char **map);
-size_t 	count_height(char **map);
-int		elements_counter(char *map_name);
-void	ft_free(char **arr);
-int		map_finder(char *str);
-void    elements(t_game *game, char *line);
-void	map(t_game *game, char *line);
-int		struct_elements(t_game *game);
-int		borders(t_game *game);
-int		parsing_error(t_game *game);
-int		file_check(char *name);
-int 	floor_color_check(t_game *game);
-int 	floor_color_check_2(t_game *game);
-int		ceiling_color_check(t_game *game);
-int		ceiling_color_check_2(t_game *game);
-uint32_t color(uint8_t *arr);
+// GET_NEXT_LINE //
+char			*get_next_line(int fd);
 
-size_t count_width(char **map);
-size_t count_height(char **map);
-int	doors_counter(t_game *game);
-void load_textures(t_game *game);
-void parsing(t_game *game, char *line);
-void 	render_textures(t_game *game, t_ray *ray);
-void 	render_NO(t_game *game, t_ray *ray, int i, int y);
-void 	render_EA(t_game *game, t_ray *ray, int i, int y);
-void 	render_SO(t_game *game, t_ray *ray, int i, int y);
-void 	render_WE(t_game *game, t_ray *ray, int i, int y);
-void 	render_HorzDoor(t_game *game, t_ray *ray, int i, int y);
-void 	render_VertDoor(t_game *game, t_ray *ray, int i, int y);
-void	render_weapon(t_game *game);
-void	animate_weapon(t_game *game);
-void	deanimate_weapon(t_game *game);
-void	ft_free(char **arr);
-void	free_all(t_game *game);
+// PARSING FUNCTIONS //
 
-// raycast function 
-void	init_struct(t_game *game);
-void	draw_ceiling(t_game *game);
-void	draw_floor(t_game *game);
-void	draw_wall(t_game *game);
-void 	draw_doors(t_game *game);
-void	draw_player(t_game *game);
-void 	draw_line(t_game *game, t_ray ray);
-void 	dda_test(t_game *game, t_ray ray);
-void rebuild_game(t_game *game);
+size_t			count_width(char **map);
+size_t			count_height(char **map);
+int				elements_counter(char *map_name);
+void			ft_free(char **arr);
+int				map_finder(char *str);
+void			elements(t_game *game, char *line);
+void			map(t_game *game, char *line);
+int				struct_elements(t_game *game);
+int				empty_line(char *str);
+int				map_checker(t_game *game);
+int				map_checker_2(t_game *game);
+int				map_checker_3(t_game *game);
+int				map_checker_4(t_game *game);
+int				flag_counter(t_game *game, char **str, int flag);
+int				flag_counter_2(t_game *game, char **str, int flag_2);
+int				border_check(t_game *game, int y, int x);
+int				borders(t_game *game);
+int				parsing_error(t_game *game);
+int				file_check(char *name);
+int				floor_color_check(t_game *game);
+int				floor_color_check_2(t_game *game);
+int				ceiling_color_check(t_game *game);
+int				ceiling_color_check_2(t_game *game);
+uint32_t		color(uint8_t *arr);
+void			render_weapon(t_game *game);
+void			animate_weapon(t_game *game);
+void			deanimate_weapon(t_game *game);
+size_t			count_width(char **map);
+size_t			count_height(char **map);
+int				doors_counter(t_game *game);
+void			load_textures(t_game *game);
+void			parsing(t_game *game, char *line);
+void			render_textures(t_game *game, t_ray *ray);
+void			render_no(t_game *game, t_ray *ray, int i, int y);
+void			render_ea(t_game *game, t_ray *ray, int i, int y);
+void			render_so(t_game *game, t_ray *ray, int i, int y);
+void			render_we(t_game *game, t_ray *ray, int i, int y);
+void			render_horzdoor(t_game *game, t_ray *ray, int i, int y);
+void			render_vertdoor(t_game *game, t_ray *ray, int i, int y);
+void			render_weapon(t_game *game);
+void			animate_weapon(t_game *game);
+void			deanimate_weapon(t_game *game);
+void			ft_free(char **arr);
+void			free_all(t_game *game);
 
-void 	right_move(t_game *game);
-void	left_move(t_game *game);
-void	backward_move(t_game *game);
-void	forward_move(t_game *game);
+// raycast function //
 
-bool	is_facing_down(double angle);
-bool	is_facing_up(double angle);
-bool	is_facing_right(double angle);
-bool	is_facing_left(double angle);
-bool 	is_wall(t_game *game, double x, double y);
-bool 	is_doors(t_game *game, double x, double y);
-bool 	is_openDoor(t_game *game, double x, double y);
+void			init_struct(t_game *game);
+void			draw_ceiling(t_game *game);
+void			draw_floor(t_game *game);
+void			draw_wall(t_game *game);
+void			draw_doors(t_game *game);
+void			draw_player(t_game *game);
+void			draw_line(t_game *game, t_ray ray);
+void			dda_test(t_game *game, t_ray ray);
+void			rebuild_game(t_game *game);
+void			right_move(t_game *game);
+void			left_move(t_game *game);
+void			backward_move(t_game *game);
+void			forward_move(t_game *game);
+bool			is_facing_down(double angle);
+bool			is_facing_up(double angle);
+bool			is_facing_right(double angle);
+bool			is_facing_left(double angle);
+bool			is_wall(t_game *game, double x, double y);
+bool			is_doors(t_game *game, double x, double y);
+bool			is_openDoor(t_game *game, double x, double y);
 
 // void	movement_hook1(mlx_key_data_t key, void *param);
-void	movement_hook(void *param);
-void	animation_hook(mlx_key_data_t key, void *param);
-void 	mouse_hook(double xpos, double ypos, void *param);
 
-double	normalize_angle(double angle);
-void 	find_distance(t_game *game, t_ray *ray, double ray_angle);
-void 	cast_rays(t_game *game);
-double 	calculate_distance(double x1, double y1, double x2, double y2);
+void			movement_hook(void *param);
+void			animation_hook(mlx_key_data_t key, void *param);
+void			mouse_hook(double xpos, double ypos, void *param);
+double			normalize_angle(double angle);
+void			find_distance(t_game *game, t_ray *ray, double ray_angle);
+void			cast_rays(t_game *game);
+double			calculate_distance(double x1, double y1, double x2, double y2);
+void			render_textures(t_game *game, t_ray *ray);
+unsigned int	rgbt_color(int t, int r, int g, int b);
 
-void 	render_textures(t_game *game, t_ray *ray);
-unsigned int		rgbt_color(int t, int r, int g, int b);
 // int depth_color(double distance, int terp);
-void find_player(t_game *game);
-void draw_minimap(t_game *game);
-void doors_allocted(t_game *game);
-void rays_direction(t_ray *ray);
-void draw_background(t_game *game);
+
+void			find_player(t_game *game);
+void			draw_minimap(t_game *game);
+void			doors_allocted(t_game *game);
+void			rays_direction(t_ray *ray);
+void			draw_background(t_game *game);
+
+#endif
