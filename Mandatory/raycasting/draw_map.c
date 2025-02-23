@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 21:41:32 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/18 22:45:28 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/22 22:15:07 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,6 @@ void draw_ceiling(t_game *game)
 {
 	game->x_draw = 0;
 	game->y_draw = 0;
-	// game->image = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	// if ((!game->image) || (mlx_image_to_window(game->mlx, game->image, 0, 0) < 0))
-	// 	return ;
 	while (HEIGHT / 2 > game->y_draw)
 	{
 		game->x_draw = 0;

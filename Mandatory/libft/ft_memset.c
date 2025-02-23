@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_direction.c                                 :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 16:25:10 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/23 01:42:50 by asalmi           ###   ########.fr       */
+/*   Created: 2025/02/22 22:18:44 by asalmi            #+#    #+#             */
+/*   Updated: 2025/02/22 22:19:04 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-bool	is_facing_down(double angle)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	return (angle > 0 && angle < M_PI);
-}
+	size_t			i;
+	unsigned char	*p;
 
-bool	is_facing_up(double angle)
-{
-	return (angle > M_PI && angle < 2 * M_PI);
-}
-
-bool	is_facing_right(double angle)
-{
-	return (angle > 3 * M_PI / 2 || angle < M_PI / 2);
-}
-
-bool	is_facing_left(double angle)
-{
-	return (angle > M_PI / 2 && angle < 3 * M_PI / 2);
+	i = 0;
+	p = (unsigned char *)b;
+	while (i < len)
+	{
+		p[i] = (unsigned char)c;
+		i++;
+	}
+	return (b);
 }

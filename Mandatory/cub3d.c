@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/22 21:02:04 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 22:36:36 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ int main(int ac, char **av)
 {	
 	t_game *game;
 
+	// atexit(leaks);
 	if (ac != 2)
 		return (1);
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (1);
-	atexit(leaks);
 	init_struct(game);
 	parsing(game, av[1]);
 	set_player_direction(game);
@@ -97,9 +97,7 @@ int main(int ac, char **av)
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(game->mlx, setup_mouse, game);
 	mlx_loop_hook(game->mlx, &movement_hook, game);
-	// mlx_delete_image(game->mlx, game->image);
-	// mlx_delete_image(game->mlx, game->minimap_img);
 	mlx_loop(game->mlx);
-	// free_all(game);
+	free_all(game);
 	return (0);
 }

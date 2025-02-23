@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/22 21:03:08 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/23 02:13:54 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
-# include </Users/mizem/MLX42/include/MLX42/MLX42.h>
+# include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
 // #include <MLX42.h>
 
 typedef struct s_dda {
@@ -46,6 +46,10 @@ typedef struct s_dda {
 }	t_dda;
 
 typedef struct s_minimap {
+	double	dx;
+	double	dy;
+	double	x1;
+	double	y1;	
 	double steps;
 	double x_inc;
 	double y_inc;
@@ -67,6 +71,8 @@ typedef struct s_horizontal {
 	bool		foundHorzWall;
 	bool		closeHorzDoor;
 	bool		openHorzDoor;
+	double		nextHorzStepX;
+	double		nextHorzStepY;
 	int			x_open;
 	int			y_open;
 }	t_horizontal;
@@ -175,6 +181,7 @@ char			*ft_strdup(char *s1);
 char			*ft_substr(char *s, int start, int len);
 char			*ft_strtrim(char *s1, char *set);
 char			**ft_split(char *s, char *c);
+void			*ft_memset(void *b, int c, size_t len);
 
 // GET_NEXT_LINE //
 char			*get_next_line(int fd);
@@ -249,8 +256,6 @@ bool			is_wall(t_game *game, double x, double y);
 bool			is_doors(t_game *game, double x, double y);
 bool			is_openDoor(t_game *game, double x, double y);
 
-// void	movement_hook1(mlx_key_data_t key, void *param);
-
 void			movement_hook(void *param);
 void			animation_hook(mlx_key_data_t key, void *param);
 void			mouse_hook(double xpos, double ypos, void *param);
@@ -261,12 +266,26 @@ double			calculate_distance(double x1, double y1, double x2, double y2);
 void			render_textures(t_game *game, t_ray *ray);
 unsigned int	rgbt_color(int t, int r, int g, int b);
 
-// int depth_color(double distance, int terp);
 void find_player(t_game *game);
-void draw_minimap(t_game *game);
 void doors_allocted(t_game *game);
 void rays_direction(t_ray *ray);
 void draw_background(t_game *game);
 void rotate_right(t_game *game);
 void rotate_left(t_game *game);
+
+// minimap 
+
+int		bounds_error(t_game *game, double px, double py);
+void	init_line(t_game *game, int px, int py);
+int		get_status_color(int status);
+void	start_draw(t_game *game, int x, int y, int status);
+void 	draw_minimap(t_game *game);
+
+// doors
+
+void	close_door(t_game *game);
+void	open_door(t_game *game);
+int		check_for_close(t_game *game, int door_x, int door_y);
+void	check_for_open(t_game *game, int grid_x, int grid_y);
+
 #endif

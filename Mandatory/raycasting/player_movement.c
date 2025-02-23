@@ -6,24 +6,24 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:24:27 by asalmi            #+#    #+#             */
-/*   Updated: 2025/01/27 21:41:00 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/22 23:50:03 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int check_map(t_game *game, double new_position_x, double new_position_y)
+int	check_map(t_game *game, double new_position_x, double new_position_y)
 {
-	int i;
-	int tmp_x;
-	int tmp_y;
-	
+	int	i;
+	int	tmp_x;
+	int	tmp_y;
+
 	i = -MOVE_SPEED;
 	tmp_x = floor(new_position_x);
 	tmp_y = floor(new_position_y);
 	while (i <= MOVE_SPEED)
 	{
-		if (game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == '1' 
+		if (game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == '1'
 			|| game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == 'C')
 			return (0);
 		i++;
@@ -39,11 +39,11 @@ int check_map(t_game *game, double new_position_x, double new_position_y)
 	return (1);
 }
 
-void right_move(t_game *game)
+void	right_move(t_game *game)
 {
-	double move_steps;
-	double new_position_x;
-	double new_position_y;
+	double	move_steps;
+	double	new_position_x;
+	double	new_position_y;
 
 	move_steps = game->player.move_speed;
 	new_position_x = game->player.position_x;
@@ -56,11 +56,11 @@ void right_move(t_game *game)
 	game->player.position_y = new_position_y;
 }
 
-void left_move(t_game *game)
+void	left_move(t_game *game)
 {
-	double move_steps;
-	double new_position_x;
-	double new_position_y;
+	double	move_steps;
+	double	new_position_x;
+	double	new_position_y;
 
 	move_steps = game->player.move_speed;
 	new_position_x = game->player.position_x;
@@ -73,11 +73,11 @@ void left_move(t_game *game)
 	game->player.position_y = new_position_y;
 }
 
-void backward_move(t_game *game)
+void	backward_move(t_game *game)
 {
-	double move_steps;
-	double new_position_x;
-	double new_position_y;
+	double	move_steps;
+	double	new_position_x;
+	double	new_position_y;
 
 	game->player.move_direction = -1;
 	new_position_x = game->player.position_x;
@@ -91,11 +91,11 @@ void backward_move(t_game *game)
 	game->player.position_y = new_position_y;
 }
 
-void forward_move(t_game *game)
+void	forward_move(t_game *game)
 {
-	double move_steps;
-	double new_position_x;
-	double new_position_y;
+	double	move_steps;
+	double	new_position_x;
+	double	new_position_y;
 
 	game->player.move_direction = 1;
 	new_position_x = game->player.position_x;

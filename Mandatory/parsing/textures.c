@@ -15,13 +15,13 @@
 void	load_textures_2(t_game *game)
 {
 	game->textures->door_texture[0] = mlx_load_png
-		("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/door.png");
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/door.png");
 	game->textures->weapon_texture[0] = mlx_load_png
-		("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w1.png");
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/w1.png");
 	game->textures->weapon_texture[1] = mlx_load_png
-		("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/w2.png");
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/w2.png");
 	game->textures->crosshair_texture[0] = mlx_load_png
-		("/Users/mizem/Desktop/cursus/cub3d/Mandatory/images/crosshair.png");
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/crosshair.png");
 	game->textures->weapon_img[0] = mlx_texture_to_image
 		(game->mlx, game->textures->weapon_texture[0]);
 	game->textures->weapon_img[1] = mlx_texture_to_image

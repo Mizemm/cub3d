@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:36:14 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/22 21:04:35 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/22 22:12:53 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	free_textures(t_game *game)
 		mlx_delete_texture(game->textures->weapon_texture[1]);
 	if (game->textures->crosshair_texture[0])
 		mlx_delete_texture(game->textures->crosshair_texture[0]);
+	if (game->textures)
+	{
+		free(game->textures);
+		game->textures = NULL;
+	}
 }
 
 void	free_all(t_game *game)
@@ -66,4 +71,30 @@ void	free_all(t_game *game)
 		free(game->ceiling_color);
 	if (game->trash)
 		free(game->trash);
+	if (game->rays)
+	{
+		free(game->rays);
+		game->rays = NULL;
+	}
+	if (game->doors)
+	{
+		free(game->doors);
+		game->doors = NULL;
+	}
+	if (game->minimap_img)
+	{
+		mlx_delete_image(game->mlx, game->minimap_img);
+		game->minimap_img = NULL;
+	}
+	if (game->image)
+	{
+		mlx_delete_image(game->mlx, game->image);
+		game->image = NULL;
+	}
+	if (game->mlx)
+	{
+		mlx_terminate(game->mlx);
+		game->mlx = NULL;
+	}
+	free(game);
 }
