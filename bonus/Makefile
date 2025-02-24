@@ -1,4 +1,4 @@
-NAME	= cub3d
+NAME	= cub3d_bonus
 CFLAGS	= -fsanitize=address -g #-Wextra -Wall -Werror
 LIBMLX	= ~/MLX42
 CC		= cc
