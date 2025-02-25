@@ -6,11 +6,11 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 22:18:44 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/22 22:19:04 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 21:00:27 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 void	*ft_memset(void *b, int c, size_t len)
 {

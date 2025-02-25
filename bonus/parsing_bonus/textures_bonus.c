@@ -10,7 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
+
+void	load_textures_2(t_game *game)
+{
+	game->textures->door_texture[0] = mlx_load_png
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/door.png");
+	game->textures->weapon_texture[0] = mlx_load_png
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/w1.png");
+	game->textures->weapon_texture[1] = mlx_load_png
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/w2.png");
+	game->textures->crosshair_texture[0] = mlx_load_png
+		("/Users/asalmi/cursus/cub3d/Mandatory/images/crosshair.png");
+	game->textures->weapon_img[0] = mlx_texture_to_image
+		(game->mlx, game->textures->weapon_texture[0]);
+	game->textures->weapon_img[1] = mlx_texture_to_image
+		(game->mlx, game->textures->weapon_texture[1]);
+	game->textures->crosshair_img[0] = mlx_texture_to_image
+		(game->mlx, game->textures->crosshair_texture[0]);
+}
 
 void	load_textures(t_game *game)
 {
@@ -18,10 +36,15 @@ void	load_textures(t_game *game)
 	game->textures->wall_texture[1] = mlx_load_png(game->ea_path);
 	game->textures->wall_texture[2] = mlx_load_png(game->so_path);
 	game->textures->wall_texture[3] = mlx_load_png(game->we_path);
+	load_textures_2(game);
 	if (!game->textures->wall_texture[0] 
 		|| !game->textures->wall_texture[1] 
 		|| !game->textures->wall_texture[2] 
-		|| !game->textures->wall_texture[3])
+		|| !game->textures->wall_texture[3] 
+		|| !game->textures->door_texture[0] 
+		|| !game->textures->weapon_texture[0] 
+		|| !game->textures->weapon_texture[1]
+		|| !game->textures->crosshair_texture[0])
 		exit (1);
 }
 
@@ -37,6 +60,10 @@ void	render_textures_2(t_game *game, t_ray *ray, int y, int i)
 			render_ea(game, ray, i, y);
 		if (ray[i].found_we && (y >= 0 && y < HEIGHT))
 			render_we(game, ray, i, y);
+		if (ray[i].found_horz_door && (y >= 0 && y < HEIGHT))
+			render_horzdoor(game, ray, i, y);
+		if (ray[i].found_vert_door && (y >= 0 && y < HEIGHT))
+			render_vertdoor(game, ray, i, y);
 		y++;
 	}
 }

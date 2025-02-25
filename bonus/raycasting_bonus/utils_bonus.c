@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 20:45:21 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/24 22:15:39 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:49:09 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 double	normalize_angle(double angle)
 {
@@ -41,4 +41,50 @@ double	calculate_distance(double x1, double y1, double x2, double y2)
 	dx = x2 - x1;
 	dy = y2 - y1;
 	return (sqrt((dx * dx) + (dy * dy)));
+}
+
+int	init_door(t_game *game)
+{
+	int	door_size;
+
+	door_size = doors_counter(game);
+	if (door_size <= 0)
+	{
+		game->doors = NULL;
+		return (1);
+	}
+	game->doors = malloc(sizeof(t_doors) * (door_size));
+	if (!game->doors)
+	{
+		exit(EXIT_FAILURE);
+	}
+	return (0);
+}
+
+void	doors_allocted(t_game *game)
+{
+	int	x;
+	int	y;
+	int	index;
+
+	y = 0;
+	index = 0;
+	if (init_door(game) == -1)
+		return ;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
+			{
+				game->doors[index].x = x;
+				game->doors[index].y = y;
+				game->doors[index].is_closed = (game->map[y][x] == 'C');
+				index++;
+			}
+			x++;
+		}
+		y++;
+	}
 }

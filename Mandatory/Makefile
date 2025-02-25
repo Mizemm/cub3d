@@ -1,12 +1,12 @@
 NAME	= cub3d
-CFLAGS	= -fsanitize=address -g #-Wextra -Wall -Werror
+CFLAGS	= -fsanitize=address -g -Wextra -Wall -Werror
 LIBMLX	= ~/MLX42
 CC		= cc
 
 HEADERS	= -I ./include -I $(LIBMLX)/include/MLX42
 LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS	= cub3d.c raycasting/player_action.c raycasting/init_struct.c raycasting/utils.c raycasting/draw_map.c \
-		raycasting/player_movement.c raycasting/raycasting.c raycasting/player_direction.c raycasting/utils2.c raycasting/minimap.c raycasting/minimap_utils.c raycasting/doors.c raycasting/doors_utils.c raycasting/raycasting_utils.c raycasting/raycasting_utils2.c \
+		raycasting/player_movement.c raycasting/raycasting.c raycasting/player_direction.c raycasting/utils2.c raycasting/raycasting_utils.c raycasting/raycasting_utils2.c \
 		parsing/parsing.c parsing/ft_free.c parsing/border_check.c parsing/elements.c parsing/map.c \
 		parsing/parsing_error.c parsing/colors_check.c parsing/textures.c parsing/texture_walls.c \
 		parsing/texture_doors.c parsing/border_check_2.c parsing/map_checkers.c \

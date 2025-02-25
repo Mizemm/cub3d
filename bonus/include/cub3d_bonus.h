@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 22:31:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 01:42:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # define UNIT_SIZE 30
 # define FOV 1.04719755
@@ -46,6 +46,24 @@ typedef struct s_dda
 	int				e2;
 }					t_dda;
 
+typedef struct s_minimap
+{
+	double			dx;
+	double			dy;
+	double			x1;
+	double			y1;
+	double			steps;
+	double			x_inc;
+	double			y_inc;
+}					t_minimap;
+
+typedef struct s_doors
+{
+	int				x;
+	int				y;
+	bool			is_closed;
+}					t_doors;
+
 typedef struct s_horizontal
 {
 	double			x_intercept;
@@ -55,8 +73,13 @@ typedef struct s_horizontal
 	double			horz_wall_hitx;
 	double			horz_wall_hity;
 	bool			found_horz_wall;
+	bool			close_horz_door;
+	bool			open_horz_door;
+	bool			first_close;
 	double			next_horz_stepx;
 	double			next_horz_stepy;
+	int				x_open;
+	int				y_open;
 }					t_horizontal;
 
 typedef struct s_vertical
@@ -68,8 +91,13 @@ typedef struct s_vertical
 	double			vert_wall_hitx;
 	double			vert_wall_hity;
 	bool			found_vert_wall;
+	bool			close_vert_door;
+	bool			open_vert_door;
+	bool			first_close;
 	double			next_vert_stepx;
 	double			next_vert_stepy;
+	int				x_open;
+	int				y_open;
 }					t_vertical;
 
 typedef struct s_player
@@ -93,6 +121,14 @@ typedef struct s_ray
 	double			distance;
 	bool			found_horz;
 	bool			found_vert;
+	bool			found_horz_door;
+	bool			found_vert_door;
+	bool			open_horz_door;
+	bool			open_vert_door;
+	int				h_openx;
+	int				h_openy;
+	int				v_openx;
+	int				v_openy;
 	bool			found_no;
 	bool			found_so;
 	bool			found_ea;
@@ -102,6 +138,11 @@ typedef struct s_ray
 typedef struct s_textures
 {
 	mlx_texture_t	*wall_texture[4];
+	mlx_texture_t	*door_texture[1];
+	mlx_texture_t	*weapon_texture[2];
+	mlx_image_t		*weapon_img[2];
+	mlx_texture_t	*crosshair_texture[1];
+	mlx_image_t		*crosshair_img[1];
 	double			p_wall_height;
 	double			projection_distance;
 	int				wall_top_pixel;
@@ -117,6 +158,7 @@ typedef struct s_game
 	int				x_draw;
 	int				y_draw;
 	double			rays_number;
+	bool			is_door;
 	char			**map;
 	char			**elements;
 	char			*no_path;
@@ -130,12 +172,15 @@ typedef struct s_game
 	char			*trash;
 	char			player_direction;
 	mlx_t			*mlx;
+	mlx_image_t		*minimap_img;
 	mlx_image_t		*image;
 	t_ray			*rays;
 	t_player		player;
 	t_vertical		vertical;
+	t_doors			*doors;
 	t_horizontal	horizontal;
 	t_textures		*textures;
+	t_minimap		minimap;
 }					t_game;
 
 // LIBFT FUNCTIONS //
@@ -203,7 +248,6 @@ void				free_all(t_game *game);
 
 // init & draw function //
 
-
 void				init_struct(t_game *game);
 void				draw_ceiling(t_game *game);
 void				draw_floor(t_game *game);
@@ -221,6 +265,7 @@ void				left_move(t_game *game);
 void				backward_move(t_game *game);
 void				forward_move(t_game *game);
 void				movement_hook(void *param);
+void				mouse_hook(double xpos, double ypos, void *param);
 
 // player direction //
 

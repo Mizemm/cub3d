@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mini_strchr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
+/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 16:54:51 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/21 19:54:25 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/24 21:00:30 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 int	ft_mini_strchr(char s, char *c)
 {

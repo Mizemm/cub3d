@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 15:46:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 21:00:18 by asalmi           ###   ########.fr       */
+/*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
+/*   Updated: 2025/02/24 20:50:49 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-int	ft_atoi(char *str)
+void	parsing(t_game *game, char *line)
 {
-	int	i;
-	int	sign;
-	int	result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	if (!str)
-		return (-1);
-	if (str[i] == '-' || str[i] == '+')
+	if (file_check(line) == 1)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		write(1, "Error\n", 6);
+		exit(1);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	elements(game, line);
+	map(game, line);
+	game->width = count_width(game->map);
+	game->height = count_height(game->map);
+	if (struct_elements(game) == 1 || parsing_error(game) == 1)
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		write(1, "Error\n", 6);
+		exit(1);
 	}
-	return (result * sign);
 }

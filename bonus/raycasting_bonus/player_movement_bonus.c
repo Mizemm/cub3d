@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_movement.c                                  :+:      :+:    :+:   */
+/*   player_movement_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:24:27 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/24 22:30:30 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:48:59 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 int	check_map(t_game *game, double new_position_x, double new_position_y)
 {
@@ -23,14 +23,16 @@ int	check_map(t_game *game, double new_position_x, double new_position_y)
 	tmp_y = floor(new_position_y);
 	while (i <= MOVE_SPEED)
 	{
-		if (game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == '1')
+		if (game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == '1'
+			|| game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == 'C')
 			return (0);
 		i++;
 	}
 	i = -MOVE_SPEED;
 	while (i <= MOVE_SPEED)
 	{
-		if (game->map[tmp_y / UNIT_SIZE][(tmp_x + i) / UNIT_SIZE] == '1')
+		if (game->map[tmp_y / UNIT_SIZE][(tmp_x + i) / UNIT_SIZE] == '1'
+			|| game->map[(tmp_y + i) / UNIT_SIZE][tmp_x / UNIT_SIZE] == 'C')
 			return (0);
 		i++;
 	}

@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   player_direction_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 15:46:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 21:00:18 by asalmi           ###   ########.fr       */
+/*   Created: 2025/01/02 16:25:10 by asalmi            #+#    #+#             */
+/*   Updated: 2025/02/24 20:48:57 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-int	ft_atoi(char *str)
+bool	is_facing_down(double angle)
 {
-	int	i;
-	int	sign;
-	int	result;
+	return (angle > 0 && angle < M_PI);
+}
 
-	i = 0;
-	sign = 1;
-	result = 0;
-	if (!str)
-		return (-1);
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	return (result * sign);
+bool	is_facing_up(double angle)
+{
+	return (angle > M_PI && angle < 2 * M_PI);
+}
+
+bool	is_facing_right(double angle)
+{
+	return (angle > 3 * M_PI / 2 || angle < M_PI / 2);
+}
+
+bool	is_facing_left(double angle)
+{
+	return (angle > M_PI / 2 && angle < 3 * M_PI / 2);
 }

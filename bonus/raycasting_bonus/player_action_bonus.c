@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_action.c                                    :+:      :+:    :+:   */
+/*   player_action_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:11:16 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/24 22:30:40 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:48:54 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 void	rotate_right(t_game *game)
 {
@@ -57,7 +57,15 @@ void	movement_hook(void *param)
 		mlx_close_window(game->mlx);
 	handle_rotation(game);
 	handle_movement(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_F))
+		open_door(game);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_C))
+		close_door(game);
 	game->player.rotate_direction = 0;
 	game->player.move_direction = 0;
 	rebuild_game(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ENTER))
+		animate_weapon(game);
+	if (!mlx_is_key_down(game->mlx, MLX_KEY_ENTER))
+		deanimate_weapon(game);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/24 22:28:26 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:48:47 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 void	find_player(t_game *game)
 {
@@ -83,4 +83,9 @@ void	init_struct(t_game *game)
 		return ;
 	game->minimap_width = 7 * UNIT_SIZE;
 	game->minimap_height = 5 * UNIT_SIZE;
+	game->minimap_img = mlx_new_image(game->mlx, game->minimap_width,
+			game->minimap_height);
+	if ((!game->minimap_img) || (mlx_image_to_window(game->mlx,
+				game->minimap_img, 10, 10)) < 0)
+		return ;
 }

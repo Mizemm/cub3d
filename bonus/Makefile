@@ -1,16 +1,16 @@
 NAME	= cub3d_bonus
-CFLAGS	= -fsanitize=address -g #-Wextra -Wall -Werror
+CFLAGS	= -fsanitize=address -g -Wextra -Wall -Werror
 LIBMLX	= ~/MLX42
 CC		= cc
 
 HEADERS	= -I ./include -I $(LIBMLX)/include/MLX42
 LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	= cub3d.c raycasting/player_action.c raycasting/init_struct.c raycasting/utils.c raycasting/draw_map.c \
-		raycasting/player_movement.c raycasting/raycasting.c raycasting/player_direction.c raycasting/utils2.c raycasting/minimap.c raycasting/minimap_utils.c raycasting/doors.c raycasting/doors_utils.c raycasting/raycasting_utils.c raycasting/raycasting_utils2.c \
-		parsing/parsing.c parsing/ft_free.c parsing/border_check.c parsing/elements.c parsing/map.c \
-		parsing/parsing_error.c parsing/colors_check.c parsing/textures.c parsing/texture_walls.c \
-		parsing/texture_doors.c parsing/border_check_2.c parsing/map_checkers.c \
-		parsing/flag_counters.c parsing/textures_2.c \
+SRCS	= cub3d_bonus.c raycasting_bonus/player_action_bonus.c raycasting_bonus/init_struct_bonus.c raycasting_bonus/utils_bonus.c raycasting_bonus/draw_map_bonus.c \
+		raycasting_bonus/player_movement_bonus.c raycasting_bonus/raycasting_bonus.c raycasting_bonus/player_direction_bonus.c raycasting_bonus/utils2_bonus.c raycasting_bonus/minimap_bonus.c raycasting_bonus/minimap_utils_bonus.c raycasting_bonus/doors_bonus.c raycasting_bonus/doors_utils_bonus.c raycasting_bonus/raycasting_utils_bonus.c raycasting_bonus/raycasting_utils2_bonus.c \
+		parsing_bonus/parsing_bonus.c parsing_bonus/ft_free_bonus.c parsing_bonus/border_check_bonus.c parsing_bonus/elements_bonus.c parsing_bonus/map_bonus.c \
+		parsing_bonus/parsing_error_bonus.c parsing_bonus/colors_check_bonus.c parsing_bonus/textures_bonus.c parsing_bonus/texture_walls_bonus.c \
+		parsing_bonus/texture_doors_bonus.c parsing_bonus/border_check_2_bonus.c parsing_bonus/map_checkers_bonus.c \
+		parsing_bonus/flag_counters_bonus.c parsing_bonus/textures_2_bonus.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		libft/ft_split.c libft/ft_substr.c libft/ft_mini_strchr.c libft/ft_strlen.c libft/ft_strdup.c libft/ft_isdigit.c \
 		libft/ft_atoi.c libft/ft_strtrim.c libft/ft_memset.c

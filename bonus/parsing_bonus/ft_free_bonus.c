@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_free_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:36:14 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 22:33:28 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:50:41 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 void	ft_free(char **arr)
 {
@@ -35,6 +35,14 @@ void	free_textures(t_game *game)
 		mlx_delete_texture(game->textures->wall_texture[2]);
 	if (game->textures->wall_texture[3])
 		mlx_delete_texture(game->textures->wall_texture[3]);
+	if (game->textures->door_texture[0])
+		mlx_delete_texture(game->textures->door_texture[0]);
+	if (game->textures->weapon_texture[0])
+		mlx_delete_texture(game->textures->weapon_texture[0]);
+	if (game->textures->weapon_texture[1])
+		mlx_delete_texture(game->textures->weapon_texture[1]);
+	if (game->textures->crosshair_texture[0])
+		mlx_delete_texture(game->textures->crosshair_texture[0]);
 	if (game->textures)
 	{
 		free(game->textures);
@@ -67,6 +75,16 @@ void	free_all(t_game *game)
 	{
 		free(game->rays);
 		game->rays = NULL;
+	}
+	if (game->doors)
+	{
+		free(game->doors);
+		game->doors = NULL;
+	}
+	if (game->minimap_img)
+	{
+		mlx_delete_image(game->mlx, game->minimap_img);
+		game->minimap_img = NULL;
 	}
 	if (game->image)
 	{

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:49:18 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/24 22:28:35 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/24 21:02:41 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/cub3d_bonus.h"
 
 void	horizontal_intersection(t_game *game, double angle)
 {
@@ -27,8 +27,9 @@ void	horizontal_intersection(t_game *game, double angle)
 	{
 		check_stepx = game->horizontal.next_horz_stepx;
 		check_stepy = game->horizontal.next_horz_stepy;
-		if (is_facing_up(angle))
-			check_stepy -= 1;
+		if (is_doors(game, check_stepx, check_stepy))
+			game->horizontal.close_horz_door = true;
+		check_horz_door(game, check_stepx, check_stepy, angle);
 		if (check_horz_wall(game, check_stepx, check_stepy))
 			break ;
 		game->horizontal.next_horz_stepx += game->horizontal.x_step;
@@ -51,8 +52,9 @@ void	vertical_intersection(t_game *game, double angle)
 	{
 		check_stepx = game->vertical.next_vert_stepx;
 		check_stepy = game->vertical.next_vert_stepy;
-		if (is_facing_left(angle))
-			check_stepx -= 1;
+		if (is_doors(game, check_stepx, check_stepy))
+			game->vertical.close_vert_door = true;
+		check_vert_door(game, check_stepx, check_stepy, angle);
 		if (check_vert_wall(game, check_stepx, check_stepy))
 			break ;
 		game->vertical.next_vert_stepx += game->vertical.x_step;
@@ -91,12 +93,19 @@ void	cast_rays(t_game *game)
 
 	i = 0;
 	angle = game->player.angle_rotation - (FOV / 2);
+	game->is_door = false;
 	while (i < game->rays_number)
 	{
+		game->rays[i].found_horz_door = false;
+		game->rays[i].found_vert_door = false;
+		game->rays[i].open_horz_door = false;
+		game->rays[i].open_vert_door = false;
 		game->rays[i].found_no = false;
 		game->rays[i].found_so = false;
 		game->rays[i].found_ea = false;
 		game->rays[i].found_we = false;
+		game->rays[i].found_horz_door = false;
+		game->rays[i].found_vert_door = false;
 		game->rays[i].ray_angle = normalize_angle(angle);
 		find_distance(game, &game->rays[i], game->rays[i].ray_angle);
 		rays_direction(&game->rays[i]);
