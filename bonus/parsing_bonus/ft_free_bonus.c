@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:36:14 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 20:50:41 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:14:04 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,8 @@ void	free_textures(t_game *game)
 	}
 }
 
-void	free_all(t_game *game)
+void	free_2(t_game *game)
 {
-	free_textures(game);
-	if (game->elements)
-		ft_free(game->elements);
-	if (game->map)
-		ft_free(game->map);
-	if (game->no_path)
-		free(game->no_path);
-	if (game->so_path)
-		free(game->so_path);
-	if (game->we_path)
-		free(game->we_path);
-	if (game->ea_path)
-		free(game->ea_path);
-	if (game->floor_color)
-		free(game->floor_color);
-	if (game->ceiling_color)
-		free(game->ceiling_color);
-	if (game->trash)
-		free(game->trash);
 	if (game->rays)
 	{
 		free(game->rays);
@@ -96,5 +77,29 @@ void	free_all(t_game *game)
 		mlx_terminate(game->mlx);
 		game->mlx = NULL;
 	}
+}
+
+void	free_all(t_game *game)
+{
+	free_textures(game);
+	if (game->elements)
+		ft_free(game->elements);
+	if (game->map)
+		ft_free(game->map);
+	if (game->no_path)
+		free(game->no_path);
+	if (game->so_path)
+		free(game->so_path);
+	if (game->we_path)
+		free(game->we_path);
+	if (game->ea_path)
+		free(game->ea_path);
+	if (game->floor_color)
+		free(game->floor_color);
+	if (game->ceiling_color)
+		free(game->ceiling_color);
+	if (game->trash)
+		free(game->trash);
+	free_2(game);
 	free(game);
 }

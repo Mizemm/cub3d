@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 22:31:48 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:01:25 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ void				ft_free(char **arr);
 void				free_all(t_game *game);
 
 // init & draw function //
-
 
 void				init_struct(t_game *game);
 void				draw_ceiling(t_game *game);

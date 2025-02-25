@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/25 01:41:47 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:14:53 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	ft_raycasting(t_game *game)
 
 void	setup_mouse(double xpos, double ypos, void *param)
 {
-	t_game		*game;
-	int			x;
-	int			y;
-	int			dfs;
-	const int	center_x;
+	t_game	*game;
+	int		x;
+	int		y;
+	int		dfs;
+	int		center_x;
 
 	(void)xpos;
 	(void)ypos;
@@ -66,10 +66,16 @@ void	set_player_direction(t_game *game)
 		game->player.angle_rotation = M_PI;
 }
 
+void	leaks(void)
+{
+	system("leaks cub3d");
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
 
+	atexit(leaks);
 	if (ac != 2)
 		return (1);
 	game = malloc(sizeof(t_game));

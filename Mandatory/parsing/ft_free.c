@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 22:36:14 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 22:33:28 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 17:04:22 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,25 @@ void	free_textures(t_game *game)
 	}
 }
 
+void	free_2(t_game *game)
+{
+	if (game->rays)
+	{
+		free(game->rays);
+		game->rays = NULL;
+	}
+	if (game->image)
+	{
+		mlx_delete_image(game->mlx, game->image);
+		game->image = NULL;
+	}
+	if (game->mlx)
+	{
+		mlx_terminate(game->mlx);
+		game->mlx = NULL;
+	}
+}
+
 void	free_all(t_game *game)
 {
 	free_textures(game);
@@ -63,20 +82,6 @@ void	free_all(t_game *game)
 		free(game->ceiling_color);
 	if (game->trash)
 		free(game->trash);
-	if (game->rays)
-	{
-		free(game->rays);
-		game->rays = NULL;
-	}
-	if (game->image)
-	{
-		mlx_delete_image(game->mlx, game->image);
-		game->image = NULL;
-	}
-	if (game->mlx)
-	{
-		mlx_terminate(game->mlx);
-		game->mlx = NULL;
-	}
+	free_2(game);
 	free(game);
 }
