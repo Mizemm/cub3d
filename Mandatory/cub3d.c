@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/26 00:30:25 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/26 00:33:03 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ void	set_player_direction(t_game *game)
 		game->player.angle_rotation = 2 * M_PI;
 	else if (game->player_direction == 'W')
 		game->player.angle_rotation = M_PI;
-}
-
-void	leaks(void)
-{
-	system("leaks cub3d");
 }
 
 int	main(int ac, char **av)
