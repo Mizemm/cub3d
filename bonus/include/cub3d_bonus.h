@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/25 01:42:22 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 22:49:12 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MINIMAP_SCALE 0.2
 # define ZOOM 0.5
 
-# include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
+# include </Users/mizem/MLX42/include/MLX42/MLX42.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>

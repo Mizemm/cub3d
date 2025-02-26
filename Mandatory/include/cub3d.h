@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 23:02:49 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/25 17:01:25 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/26 00:25:56 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define MINIMAP_SCALE 0.2
 # define ZOOM 0.5
 
-# include </Users/asalmi/MLX42/include/MLX42/MLX42.h>
+# include </Users/mizem/MLX42/include/MLX42/MLX42.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
@@ -167,7 +167,6 @@ int					struct_elements(t_game *game);
 int					empty_line(char *str);
 int					map_checker(t_game *game);
 int					map_checker_2(t_game *game);
-int					map_checker_3(t_game *game);
 int					map_checker_4(t_game *game);
 int					flag_counter(t_game *game, char **str, int flag);
 int					flag_counter_2(t_game *game, char **str, int flag_2);
@@ -185,7 +184,6 @@ void				animate_weapon(t_game *game);
 void				deanimate_weapon(t_game *game);
 size_t				count_width(char **map);
 size_t				count_height(char **map);
-int					doors_counter(t_game *game);
 void				load_textures(t_game *game);
 void				parsing(t_game *game, char *line);
 void				render_textures(t_game *game, t_ray *ray);

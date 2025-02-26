@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/25 17:05:03 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/26 00:30:25 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	main(int ac, char **av)
 {
 	t_game	*game;
 
-	atexit(leaks);
 	if (ac != 2)
 		return (1);
 	game = malloc(sizeof(t_game));

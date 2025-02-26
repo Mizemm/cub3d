@@ -6,33 +6,11 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 13:31:53 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/22 19:17:49 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/26 00:18:22 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int	doors_counter(t_game *game)
-{
-	int	x;
-	int	y;
-	int	c;
-
-	y = 0;
-	c = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'C' || game->map[y][x] == 'O')
-				c++;
-			x++;
-		}
-		y++;
-	}
-	return (c);
-}
 
 int	elements_counter(char *line)
 {
