@@ -1,5 +1,5 @@
 NAME	= cub3d
-CFLAGS	= #-fsanitize=address -g -Wextra -Wall -Werror
+CFLAGS	= -Wextra -Wall -Werror #-fsanitize=address -g 
 LIBMLX	= ~/MLX42
 CC		= cc
 
@@ -29,7 +29,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJS)
-	#@rm -rf $(LIBMLX)/build
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@rm -rf $(NAME)

@@ -6,7 +6,7 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 12:16:55 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/24 22:28:26 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/25 21:26:24 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_struct(t_game *game)
 	game->rays_number = WIDTH;
 	if (allocate_rays(game) == 1 || allocate_textures(game) == 1)
 		return ;
-	mlx_set_setting(0, 1);
+	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
 	game->mlx = mlx;
 	if (!mlx)
