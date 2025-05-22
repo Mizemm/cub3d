@@ -6,9 +6,10 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:51:46 by asalmi            #+#    #+#             */
-/*   Updated: 2025/02/26 00:18:06 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/05/22 14:11:39 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "include/cub3d_bonus.h"
 
@@ -66,16 +67,10 @@ void	set_player_direction(t_game *game)
 		game->player.angle_rotation = M_PI;
 }
 
-void	leaks(void)
-{
-	system("leaks cub3d");
-}
-
 int	main(int ac, char **av)
 {
 	t_game	*game;
 
-	atexit(leaks);
 	if (ac != 2)
 		return (1);
 	game = malloc(sizeof(t_game));

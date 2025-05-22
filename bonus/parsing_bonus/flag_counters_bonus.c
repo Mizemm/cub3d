@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_counters_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 19:17:35 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/24 20:50:39 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/02/26 00:30:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int	flag_counter(t_game *game, char **str, int flag)
 		game->ea_path = ft_strtrim(str[1], "\n");
 		flag++;
 	}
-	else if (str && (str[0][0] >= 33 && str[0][0] <= 126) 
-	&& ft_strcmp(str[0], "F") != 0 && ft_strcmp(str[0], "C") != 0)
-		game->trash = ft_strdup(str[0]);
 	return (flag);
 }
 
@@ -51,6 +48,14 @@ int	flag_counter_2(t_game *game, char **str, int flag_2)
 	{
 		game->ceiling_color = ft_strtrim(str[1], "\n");
 		flag_2++;
+	}
+	else if (str && (str[0][0] >= 33 && str[0][0] <= 126) 
+	&& ft_strcmp(str[0], "NO") != 0 && ft_strcmp(str[0], "SO") != 0
+	&& ft_strcmp(str[0], "WE") != 0 && ft_strcmp(str[0], "EA") != 0)
+	{
+		if (game->trash)
+			free(game->trash);
+		game->trash = ft_strdup(str[0]);
 	}
 	return (flag_2);
 }

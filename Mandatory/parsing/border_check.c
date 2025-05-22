@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 19:35:24 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/22 01:32:28 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/25 22:23:25 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	borders(t_game *game)
 
 	y = 0;
 	if (map_checker(game) == 1 || map_checker_2(game) == 1 
-		|| map_checker_3(game) == 1 || map_checker_4(game) == 1)
+		|| map_checker_4(game) == 1)
 		return (1);
 	while (game->map[y])
 	{

@@ -6,7 +6,7 @@
 /*   By: mizem <mizem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 20:40:54 by mizem             #+#    #+#             */
-/*   Updated: 2025/02/21 20:56:03 by mizem            ###   ########.fr       */
+/*   Updated: 2025/02/25 22:18:36 by mizem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	mini_border_check(t_game *game, int y, int x)
 		{
 			if (game->map[y][x] == '0' || game->map[y][x] == 'N' 
 				|| game->map[y][x] == 'S' || game->map[y][x] == 'W' 
-					|| game->map[y][x] == 'E' || game->map[y][x] == 'O' 
-						|| game->map[y][x] == 'C')
+					|| game->map[y][x] == 'E')
 				return (1);
 			x++;
 		}
@@ -49,8 +48,7 @@ int	mini_border_check(t_game *game, int y, int x)
 		{
 			if ((game->map[y][x] == '0' || game->map[y][x] == 'N' 
 			|| game->map[y][x] == 'S' || game->map[y][x] == 'W' 
-			|| game->map[y][x] == 'E' || game->map[y][x] == 'O' 
-			|| game->map[y][x] == 'C'))
+			|| game->map[y][x] == 'E'))
 				return (1);
 			x++;
 		}
@@ -64,13 +62,11 @@ int	border_check(t_game *game, int y, int x)
 		return (1);
 	if (x == 0 && (game->map[y][x] == '0' || game->map[y][x] == 'N' 
 		|| game->map[y][x] == 'S' || game->map[y][x] == 'W' 
-			|| game->map[y][x] == 'E' || game->map[y][x] == 'O' 
-				|| game->map[y][x] == 'C'))
+			|| game->map[y][x] == 'E'))
 		return (1);
 	if (((game->map[y][x] == '0' || game->map[y][x] == 'N' 
 		|| game->map[y][x] == 'S' || game->map[y][x] == 'W' 
-		|| game->map[y][x] == 'E' || game->map[y][x] == 'O' 
-		|| game->map[y][x] == 'C')) && checker(game, x, y) == 1)
+		|| game->map[y][x] == 'E')) && checker(game, x, y) == 1)
 		return (1);
 	return (0);
 }
